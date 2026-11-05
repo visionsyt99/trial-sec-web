@@ -295,7 +295,7 @@
   <main class="admin-main">
     <div class="gh-banner" id="ghBanner">
       <span class="gh-banner-icon">⚡</span>
-      <span><strong>Realtime mode:</strong> changes are saved to Firebase as individual data sections and broadcast instantly to connected pages. GitHub is no longer part of the admin write path.</span>
+      <span><strong>Realtime mode:</strong> changes are saved to Firestore as individual data sections and synchronized to connected pages.</span>
     </div>
 
     <!-- NOTICES -->
@@ -640,6 +640,7 @@
 
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="firebase-client.js"></script>
 <script src="nepali-date.js"></script>
 <script>
@@ -700,7 +701,22 @@ async function unlock(){
 
 async function initAuth(){
   ECFirebase.onAuthStateChanged(async user => {
-    if(user){ await unlock(); }
+    if (!user) {
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('adminWrap').classList.remove('visible');
+      return;
+    }
+    const allowed = await ECFirebase.isAdmin(user);
+    if (!allowed) {
+      await ECFirebase.signOut();
+      const err = document.getElementById('loginError');
+      err.textContent = 'This account is signed in but is not listed as an authorized site admin.';
+      err.style.display = 'block';
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('adminWrap').classList.remove('visible');
+      return;
+    }
+    await unlock();
   });
 }
 

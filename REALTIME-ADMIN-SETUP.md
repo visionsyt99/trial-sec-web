@@ -1,32 +1,37 @@
-# The E Chronicles — realtime admin setup
+# The E Chronicles — Firebase setup
 
-## What changed
-- Admin writes no longer go through GitHub or require a GitHub personal access token.
-- Site data is stored as separate Firestore documents under `siteData`, so changing one section cannot overwrite another section.
-- Public pages listen to Firestore with `onSnapshot`, so admin changes appear live without waiting for a GitHub Pages rebuild/cache refresh.
-- The old hard-coded admin password/token flow is removed.
-- `data/ec-data.json` is retained as a local fallback and has been repaired (the old file had an invalid trailing comma).
+## Active Firebase project
 
-## One-time Firebase setup
-1. Open Firebase Console for project **e-chronicles**.
-2. Enable **Authentication → Sign-in method → Email/Password**.
-3. Create your admin user under **Authentication → Users**.
-4. Create Firestore database if it is not already enabled.
-5. In Firestore, create:
-   - collection: `config`
-   - document: `admins`
-   - field: `emails` (array)
-   - add your admin email as an array value, e.g. `["your-email@example.com"]`
-6. Publish `firestore.rules` from this repository, or paste its contents into Firestore Rules.
-7. Open `admin-ec2027.html` and sign in with that Firebase email/password.
-8. On the first admin load, the existing `data/ec-data.json` is automatically seeded into Firestore if `siteData` is empty.
+- Project ID: `sec-e-chronicles`
+- Authentication: Email/Password
+- Database: Cloud Firestore, `(default)`
+- Public data collection: `siteData`
+- Admin allow-list document: `config/admins`
+
+## Admin allow-list
+
+Create `config/admins` with this field:
+
+- `emails` — Array containing the exact email address(es) authorized to administer the site.
+
+Do not store passwords in Firestore or in this repository. Admin passwords belong only in Firebase Authentication.
+
+## Firestore rules
+
+The rules in `firestore.rules` are the matching rules to publish in Firebase Console → Firestore Database → Rules. Public visitors can read `siteData`; only authenticated users whose email is in `config/admins.emails` can write it. The allow-list document is readable only to signed-in users and cannot be changed by the client.
+
+## Data format
+
+Each document in `siteData` stores one top-level site-data section. Its `value` field contains the section value. The admin panel seeds the bundled `data/ec-data.json` data on the first authorized admin session when the collection is empty.
+
+## Deploying
+
+1. Keep the repository's existing folder structure.
+2. Publish all site files to the GitHub Pages repository root.
+3. Do not upload a `.git` directory inside the site files.
+4. Open `health.html` to check the Firebase connection.
+5. Open `admin-ec2027.html`, sign in with the authorized Firebase Auth account, and verify that the dashboard loads.
 
 ## Important
-The Firebase web config is intentionally client-visible. Security comes from Firebase Authentication + Firestore Rules, not from hiding the config.
 
-## Optional Firebase CLI deployment
-From the project folder:
-
-    firebase deploy --only firestore:rules
-
-If you do not use the Firebase CLI, deploy the same rules from the Firebase Console.
+The Firebase web configuration is a client identifier, not an admin secret. Security depends on Authentication and Firestore Security Rules. Never put service-account keys or private credentials in this repository.

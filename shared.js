@@ -419,7 +419,7 @@ if (window.ECFirebase) {
 //  2. Explicit photo in STUDENT_PROFILES (hardcoded)
 //  3. Apps Script proxy (roll.jpg from folder)
 function getDriveFolderPhotoUrl(roll, memberPhotosFromDB) {
-  // 1. Admin-panel override from GitHub data
+  // 1. Admin-panel override from Firebase data
   try {
     const adminPhotos = memberPhotosFromDB || {};
     if (adminPhotos[roll] && adminPhotos[roll].trim()) {

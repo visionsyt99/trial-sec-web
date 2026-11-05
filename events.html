@@ -92,6 +92,7 @@
 </div>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="firebase-client.js"></script>
 <script src="shared.js"></script>
 <script>
@@ -106,7 +107,7 @@ const EVENTS_DEFAULT = [
   { id:4, title:"First Internal Exam", date:"2025-10-15", time:"9:45 AM", venue:"Section E Classroom", desc:"First internal assessment of Grade 11.", status:"past" },
 ];
 
-// _siteData holds admin data loaded from GitHub via loadSiteData()
+// _siteData holds admin data loaded from Firebase via loadSiteData()
 let _siteData = {};
 let EVENTS = [];
 let currentFilter = 'all';
@@ -182,10 +183,10 @@ document.getElementById('filterTabs').addEventListener('click', e => {
   renderEvents();
 });
 
-// Wait for GitHub admin data before rendering
+// Wait for Firebase site data before rendering
 (async function init() {
   _siteData = await loadSiteData();
-  // Prefer admin data from GitHub, then localStorage, then hardcoded defaults
+  // Use Firebase-backed site data with bundled JSON fallback
   EVENTS = (_siteData.events && _siteData.events.length)
     ? _siteData.events
     : (JSON.parse(localStorage.getItem('ec_events') || 'null') || EVENTS_DEFAULT);

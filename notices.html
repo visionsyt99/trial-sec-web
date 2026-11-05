@@ -86,6 +86,7 @@
 </div>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="firebase-client.js"></script>
 <script src="shared.js"></script>
 <script>
@@ -93,15 +94,13 @@ injectNav();
 
 const COLOR_CLASSES = ['nc-blue','nc-green','nc-gold','nc-red','nc-purple','nc-teal'];
 
-// _siteData holds admin data loaded from GitHub via loadSiteData()
+// _siteData holds admin data loaded from Firebase via loadSiteData()
 let _siteData = {};
 
 function renderNotices() {
   const grid = document.getElementById('noticeGrid');
-  // Prefer admin data from GitHub; fall back to localStorage
-  const notices = (_siteData.notices && _siteData.notices.length)
-    ? _siteData.notices
-    : JSON.parse(localStorage.getItem('ec_notices') || '[]');
+  // Use Firebase-backed site data with bundled JSON fallback
+  const notices = (_siteData.notices || []);
   if (!notices.length) {
     grid.innerHTML = '<div class="empty-state">No notices yet. Check back soon!</div>';
     return;
@@ -124,7 +123,7 @@ function renderNotices() {
   }).join('');
 }
 
-// Wait for GitHub admin data before rendering
+// Wait for Firebase site data before rendering
 (async function init() {
   _siteData = await loadSiteData();
   renderNotices();

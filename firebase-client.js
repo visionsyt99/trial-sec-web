@@ -11,6 +11,9 @@
   if (!window.firebase) throw new Error('Firebase SDK not loaded');
   if (!firebase.apps.length) firebase.initializeApp(config);
   const db = firebase.firestore();
+  // Some networks/proxies interrupt Firestore's default WebChannel streaming transport.
+  // Force HTTP long-polling before any reads, listeners, or writes are started.
+  db.settings({ experimentalForceLongPolling: true });
   const auth = firebase.auth();
   const COLLECTION = 'siteData';
   const KNOWN_KEYS = [

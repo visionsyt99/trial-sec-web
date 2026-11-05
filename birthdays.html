@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Birthdays — The E Chronicles</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════════════════════════════════════
+   BIRTHDAYS — Lavender · Purple · Yellow · Crazy edition
+══════════════════════════════════════════════════════════════ */
+:root{
+  --lav-50:#faf7ff;
+  --lav-100:#f1e8ff;
+  --lav-200:#e2d2ff;
+  --lav-300:#c9aaff;
+  --lav-400:#b794f4;
+  --lav-500:#9f7aea;
+  --lav-600:#7c3aed;
+  --purple-700:#6b21a8;
+  --purple-800:#4c1d95;
+  --purple-900:#2e1065;
+  --yellow-300:#fde047;
+  --yellow-400:#facc15;
+  --yellow-500:#eab308;
+  --amber:#fbbf24;
+  --ink:#1b0e3a;
+  --ink-2:#3b2570;
+  --ink-3:#6b5b94;
+  --bg:#fbf8ff;
+  --surface:#ffffff;
+  --border:rgba(124,58,237,.16);
+  --shadow-soft:0 12px 40px -12px rgba(76,29,149,.18);
+  --shadow-pop:0 24px 60px -18px rgba(76,29,149,.45);
+  --grad-aurora:conic-gradient(from 0deg,#fde047,#b794f4,#7c3aed,#fbbf24,#c9aaff,#fde047);
+  --grad-soft:linear-gradient(135deg,#f1e8ff 0%,#fff8dc 100%);
+  --radius:20px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.page{min-height:100vh;position:relative;overflow-x:hidden}
+
+/* ── PAGE AMBIENT BACKDROP (animated mesh) ── */
+.page::before{
+  content:"";position:fixed;inset:-20%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(45% 35% at 12% 18%, rgba(183,148,244,.45), transparent 60%),
+    radial-gradient(35% 30% at 88% 8%,  rgba(253,224,71,.35), transparent 60%),
+    radial-gradient(40% 35% at 80% 90%, rgba(124,58,237,.30), transparent 65%),
+    radial-gradient(30% 25% at 5% 80%,  rgba(251,191,36,.28), transparent 60%);
+  filter:blur(40px);
+  animation:meshDrift 22s ease-in-out infinite alternate;
+}
+@keyframes meshDrift{
+  0%  {transform:translate(0,0) rotate(0deg)}
+  50% {transform:translate(2%,-2%) rotate(2deg)}
+  100%{transform:translate(-2%,2%) rotate(-2deg)}
+}
+.page > *{position:relative;z-index:1}
+
+/* ── HERO ── */
+.bday-hero{
+  padding:5.5rem 2.5rem 4.5rem;
+  position:relative;overflow:hidden;
+  border-bottom:1px dashed rgba(124,58,237,.18);
+}
+.bday-hero-bg{display:none}
+.bday-hero-inner{max-width:1180px;margin:0 auto;position:relative;z-index:2}
+
+/* ═══════════════════════════════════════════════
+   FIX 1: DARK THEME — section-label & description
+   Use light text + semi-transparent light bg so
+   they're readable on both light AND dark navbars
+═══════════════════════════════════════════════ */
+.section-label{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;
+  /* Light text that reads on dark backgrounds */
+  color:#e2d2ff;
+  padding:.4rem .85rem;border:1px solid rgba(183,148,244,.45);
+  border-radius:999px;
+  background:rgba(76,29,149,.55);
+  backdrop-filter:blur(8px);
+}
+
+.bday-hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(3rem,8vw,6.5rem);
+  font-weight:900;line-height:.95;letter-spacing:-.03em;
+  margin:1.2rem 0 .6rem;
+  color:#ffffff;
+  text-shadow:0 2px 24px rgba(0,0,0,.45), 0 0 60px rgba(76,29,149,.4);
+}
+.bday-hero h1 em{
+  font-style:italic;font-weight:700;
+  background:linear-gradient(120deg,var(--lav-300) 0%,var(--amber) 50%,var(--lav-400) 100%);
+  background-size:200% 200%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:gradientShift 6s ease-in-out infinite;
+  position:relative;
+}
+@keyframes gradientShift{
+  0%,100%{background-position:0% 50%}
+  50%    {background-position:100% 50%}
+}
+.section-desc{
+  font-size:1.1rem;line-height:1.65;
+  color:#ffffff;
+  max-width:560px;margin-top:1rem;
+  text-shadow:0 1px 12px rgba(0,0,0,.5), 0 0 40px rgba(76,29,149,.5);
+}
+
+/* Hero floating emojis */
+.hero-floaters{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+.floater{
+  position:absolute;font-size:1.6rem;opacity:.55;
+  animation:floatUp linear infinite;
+  filter:drop-shadow(0 4px 10px rgba(124,58,237,.25));
+}
+@keyframes floatUp{
+  0%  {transform:translateY(0) rotate(0)   scale(1);   opacity:0}
+  20% {opacity:.6}
+  100%{transform:translateY(-260px) rotate(40deg) scale(1.15); opacity:0}
+}
+
+/* ═══════════════════════════════════════════════
+   FIX 2: TODAY BANNER — reduce size, clear of navbar
+   The navbar is ~64px tall; we push down with
+   padding-top on bday-body and shrink banner padding
+═══════════════════════════════════════════════ */
+.today-banner{
+  background:linear-gradient(110deg,var(--lav-100) 0%,#fff7c5 50%,var(--lav-100) 100%);
+  background-size:200% 100%;
+  border:1.5px solid transparent;
+  border-radius:var(--radius);
+  /* Smaller padding so it doesn't feel massive */
+  padding:.75rem 1.2rem;
+  display:flex;align-items:center;gap:.85rem;
+  /* Reduced bottom margin */
+  margin-bottom:1.4rem;
+  position:relative;overflow:hidden;
+  box-shadow:var(--shadow-soft);
+  animation:bannerShimmer 4s linear infinite, bannerPulse 2.4s ease-in-out infinite;
+}
+.today-banner::before{
+  content:"";position:absolute;inset:-2px;border-radius:inherit;padding:2px;
+  background:var(--grad-aurora);background-size:300% 300%;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  animation:auroraSpin 6s linear infinite;
+  pointer-events:none;
+}
+@keyframes bannerShimmer{0%{background-position:0% 0%}100%{background-position:200% 0%}}
+@keyframes bannerPulse{0%,100%{box-shadow:0 12px 40px -12px rgba(124,58,237,.25)}50%{box-shadow:0 18px 50px -10px rgba(251,191,36,.45)}}
+@keyframes auroraSpin{to{background-position:300% 0%}}
+/* Smaller icon */
+.today-banner-icon{font-size:1.5rem;animation:wiggle 1.8s ease-in-out infinite}
+@keyframes wiggle{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(12deg) scale(1.1)}}
+.today-banner-text{flex:1;color:var(--ink);font-weight:500;font-size:.95rem}
+.today-banner-text strong{color:var(--lav-600)}
+
+/* ── BODY LAYOUT ── */
+/* FIX 2 continued: add scroll-margin so banner clears sticky navbar */
+.bday-body{padding:1.5rem 2.5rem 6rem;scroll-margin-top:80px}
+.bday-body-inner{max-width:1180px;margin:0 auto}
+.bday-layout{display:grid;grid-template-columns:340px 1fr;gap:2.2rem;align-items:start}
+@media (max-width:900px){.bday-layout{grid-template-columns:1fr}}
+
+/* ── SIDEBAR ── */
+.bday-sidebar{position:sticky;top:1.5rem}
+.sidebar-card{
+  background:var(--surface);
+  border-radius:calc(var(--radius) + 4px);
+  padding:1.4rem;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow-soft);
+  position:relative;overflow:hidden;
+}
+.sidebar-card::before{
+  content:"";position:absolute;top:-50%;right:-30%;width:200px;height:200px;
+  background:radial-gradient(circle,rgba(253,224,71,.35),transparent 70%);
+  filter:blur(20px);pointer-events:none;
+}
+.sidebar-header{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;position:relative}
+.sidebar-header-title{font-family:'Fraunces',serif;font-weight:700;font-size:1.3rem;color:var(--ink);flex:1}
+.sidebar-header-badge{
+  font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--lav-600),var(--lav-500));color:#fff;
+  padding:.3rem .65rem;border-radius:999px;
+  box-shadow:0 4px 12px -4px rgba(124,58,237,.5);
+}
+.upcoming-items{display:flex;flex-direction:column;gap:.55rem;position:relative}
+.upcoming-item{
+  display:flex;align-items:center;gap:.85rem;
+  padding:.75rem .85rem;border-radius:14px;cursor:pointer;
+  background:var(--lav-50);
+  border:1px solid transparent;
+  transition:all .25s cubic-bezier(.4,0,.2,1);
+}
+.upcoming-item:hover{
+  background:linear-gradient(135deg,var(--lav-100),#fff7c5);
+  border-color:rgba(124,58,237,.3);
+  transform:translateX(4px);
+  box-shadow:0 8px 20px -8px rgba(124,58,237,.35);
+}
+.upcoming-item.is-soon{
+  background:linear-gradient(135deg,#fff3a8,var(--lav-100));
+  border-color:rgba(251,191,36,.5);
+  animation:soonGlow 2.4s ease-in-out infinite;
+}
+@keyframes soonGlow{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,.4)}50%{box-shadow:0 0 0 8px rgba(251,191,36,0)}}
+.days-pill{
+  min-width:54px;text-align:center;padding:.45rem .3rem;border-radius:12px;
+  background:linear-gradient(135deg,var(--lav-600),var(--purple-800));
+  color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 6px 14px -6px rgba(76,29,149,.5);
+}
+.is-soon .days-pill{background:linear-gradient(135deg,var(--amber),#f97316)}
+.days-num{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:800;line-height:1}
+.days-lbl{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85;margin-top:2px}
+.ui-name{font-weight:600;color:var(--ink)}
+.ui-date{font-size:.78rem;color:var(--ink-3);margin-top:2px}
+.upcoming-empty{text-align:center;padding:1.4rem;color:var(--ink-3);font-style:italic}
+
+/* ── MAIN: BY MONTH ── */
+.month-section{margin-bottom:2.4rem}
+.month-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.month-name{
+  font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;
+  color:var(--ink);letter-spacing:-.01em;
+  background:linear-gradient(120deg,var(--purple-800),var(--lav-600));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.month-line{flex:1;height:2px;background:linear-gradient(90deg,var(--lav-300),transparent);border-radius:2px}
+.month-count{font-size:.75rem;font-weight:600;color:var(--lav-600);letter-spacing:.08em;text-transform:uppercase}
+.month-chips{display:flex;flex-wrap:wrap;gap:.7rem}
+.bday-chip{
+  display:inline-flex;align-items:center;gap:.55rem;padding:.55rem .95rem;
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:999px;cursor:pointer;
+  font-size:.92rem;color:var(--ink);
+  transition:all .22s cubic-bezier(.4,0,.2,1);
+  position:relative;
+  box-shadow:0 4px 10px -6px rgba(76,29,149,.15);
+}
+.bday-chip:hover{
+  background:linear-gradient(135deg,var(--lav-100),#fff7c5);
+  border-color:var(--lav-400);
+  transform:translateY(-3px) scale(1.04);
+  box-shadow:0 12px 24px -10px rgba(124,58,237,.4);
+}
+.chip-day{
+  font-family:'Fraunces',serif;font-weight:800;font-size:1.05rem;
+  color:#a78bfa;min-width:22px;
+}
+/* chip-name: dark bg → white, light bg → dark ink via mix-blend contrast trick */
+.chip-name{font-weight:500;color:#1b0e3a}
+/* when style.css sets dark mode, override — covers common dark mode class patterns */
+[data-theme="dark"] .chip-name,
+.dark .chip-name,
+body.dark-mode .chip-name,
+[data-theme="dark"] .chip-day,
+.dark .chip-day,
+body.dark-mode .chip-day{color:#f1e8ff}
+[data-theme="dark"] .chip-day,
+.dark .chip-day,
+body.dark-mode .chip-day{color:#c9aaff}
+[data-theme="dark"] .bday-chip,
+.dark .bday-chip,
+body.dark-mode .bday-chip{
+  background:rgba(76,29,149,.55);
+  border-color:rgba(183,148,244,.35);
+}
+[data-theme="dark"] .month-count,
+.dark .month-count,
+body.dark-mode .month-count{color:#c9aaff}
+/* Nuclear option: if page bg is dark (style.css overrides --surface to dark),
+   the chip text must be light. Use forced-colors-safe contrast trick: */
+@media (prefers-color-scheme: dark){
+  .chip-name{color:#f1e8ff}
+  .chip-day{color:#c9aaff}
+  .bday-chip{background:rgba(76,29,149,.55);border-color:rgba(183,148,244,.35)}
+}
+.today-chip{
+  background:linear-gradient(135deg,#fde047,var(--lav-300))!important;
+  border-color:var(--amber)!important;
+  color:var(--purple-900)!important;font-weight:700;
+  animation:todayChipPulse 1.6s ease-in-out infinite;
+}
+@keyframes todayChipPulse{
+  0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(251,191,36,.6)}
+  50%    {transform:scale(1.06);box-shadow:0 0 0 10px rgba(251,191,36,0)}
+}
+.chip-today-dot{
+  width:8px;height:8px;border-radius:50%;background:#f43f5e;
+  box-shadow:0 0 0 4px rgba(244,63,94,.25);animation:todayChipPulse 1.4s infinite;
+}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(20px);transition:all .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.15s}
+
+/* ══════════════════════════════════════════════════════════════
+   POPUP OVERLAY
+══════════════════════════════════════════════════════════════ */
+.bday-overlay{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at center,rgba(46,16,101,.85),rgba(15,5,30,.95));
+  backdrop-filter:blur(14px);
+  opacity:0;pointer-events:none;
+  transition:opacity .4s ease;
+  /* FIX 2: ensure overlay starts below navbar height */
+  padding-top:70px;
+  padding-left:1.5rem;
+  padding-right:1.5rem;
+  padding-bottom:1.5rem;
+  /* allow scroll if card is still too tall on small screens */
+  overflow-y:auto;
+}
+.bday-overlay.open{opacity:1;pointer-events:auto}
+.hidden{display:none!important}
+
+/* ──────────────────────────────────────────────
+   TYPE 1 · TODAY — COSMIC BIRTHDAY STAGE (EPIC)
+────────────────────────────────────────────── */
+.card-today-wrapper{
+  position:relative;width:min(620px,95vw);
+  /* FIX 2: remove perspective so card doesn't overflow vertically */
+  animation:ctDrop .9s cubic-bezier(.2,1.4,.4,1) both;
+}
+@keyframes ctDrop{
+  0%  {opacity:0;transform:scale(.4) rotateX(-25deg) rotateY(15deg)}
+  60% {opacity:1;transform:scale(1.06) rotateX(4deg) rotateY(-2deg)}
+  100%{opacity:1;transform:scale(1) rotateX(0) rotateY(0)}
+}
+.ct-ring{
+  position:absolute;inset:-55px;border-radius:40px;
+  background:var(--grad-aurora);background-size:300% 300%;
+  filter:blur(40px);opacity:.95;z-index:-1;
+  animation:auroraSpin 6s linear infinite;
+}
+.ct-ring2{
+  position:absolute;inset:-25px;border-radius:36px;
+  background:conic-gradient(from 180deg,#fde047,#fff,#b794f4,#7c3aed,#fde047);
+  background-size:200% 200%;
+  filter:blur(14px);opacity:.55;z-index:-1;
+  animation:auroraSpin 4s linear infinite reverse;
+}
+.card-today{
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%,rgba(253,224,71,.18),transparent 60%),
+    linear-gradient(160deg,#1a0533 0%,#2e1065 50%,#1a0533 100%);
+  border-radius:30px;overflow:hidden;
+  border:1.5px solid rgba(253,224,71,.35);
+  box-shadow:0 50px 100px -20px rgba(0,0,0,.8),
+             inset 0 1px 0 rgba(255,255,255,.12),
+             inset 0 0 60px rgba(124,58,237,.25);
+  position:relative;
+  transform-style:preserve-3d;
+}
+.card-today::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    repeating-linear-gradient(45deg,transparent 0 12px,rgba(253,224,71,.025) 12px 13px),
+    var(--grad-aurora);
+  background-size:auto,200% 200%;
+  opacity:.18;mix-blend-mode:screen;
+  animation:auroraSpin 10s linear infinite;
+}
+.ct-balloons{
+  position:absolute;top:-28px;left:0;right:0;display:flex;justify-content:space-around;
+  z-index:5;pointer-events:none;
+}
+.ct-balloons span{
+  font-size:2.4rem;
+  filter:drop-shadow(0 8px 14px rgba(0,0,0,.5));
+  animation:balloonBob 3s ease-in-out infinite;
+}
+.ct-balloons span:nth-child(1){animation-delay:0s}
+.ct-balloons span:nth-child(2){animation-delay:.3s}
+.ct-balloons span:nth-child(3){animation-delay:.6s}
+.ct-balloons span:nth-child(4){animation-delay:.9s}
+.ct-balloons span:nth-child(5){animation-delay:1.2s}
+@keyframes balloonBob{
+  0%,100%{transform:translateY(0) rotate(-6deg) scale(1)}
+  50%    {transform:translateY(-18px) rotate(8deg) scale(1.08)}
+}
+
+/* ═══════════════════════════════════════════════
+   FIX 3: PHOTO FRAME — taller + better object-position
+   Use object-fit:cover + object-position:center 15%
+   so faces aren't cropped at the top.
+   Also reduced height from 300px to 260px to help
+   the card fit without scrolling on most screens.
+═══════════════════════════════════════════════ */
+.ct-photo-frame{
+  position:relative;
+  height:260px;
+  overflow:hidden;
+  background:#0a0520;
+}
+.ct-aurora{
+  position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:var(--grad-aurora);background-size:200% 200%;
+  mix-blend-mode:overlay;opacity:.55;
+  animation:auroraSpin 6s linear infinite;
+}
+.ct-photo-overlay{
+  position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(to bottom,transparent 55%,rgba(26,5,51,.98) 100%);
+}
+.ct-photo-img{
+  position:absolute;
+  /* sit on bottom so feet are at bottom, head shows at top */
+  bottom:0;left:50%;
+  transform:translateX(-50%);
+  /* full height of frame, auto width — shows whole person */
+  height:100%;
+  width:auto;
+  max-width:none;
+  display:block;z-index:0;
+  filter:brightness(.92) saturate(1.2) contrast(1.05);
+}
+.ct-star{
+  position:absolute;z-index:4;pointer-events:none;
+  animation:ctStarTwinkle ease-in-out infinite;
+  filter:drop-shadow(0 0 8px rgba(253,224,71,.9));
+}
+@keyframes ctStarTwinkle{
+  0%,100%{opacity:.15;transform:translateY(0) scale(.7) rotate(0)}
+  50%    {opacity:1;  transform:translateY(-14px) scale(1.4) rotate(180deg)}
+}
+.ct-cake-mega{
+  position:absolute;left:50%;bottom:14px;transform:translateX(-50%);
+  font-size:3.2rem;z-index:4;
+  filter:drop-shadow(0 8px 22px rgba(253,224,71,.7));
+  animation:ctCakeFloat 3.4s ease-in-out infinite;
+}
+@keyframes ctCakeFloat{
+  0%,100%{transform:translateX(-50%) translateY(0) rotate(-3deg)}
+  50%    {transform:translateX(-50%) translateY(-10px) rotate(3deg)}
+}
+/* Tighter text section */
+.ct-text{padding:1.4rem 1.8rem 1.4rem;position:relative;z-index:2;color:#fff;text-align:center}
+.ct-badge{
+  display:inline-block;font-size:.74rem;font-weight:800;letter-spacing:.18em;
+  padding:.5rem 1rem;border-radius:999px;
+  background:linear-gradient(90deg,var(--amber),var(--yellow-300),#fff,var(--amber));
+  background-size:300% 100%;color:var(--purple-900);
+  animation:badgeShine 2.2s linear infinite;
+  box-shadow:0 10px 24px -6px rgba(251,191,36,.7);
+}
+@keyframes badgeShine{to{background-position:300% 0%}}
+.ct-name{margin:.75rem 0 .25rem;font-family:'Fraunces',serif;font-size:clamp(2rem,6vw,2.8rem);font-weight:900;line-height:1;letter-spacing:-.02em}
+.ct-name-glow{
+  background:linear-gradient(120deg,#fde047 0%,#fff 25%,#b794f4 45%,#fff 65%,#fde047 100%);
+  background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:nameShine 3s linear infinite;
+  filter:drop-shadow(0 0 26px rgba(253,224,71,.55));
+}
+@keyframes nameShine{to{background-position:200% 0%}}
+.ct-roll{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(253,224,71,.85);margin-bottom:1rem;font-weight:700}
+.ct-wish-box{
+  position:relative;
+  margin:0 auto 1.1rem;max-width:480px;
+  padding:.9rem 1.1rem;border-radius:18px;
+  background:linear-gradient(135deg,rgba(183,148,244,.12),rgba(253,224,71,.10));
+  border:1px solid rgba(253,224,71,.3);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+}
+.ct-wish-box::before{
+  content:"❝";position:absolute;top:-14px;left:14px;font-family:'Fraunces',serif;
+  font-size:2.6rem;color:var(--amber);line-height:1;
+  text-shadow:0 0 12px rgba(251,191,36,.6);
+}
+.ct-wish{font-size:.96rem;line-height:1.6;color:#fff;font-weight:500;font-family:'Fraunces',serif;font-style:italic}
+.ct-wish strong{font-weight:700;color:var(--amber)}
+.ct-footer{display:flex;align-items:center;gap:1rem;justify-content:space-between;flex-wrap:wrap;margin-top:.5rem}
+.ct-date-strip{text-align:left}
+.ct-date-label{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--lav-300);font-weight:700}
+.ct-date-value{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-top:2px}
+.ct-close{
+  padding:.75rem 1.4rem;border:none;cursor:pointer;
+  font-family:inherit;font-weight:800;font-size:.9rem;letter-spacing:.04em;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--amber),var(--yellow-300));
+  color:var(--purple-900);
+  box-shadow:0 14px 30px -8px rgba(251,191,36,.7);
+  transition:transform .2s ease;
+}
+.ct-close:hover{transform:scale(1.08) rotate(-2deg)}
+.ct-music{
+  position:absolute;top:14px;right:14px;z-index:6;
+  width:42px;height:42px;border:none;cursor:pointer;border-radius:50%;
+  background:rgba(253,224,71,.95);color:var(--purple-900);font-size:1.1rem;
+  box-shadow:0 8px 20px rgba(0,0,0,.4),0 0 0 4px rgba(253,224,71,.25);
+  display:flex;align-items:center;justify-content:center;
+  animation:musicPulse 1.8s ease-in-out infinite;
+}
+@keyframes musicPulse{
+  0%,100%{box-shadow:0 8px 20px rgba(0,0,0,.4),0 0 0 0 rgba(253,224,71,.5)}
+  50%    {box-shadow:0 8px 20px rgba(0,0,0,.4),0 0 0 12px rgba(253,224,71,0)}
+}
+
+/* ──────────────────────────────────────────────
+   TYPE 2 · UPCOMING — GOLDEN COUNTDOWN TICKET
+────────────────────────────────────────────── */
+.card-upcoming-wrapper{
+  position:relative;width:min(640px,95vw);
+  animation:cuFlyIn .8s cubic-bezier(.2,1.2,.4,1) both;
+}
+@keyframes cuFlyIn{
+  0%  {opacity:0;transform:rotateY(-25deg) translateY(60px) scale(.85)}
+  100%{opacity:1;transform:rotateY(0) translateY(0) scale(1)}
+}
+.cu-corkboard,.cu-tape,.cu-tape-corner{display:none}
+.card-upcoming{
+  position:relative;
+  background:
+    radial-gradient(ellipse 60% 40% at 0% 0%,rgba(253,224,71,.25),transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%,rgba(183,148,244,.3),transparent 60%),
+    linear-gradient(160deg,#2a1065 0%,#4c1d95 55%,#1a0533 100%);
+  border-radius:26px;overflow:hidden;
+  box-shadow:0 50px 100px -20px rgba(0,0,0,.7),
+             inset 0 1px 0 rgba(255,255,255,.1),
+             inset 0 0 80px rgba(253,224,71,.08);
+  border:1.5px solid rgba(253,224,71,.4);
+  color:#fff;
+}
+.cu-halo{
+  position:absolute;inset:-3px;border-radius:26px;padding:3px;pointer-events:none;
+  background:conic-gradient(from 0deg,var(--amber),var(--lav-400),#fff,var(--amber),var(--lav-500),var(--amber));
+  background-size:200% 200%;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  animation:auroraSpin 5s linear infinite;
+}
+.cu-top{
+  position:relative;
+  display:grid;grid-template-columns:180px 1fr;gap:1.2rem;
+  padding:1.6rem 1.6rem 1.2rem;align-items:center;
+}
+/* FIX 3: upcoming photo — face-safe crop */
+.cu-photo{
+  position:relative;width:180px;height:180px;
+  border-radius:24px;overflow:hidden;
+  background:linear-gradient(135deg,#1a0533,#3b2570);
+  box-shadow:0 0 0 3px rgba(253,224,71,.55),
+             0 0 0 10px rgba(124,58,237,.3),
+             0 20px 40px -12px rgba(0,0,0,.6);
+  animation:cuPhotoTilt 6s ease-in-out infinite;
+}
+@keyframes cuPhotoTilt{
+  0%,100%{transform:rotate(-3deg)}
+  50%    {transform:rotate(3deg)}
+}
+.cu-photo::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(135deg,rgba(253,224,71,.18),transparent 50%,rgba(183,148,244,.18));
+  mix-blend-mode:overlay;
+}
+.cu-photo img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;
+  /* FIX 3: face-safe position */
+  object-position:center 15%;
+  z-index:1;display:block;
+}
+.cu-photo-placeholder{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:4rem;background:linear-gradient(135deg,var(--lav-500),var(--amber));z-index:1;
+}
+.cu-photo-ring{
+  position:absolute;inset:-14px;border-radius:30px;pointer-events:none;
+  background:conic-gradient(from 0deg,var(--amber),transparent 30%,var(--lav-400),transparent 70%,var(--amber));
+  filter:blur(8px);opacity:.65;z-index:-1;
+  animation:auroraSpin 4s linear infinite;
+}
+.cu-caption{display:flex;flex-direction:column;gap:.5rem}
+.cu-subtitle{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);font-weight:800}
+.cu-name{
+  font-family:'Fraunces',serif;font-weight:900;font-size:1.8rem;line-height:1.05;
+  background:linear-gradient(120deg,#fff,#fde047,#fff,#b794f4);
+  background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:nameShine 4s linear infinite;
+  letter-spacing:-.01em;
+}
+.cu-tagline{font-size:.9rem;color:rgba(255,255,255,.82);font-style:italic;line-height:1.5}
+.cu-mid{
+  position:relative;padding:1.2rem 1.6rem 1.4rem;
+  display:flex;align-items:center;gap:1.2rem;
+  border-top:1px dashed rgba(253,224,71,.25);
+  background:linear-gradient(180deg,transparent,rgba(253,224,71,.04));
+}
+.cu-cd-big{
+  position:relative;
+  min-width:130px;text-align:center;
+  padding:.85rem .7rem;border-radius:18px;
+  background:linear-gradient(135deg,rgba(253,224,71,.18),rgba(183,148,244,.18));
+  border:1.5px solid rgba(253,224,71,.5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 12px 30px -10px rgba(0,0,0,.5);
+  overflow:hidden;
+}
+.cu-cd-big::before{
+  content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:conic-gradient(from 0deg,transparent 0,rgba(253,224,71,.4) 50deg,transparent 100deg);
+  animation:auroraSpin 5s linear infinite;
+  pointer-events:none;
+}
+.cu-cd-num{
+  position:relative;
+  font-family:'Fraunces',serif;font-size:3.5rem;font-weight:900;line-height:.9;
+  background:linear-gradient(180deg,#fff8c5,var(--amber));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 0 30px rgba(251,191,36,.5);
+  animation:cdPop 2.4s ease-in-out infinite;
+}
+@keyframes cdPop{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.cu-cd-unit{position:relative;font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-top:4px}
+.cu-cd-side{flex:1}
+.cu-cd-when{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(253,224,71,.85);font-weight:800;margin-bottom:.3rem}
+.cu-cd-date{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:800;color:#fff;line-height:1.1}
+.cu-cd-sub{font-size:.82rem;color:rgba(255,255,255,.7);margin-top:.3rem}
+.cu-bottom{padding:1rem 1.6rem 1.4rem;border-top:1px dashed rgba(253,224,71,.25)}
+.cu-quote{
+  font-size:.93rem;line-height:1.6;color:rgba(255,255,255,.92);
+  font-style:italic;font-family:'Fraunces',serif;
+  padding-left:1rem;border-left:3px solid var(--amber);
+}
+.cu-close{
+  position:absolute;top:1rem;right:1rem;z-index:4;
+  width:38px;height:38px;border:none;cursor:pointer;border-radius:50%;
+  background:rgba(253,224,71,.95);color:var(--purple-900);font-weight:800;font-size:1rem;
+  box-shadow:0 6px 16px rgba(0,0,0,.4);
+}
+.cu-close:hover{background:#fff;transform:rotate(90deg);transition:.3s}
+@media (max-width:560px){
+  .cu-top{grid-template-columns:1fr;text-align:center;justify-items:center}
+  .cu-photo{width:150px;height:150px}
+  .cu-mid{flex-direction:column;text-align:center}
+  .cu-cd-side{text-align:center}
+}
+
+/* ──────────────────────────────────────────────
+   TYPE 3 · OTHER — POLAROID DEVELOPING
+────────────────────────────────────────────── */
+.card-other-wrapper{
+  position:relative;width:min(380px,90vw);
+  animation:coTilt .8s cubic-bezier(.2,1.2,.4,1) both;
+}
+@keyframes coTilt{
+  0%  {opacity:0;transform:rotate(8deg) translateY(40px) scale(.8)}
+  100%{opacity:1;transform:rotate(-2deg) translateY(0) scale(1)}
+}
+.card-other{
+  position:relative;background:#fffdf5;padding:14px 14px 0;border-radius:6px;
+  box-shadow:0 30px 60px -15px rgba(0,0,0,.5),0 0 0 1px rgba(124,58,237,.1);
+  transform:rotate(-2deg);
+}
+.card-other::before{
+  content:"";position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(-3deg);
+  width:90px;height:28px;
+  background:linear-gradient(135deg,rgba(253,224,71,.7),rgba(251,191,36,.85));
+  box-shadow:0 4px 8px rgba(0,0,0,.15);border-radius:2px;z-index:5;
+}
+/* FIX 3: polaroid photo — face-safe */
+.co-photo{position:relative;width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,var(--lav-100),#fff7c5);overflow:hidden;border-radius:3px;}
+.co-photo img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;
+  /* FIX 3: 20% from top keeps face visible */
+  object-position:center 20%;
+  transition:filter 1.4s ease,opacity 1.4s ease;
+}
+.co-photo img.undeveloped{filter:blur(20px) saturate(0) brightness(2);opacity:.3}
+.co-photo img.developed{filter:none;opacity:1}
+.co-dev-wash{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(135deg,rgba(183,148,244,.95),rgba(253,224,71,.95));transition:opacity 1.2s ease;}
+.co-dev-wash.gone{opacity:0}
+.co-scan{position:absolute;left:0;right:0;top:-4px;height:60px;z-index:4;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(253,224,71,.9) 50%,transparent);filter:blur(2px);transition:top 1.4s cubic-bezier(.4,0,.2,1);}
+.co-photo-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,var(--lav-300),var(--amber));z-index:1;}
+.co-mini-confetti{position:absolute;bottom:90px;left:50%;width:0;height:0;pointer-events:none;z-index:6}
+.co-confetti-p{position:absolute;width:8px;height:12px;left:0;top:0;animation:coConfetti var(--d) cubic-bezier(.2,.7,.3,1) var(--delay) forwards;opacity:0;}
+@keyframes coConfetti{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--bx),var(--by)) rotate(var(--br))}}
+.co-white-bottom{padding:1.2rem .6rem 1.5rem;text-align:center}
+.co-name{
+  font-family:'Fraunces',serif;font-size:1.9rem;font-weight:900;
+  color:#2e1065;line-height:1.05;letter-spacing:-.01em;
+  text-shadow:0 1px 0 rgba(255,255,255,.7);
+}
+.co-bday-info{
+  font-family:'Space Grotesk',sans-serif;font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:#6b21a8;font-weight:800;margin:.55rem 0 .7rem;
+}
+.co-quote{
+  font-family:'Space Grotesk',sans-serif;font-size:.92rem;color:#1b0e3a;
+  font-style:italic;line-height:1.55;padding:0 .5rem;font-weight:500;
+}
+.co-close{position:absolute;top:-14px;right:-14px;width:36px;height:36px;border:none;cursor:pointer;border-radius:50%;background:var(--purple-800);color:#fff;font-weight:700;font-size:.8rem;box-shadow:0 6px 14px rgba(0,0,0,.3);z-index:6;}
+.co-close:hover{background:var(--amber);color:var(--purple-900);transform:scale(1.1) rotate(90deg);transition:.3s}
+
+/* ── Nav float ── */
+.card-nav-float{position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);padding:.5rem .6rem;border-radius:999px;box-shadow:0 12px 28px rgba(0,0,0,.4);}
+.dark-nav{background:rgba(46,16,101,.85);color:#fff}
+.cnf-btn{width:34px;height:34px;border:none;cursor:pointer;border-radius:50%;background:linear-gradient(135deg,var(--lav-600),var(--purple-800));color:#fff;font-size:1.1rem;font-weight:700;}
+.cnf-btn:hover{background:linear-gradient(135deg,var(--amber),var(--yellow-300));color:var(--purple-900)}
+.cnf-count{font-size:.8rem;font-weight:600;color:inherit;padding:0 .4rem}
+
+#confettiCanvas{position:fixed;inset:0;pointer-events:none;z-index:300;display:none}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="bday-hero">
+    <div class="bday-hero-bg"></div>
+    <div class="hero-floaters" id="heroFloaters"></div>
+    <div class="bday-hero-inner reveal">
+      <div class="section-label">✦ Celebrate together</div>
+      <h1>Section E <em>Birthdays</em></h1>
+      <p class="section-desc">
+        Never miss a classmate's special day. All dates in Nepali calendar (BS). Tap any name to unwrap their birthday card.
+      </p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <section class="bday-body">
+    <div class="bday-body-inner">
+
+      <div class="today-banner" id="todayBanner" style="display:none">
+        <div class="today-banner-icon">🎂</div>
+        <div class="today-banner-text" id="todayBannerText"></div>
+      </div>
+
+      <div class="bday-layout">
+
+        <aside class="bday-sidebar reveal">
+          <div class="sidebar-card">
+            <div class="sidebar-header">
+              <span style="font-size:1.3rem">🗓</span>
+              <span class="sidebar-header-title">Upcoming</span>
+              <span class="sidebar-header-badge" id="upcomingBadge">next 30 days</span>
+            </div>
+            <div class="upcoming-items" id="upcomingList"></div>
+          </div>
+        </aside>
+
+        <main class="bday-main reveal reveal-delay-1">
+          <div class="section-label" style="margin-bottom:1rem">✦ All birthdays by month</div>
+          <div id="allBirthdays"></div>
+        </main>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<canvas id="confettiCanvas"></canvas>
+
+<!-- ══════════ POPUP — 3 EPIC TYPES ══════════ -->
+<div class="bday-overlay" id="bdayOverlay">
+
+  <!-- TYPE 1: TODAY -->
+  <div class="card-today-wrapper" id="cardTodayWrapper" style="display:none">
+    <div class="ct-ring"></div>
+    <div class="ct-ring2"></div>
+    <div class="card-today">
+      <button class="ct-music" id="ctMusic" title="Toggle birthday song">🎵</button>
+      <div class="ct-balloons"><span>🎈</span><span>🎁</span><span>🥳</span><span>🎊</span><span>🎈</span></div>
+      <div class="ct-photo-frame" id="ctPhotoFrame">
+        <div class="ct-aurora"></div>
+        <div class="ct-photo-overlay"></div>
+        <div class="ct-cake-mega">🎂</div>
+      </div>
+      <div class="ct-text">
+        <div class="ct-badge" id="ctBadge">🎉 TODAY'S BIRTHDAY STAR</div>
+        <div class="ct-name"><span class="ct-name-glow" id="ctName">Name</span></div>
+        <div class="ct-roll" id="ctRoll">Roll No. · Section E</div>
+        <div class="ct-wish-box">
+          <div class="ct-wish" id="ctWish"></div>
+        </div>
+        <div class="ct-footer">
+          <div class="ct-date-strip">
+            <div class="ct-date-label">Birthday</div>
+            <div class="ct-date-value" id="ctDate"></div>
+          </div>
+          <button class="ct-close" id="ctClose">🎉 Celebrate!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPE 2: UPCOMING -->
+  <div class="card-upcoming-wrapper" id="cardUpcomingWrapper" style="display:none">
+    <div class="card-upcoming">
+      <div class="cu-halo"></div>
+      <button class="cu-close" id="cuClose">✕</button>
+      <div class="cu-top">
+        <div class="cu-photo" id="cuPhoto">
+          <div class="cu-photo-ring"></div>
+        </div>
+        <div class="cu-caption">
+          <div class="cu-subtitle" id="cuSubtitle">Roll · Section E</div>
+          <div class="cu-name" id="cuName"></div>
+          <div class="cu-tagline" id="cuTagline">A birthday is on the horizon ✨</div>
+        </div>
+      </div>
+      <div class="cu-mid">
+        <div class="cu-cd-big">
+          <div class="cu-cd-num" id="cuDaysNum">–</div>
+          <div class="cu-cd-unit" id="cuDaysUnit">days to go</div>
+        </div>
+        <div class="cu-cd-side">
+          <div class="cu-cd-when">Mark your calendar</div>
+          <div class="cu-cd-date" id="cuBdayDate"></div>
+          <div class="cu-cd-sub" id="cuBdaySub"></div>
+        </div>
+      </div>
+      <div class="cu-bottom">
+        <div class="cu-quote" id="cuQuote"></div>
+      </div>
+    </div>
+    <div class="card-nav-float dark-nav hidden" id="cuNav">
+      <button class="cnf-btn" id="cuPrev">‹</button>
+      <span class="cnf-count" id="cuNavCount"></span>
+      <button class="cnf-btn" id="cuNext">›</button>
+    </div>
+  </div>
+
+  <!-- TYPE 3: OTHER -->
+  <div class="card-other-wrapper" id="cardOtherWrapper" style="display:none">
+    <div class="card-other">
+      <div class="co-photo" id="coPhoto">
+        <div class="co-dev-wash" id="coWash"></div>
+        <div class="co-scan" id="coScan"></div>
+      </div>
+      <div class="co-mini-confetti" id="coConfettiBox"></div>
+      <div class="co-white-bottom">
+        <div class="co-name" id="coName"></div>
+        <div class="co-bday-info" id="coBdayInfo"></div>
+        <div class="co-quote" id="coQuote"></div>
+      </div>
+      <button class="co-close" id="coClose">✕</button>
+    </div>
+    <div class="card-nav-float dark-nav hidden" id="coNav">
+      <button class="cnf-btn" id="coPrev">‹</button>
+      <span class="cnf-count" id="coNavCount"></span>
+      <button class="cnf-btn" id="coNext">›</button>
+    </div>
+  </div>
+
+  <div class="card-nav-float hidden" id="ctNav" style="position:fixed;bottom:80px;">
+    <button class="cnf-btn" id="ctPrev">‹</button>
+    <span class="cnf-count" id="ctNavCount"></span>
+    <button class="cnf-btn" id="ctNext">›</button>
+  </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="firebase-client.js"></script>
+<script src="shared.js"></script>
+<script src="nepali-date.js"></script>
+<script>
+/* ─── Birthdays page logic (unchanged behavior) ─── */
+const BS_MONTHS = NepaliDate.BS_MONTHS_EN;
+function toTitle(s){ return s.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()); }
+function getInitials(n){ return n.trim().split(/\s+/).map(w=>w[0]).join('').toUpperCase().slice(0,2); }
+
+function buildBirthdayData(){
+  const out = [];
+  Object.keys(STUDENT_PROFILES).forEach(rollStr => {
+    const roll = Number(rollStr);
+    const p = STUDENT_PROFILES[roll];
+    if(!p || !p.dob || !p.dob.bsDay) return;
+    const s = STUDENTS.find(x => x.roll === roll);
+    if(!s) return;
+    out.push({ roll, name: s.name, bsYear: p.dob.bsYear, bsMonth: p.dob.bsMonth, bsDay: p.dob.bsDay });
+  });
+  const cached = JSON.parse(localStorage.getItem('ec_birthdays') || '[]');
+  const profileRolls = new Set(out.map(x=>x.roll));
+  cached.forEach(b => { if(!profileRolls.has(b.roll)) out.push(b); });
+  localStorage.setItem('ec_birthdays', JSON.stringify(out));
+  return out;
+}
+
+let _memberPhotos = {};
+function photoUrl(roll){ return getDriveFolderPhotoUrl(roll, _memberPhotos); }
+
+function daysUntil(bsMonth, bsDay){
+  const today = NepaliDate.todayBS();
+  const todayAd = new Date(); todayAd.setHours(0,0,0,0);
+  let d = NepaliDate.bsToAd(today.y, bsMonth, bsDay);
+  d.setHours(0,0,0,0);
+  let diff = Math.round((d - todayAd) / 86400000);
+  if(diff <= 0){
+    d = NepaliDate.bsToAd(today.y + 1, bsMonth, bsDay);
+    d.setHours(0,0,0,0);
+    diff = Math.round((d - todayAd) / 86400000);
+  }
+  return diff;
+}
+
+(function initFloaters(){
+  const wrap = document.getElementById('heroFloaters');
+  const emojis = ['🎂','🎁','🎈','🥳','✨','🎉','🌟','🎊','💜','🌟'];
+  for(let i=0;i<16;i++){
+    const el = document.createElement('span');
+    el.className = 'floater';
+    el.textContent = emojis[i % emojis.length];
+    el.style.cssText = `left:${Math.random()*100}%;bottom:-30px;font-size:${1.2+Math.random()*1.4}rem;animation-duration:${6+Math.random()*8}s;animation-delay:${Math.random()*8}s;`;
+    wrap.appendChild(el);
+  }
+})();
+
+document.querySelectorAll('.reveal').forEach(el => {
+  new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 }).observe(el);
+});
+
+function renderUpcoming(data){
+  const el = document.getElementById('upcomingList');
+  const list = data
+    .map(b => ({...b, days: daysUntil(b.bsMonth, b.bsDay)}))
+    .filter(b => b.days > 0 && b.days <= 30)
+    .sort((a,b) => a.days - b.days)
+    .slice(0, 10);
+  if(!list.length){ el.innerHTML='<div class="upcoming-empty">No birthdays in the next 30 days 🎈</div>'; return; }
+  document.getElementById('upcomingBadge').textContent = `${list.length} coming up`;
+  el.innerHTML = list.map(b => `
+    <div class="upcoming-item${b.days<=7?' is-soon':''}" onclick="openPopup(${b.roll})">
+      <div class="days-pill">
+        <div class="days-num">${b.days}</div>
+        <div class="days-lbl">day${b.days!==1?'s':''}</div>
+      </div>
+      <div>
+        <div class="ui-name">${toTitle(b.name)}</div>
+        <div class="ui-date">${BS_MONTHS[b.bsMonth-1]} ${b.bsDay} BS</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderAll(data){
+  const el = document.getElementById('allBirthdays');
+  if(!data.length){ el.innerHTML='<p style="color:var(--ink-3);font-style:italic">No birthday data yet.</p>'; return; }
+  const today = NepaliDate.todayBS();
+  const byMonth = {};
+  data.forEach(b => { (byMonth[b.bsMonth] = byMonth[b.bsMonth] || []).push(b); });
+  el.innerHTML = Object.keys(byMonth).sort((a,b)=>Number(a)-Number(b)).map(m => {
+    const group = byMonth[m].sort((a,b)=>a.bsDay-b.bsDay);
+    return `
+      <div class="month-section">
+        <div class="month-header">
+          <span class="month-name">${BS_MONTHS[m-1]}</span>
+          <div class="month-line"></div>
+          <span class="month-count">${group.length} birthday${group.length!==1?'s':''}</span>
+        </div>
+        <div class="month-chips">
+          ${group.map(b => {
+            const isToday = today.m == b.bsMonth && today.d == b.bsDay;
+            return `<div class="bday-chip${isToday?' today-chip':''}" onclick="openPopup(${b.roll})">
+              <span class="chip-day">${b.bsDay}</span>
+              <span class="chip-name">${toTitle(b.name)}</span>
+              ${isToday ? '<span class="chip-today-dot"></span>' : ''}
+            </div>`;
+          }).join('')}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function renderTodayBanner(data){
+  const today = NepaliDate.todayBS();
+  const celebs = data.filter(b => today.m == b.bsMonth && today.d == b.bsDay);
+  if(!celebs.length) return;
+  const banner = document.getElementById('todayBanner');
+  banner.style.display = 'flex';
+  const names = celebs.map(b=>toTitle(b.name)).join(' & ');
+  document.getElementById('todayBannerText').innerHTML =
+    `<strong>🎉 Happy Birthday!</strong> Today we celebrate <strong>${names}</strong> from Section E. Open their card below!`;
+}
+
+const WISHES = [
+  "Wishing you a year overflowing with <strong>joy</strong>, <strong>laughter</strong>, and dreams that finally come true. Happy Birthday, <strong>{name}</strong> — Section E celebrates you today! 🎂✨",
+  "May every candle on your cake spark a new <strong>adventure</strong>. From all of us in Section E — Happy Birthday, <strong>{name}</strong>! Shine the brightest today and always. 🌟",
+  "Happy Birthday, <strong>{name}</strong>! May this year hand you <strong>endless smiles</strong>, <strong>warm memories</strong>, and people who love you fiercely. 💛💜",
+  "Today the universe takes a little pause just for <strong>you</strong>. Wishing you the happiest of birthdays, <strong>{name}</strong> — may your year be golden. 🎉",
+  "Cheers to <strong>{name}</strong> — kinder, braver, brighter every year. Section E sends a <strong>massive</strong> birthday hug. Have the most magical day! 🥳🎈",
+];
+
+function pickWish(name){
+  return WISHES[Math.floor(Math.random()*WISHES.length)].replace(/\{name\}/g, name);
+}
+
+let _popupList = [], _popupIdx = 0, _currentType = 'other';
+
+function getCardType(b){
+  const today = NepaliDate.todayBS();
+  if(today.m === b.bsMonth && today.d === b.bsDay) return 'today';
+  const days = daysUntil(b.bsMonth, b.bsDay);
+  if(days > 0 && days <= 30) return 'upcoming';
+  return 'other';
+}
+
+function buildTodayCard(b){
+  const title = toTitle(b.name);
+  const url = photoUrl(b.roll);
+  const frame = document.getElementById('ctPhotoFrame');
+  frame.querySelectorAll('.ct-photo-img,.ct-photo-placeholder,.ct-star').forEach(el=>el.remove());
+
+  const img = document.createElement('img');
+  img.className = 'ct-photo-img';
+  img.src = url;
+  img.alt = title;
+  img.onerror = function(){
+    this.remove();
+    const ph = document.createElement('div');
+    ph.className = 'ct-photo-placeholder';
+    ph.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2e1065,#b794f4);font-size:6rem;z-index:0;';
+    ph.textContent = '🎂';
+    frame.insertBefore(ph, frame.querySelector('.ct-aurora'));
+  };
+  frame.insertBefore(img, frame.querySelector('.ct-aurora'));
+
+  const emojis = ['✨','⭐','🌟','💫','🎉','🎊','💜','🟡'];
+  for(let i=0;i<14;i++){
+    const s = document.createElement('span');
+    s.className = 'ct-star';
+    s.textContent = emojis[i%emojis.length];
+    s.style.cssText = `left:${8+Math.random()*84}%;bottom:${10+Math.random()*60}%;font-size:${.7+Math.random()*1}rem;animation-duration:${2.5+Math.random()*3}s;animation-delay:${Math.random()*3}s;`;
+    frame.appendChild(s);
+  }
+
+  document.getElementById('ctName').textContent = title;
+  document.getElementById('ctRoll').textContent = `Roll No. ${b.roll} · Section E`;
+  document.getElementById('ctWish').innerHTML = pickWish(title);
+  document.getElementById('ctDate').textContent = `${BS_MONTHS[b.bsMonth-1]} ${b.bsDay}, ${b.bsYear||2064} BS`;
+}
+
+function buildUpcomingCard(b){
+  const title = toTitle(b.name);
+  const url = photoUrl(b.roll);
+  const days = daysUntil(b.bsMonth, b.bsDay);
+
+  const photoEl = document.getElementById('cuPhoto');
+  photoEl.querySelectorAll('img,.cu-photo-placeholder').forEach(el=>el.remove());
+  const img = document.createElement('img');
+  img.src = url; img.alt = title;
+  img.onerror = function(){
+    this.remove();
+    const ph = document.createElement('div');
+    ph.className = 'cu-photo-placeholder';
+    ph.textContent = '📸';
+    photoEl.appendChild(ph);
+  };
+  photoEl.appendChild(img);
+
+  document.getElementById('cuName').textContent = title;
+  document.getElementById('cuSubtitle').textContent = `ROLL ${b.roll} · SECTION E · UPCOMING`;
+  document.getElementById('cuTagline').textContent =
+    days === 1 ? "Tomorrow's the big day! 🎉"
+    : days <= 7 ? `Just ${days} days until the celebration ✨`
+    : `${title}'s birthday is on the horizon ✨`;
+  document.getElementById('cuDaysNum').textContent = days;
+  document.getElementById('cuDaysUnit').textContent = days === 1 ? 'day to go' : 'days to go';
+  document.getElementById('cuBdayDate').textContent = `${BS_MONTHS[b.bsMonth-1]} ${b.bsDay}`;
+  document.getElementById('cuBdaySub').textContent = `${b.bsYear||2064} BS · Nepali Calendar`;
+  const p = STUDENT_PROFILES[b.roll];
+  const quote = (p && p.quote) ? p.quote
+    : `Get ready Section E — ${title}'s special day is almost here. Let's make it unforgettable! 🎊`;
+  document.getElementById('cuQuote').innerHTML = quote;
+}
+
+function buildOtherCard(b){
+  const title = toTitle(b.name);
+  const url = photoUrl(b.roll);
+  const photoEl = document.getElementById('coPhoto');
+  photoEl.querySelectorAll('img,.co-photo-placeholder').forEach(el=>el.remove());
+
+  const img = document.createElement('img');
+  img.src = url; img.alt = title;
+  img.className = 'undeveloped';
+  img.onerror = function(){
+    this.remove();
+    const ph = document.createElement('div');
+    ph.className = 'co-photo-placeholder';
+    ph.textContent = '📸';
+    photoEl.insertBefore(ph, document.getElementById('coWash'));
+  };
+  photoEl.insertBefore(img, document.getElementById('coWash'));
+
+  document.getElementById('coName').textContent = title;
+  document.getElementById('coBdayInfo').textContent = `${BS_MONTHS[b.bsMonth-1]} ${b.bsDay}, ${b.bsYear||2064} BS · Roll ${b.roll}`;
+  const p = STUDENT_PROFILES[b.roll];
+  const quote = (p && p.quote) ? p.quote
+    : `${title} celebrates their birthday on ${BS_MONTHS[b.bsMonth-1]} ${b.bsDay}. Can't wait to celebrate! 🎊`;
+  document.getElementById('coQuote').innerHTML = quote;
+
+  const wash = document.getElementById('coWash');
+  const scan = document.getElementById('coScan');
+  wash.classList.remove('gone');
+  scan.classList.remove('done');
+  scan.style.top = '-4px';
+
+  setTimeout(() => {
+    scan.style.top = '105%';
+    wash.classList.add('gone');
+    img.classList.remove('undeveloped');
+    img.classList.add('developed');
+    fireBottomConfetti();
+  }, 500);
+}
+
+function fireBottomConfetti(){
+  const box = document.getElementById('coConfettiBox');
+  box.innerHTML = '';
+  const colors = ['#b794f4','#7c3aed','#fde047','#eab308','#c9aaff','#fbbf24'];
+  for(let i=0;i<26;i++){
+    const p = document.createElement('div');
+    p.className = 'co-confetti-p';
+    const angle = (Math.random() * 180) - 90;
+    const dist = 60 + Math.random() * 110;
+    const bx = Math.sin(angle * Math.PI/180) * dist + 'px';
+    const by = -(Math.cos(angle * Math.PI/180) * dist * .6 + 20 + Math.random()*60) + 'px';
+    p.style.cssText = `
+      background:${colors[i%colors.length]};
+      --bx:${bx}; --by:${by};
+      --br:${Math.random()*720-360}deg;
+      --d:${.6+Math.random()*.8}s;
+      --delay:${Math.random()*.4}s;
+      border-radius:${Math.random()>.5?'50%':'2px'};
+    `;
+    box.appendChild(p);
+  }
+}
+
+function openPopup(roll){
+  const data = JSON.parse(localStorage.getItem('ec_birthdays')||'[]');
+  const b = data.find(x => x.roll === roll);
+  if(!b) return;
+  const type = getCardType(b);
+  _currentType = type;
+  const sameDay = data.filter(x => x.bsMonth === b.bsMonth && x.bsDay === b.bsDay);
+  _popupList = sameDay.length > 1 ? sameDay : [b];
+  _popupIdx = _popupList.findIndex(x => x.roll === roll);
+  if(_popupIdx < 0) _popupIdx = 0;
+
+  const overlay = document.getElementById('bdayOverlay');
+  overlay.className = `bday-overlay type-${type}`;
+  document.getElementById('cardTodayWrapper').style.display = 'none';
+  document.getElementById('cardUpcomingWrapper').style.display = 'none';
+  document.getElementById('cardOtherWrapper').style.display = 'none';
+  document.getElementById('ctNav').classList.add('hidden');
+
+  if(type === 'today'){
+    document.getElementById('cardTodayWrapper').style.display = '';
+    buildTodayCard(b);
+    setupNav('ctNav','ctNavCount','ctPrev','ctNext');
+    setTimeout(launchConfetti, 350);
+    startBirthdaySong();
+  } else if(type === 'upcoming'){
+    document.getElementById('cardUpcomingWrapper').style.display = '';
+    buildUpcomingCard(b);
+    setupNav('cuNav','cuNavCount','cuPrev','cuNext');
+  } else {
+    document.getElementById('cardOtherWrapper').style.display = '';
+    buildOtherCard(b);
+    setupNav('coNav','coNavCount','coPrev','coNext');
+  }
+  overlay.classList.add('open');
+}
+
+function setupNav(navId, countId){
+  const nav = document.getElementById(navId);
+  if(_popupList.length > 1){
+    nav.classList.remove('hidden');
+    document.getElementById(countId).textContent = `${_popupIdx+1} / ${_popupList.length}`;
+  } else nav.classList.add('hidden');
+}
+
+function closePopup(){
+  document.getElementById('bdayOverlay').classList.remove('open');
+  stopBirthdaySong();
+}
+
+function wireNav(prevId, nextId, countId, buildFn){
+  document.getElementById(prevId).onclick = () => {
+    _popupIdx = (_popupIdx - 1 + _popupList.length) % _popupList.length;
+    buildFn(_popupList[_popupIdx]);
+    document.getElementById(countId).textContent = `${_popupIdx+1} / ${_popupList.length}`;
+  };
+  document.getElementById(nextId).onclick = () => {
+    _popupIdx = (_popupIdx + 1) % _popupList.length;
+    buildFn(_popupList[_popupIdx]);
+    document.getElementById(countId).textContent = `${_popupIdx+1} / ${_popupList.length}`;
+  };
+}
+wireNav('ctPrev','ctNext','ctNavCount', buildTodayCard);
+wireNav('cuPrev','cuNext','cuNavCount', buildUpcomingCard);
+wireNav('coPrev','coNext','coNavCount', buildOtherCard);
+
+document.getElementById('ctClose').onclick = closePopup;
+document.getElementById('cuClose').onclick = closePopup;
+document.getElementById('coClose').onclick = closePopup;
+document.getElementById('bdayOverlay').addEventListener('click', e => {
+  if(e.target === e.currentTarget) closePopup();
+});
+
+/* ─── Birthday song (Web Audio) ─── */
+let _bdAudioCtx = null, _bdNodes = [], _bdTimer = null, _bdMuted = false;
+const HBD_NOTES = [
+  ['C4',.5],['C4',.25],['D4',.75],['C4',.75],['F4',.75],['E4',1.25],
+  ['C4',.5],['C4',.25],['D4',.75],['C4',.75],['G4',.75],['F4',1.25],
+  ['C4',.5],['C4',.25],['C5',.75],['A4',.75],['F4',.75],['E4',.75],['D4',1.25],
+  ['Bb4',.5],['Bb4',.25],['A4',.75],['F4',.75],['G4',.75],['F4',1.5],
+];
+const NOTE_FREQ = {
+  'C4':261.63,'D4':293.66,'E4':329.63,'F4':349.23,'G4':392.00,'A4':440.00,'Bb4':466.16,'B4':493.88,'C5':523.25
+};
+function playHBDOnce(ctx, startAt){
+  const tempo = 0.42;
+  let t = startAt;
+  HBD_NOTES.forEach(([n,beats]) => {
+    const f = NOTE_FREQ[n];
+    const dur = beats * tempo;
+    const o1 = ctx.createOscillator(); o1.type='triangle'; o1.frequency.value = f;
+    const o2 = ctx.createOscillator(); o2.type='sine';     o2.frequency.value = f*2;
+    const g  = ctx.createGain();
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(.18, t+0.02);
+    g.gain.linearRampToValueAtTime(.13, t+dur*0.7);
+    g.gain.linearRampToValueAtTime(0,   t+dur);
+    const g2 = ctx.createGain(); g2.gain.value=.05;
+    o1.connect(g); o2.connect(g2); g2.connect(g); g.connect(ctx.destination);
+    o1.start(t); o2.start(t); o1.stop(t+dur+.05); o2.stop(t+dur+.05);
+    _bdNodes.push(o1,o2,g,g2);
+    t += dur;
+  });
+  return t - startAt;
+}
+function startBirthdaySong(){
+  stopBirthdaySong();
+  if(_bdMuted) return;
+  try {
+    _bdAudioCtx = new (window.AudioContext||window.webkitAudioContext)();
+    const loop = () => {
+      const len = playHBDOnce(_bdAudioCtx, _bdAudioCtx.currentTime + 0.1);
+      _bdTimer = setTimeout(loop, (len + 1.2) * 1000);
+    };
+    loop();
+    const btn = document.getElementById('ctMusic');
+    if(btn) btn.textContent = '🔊';
+  } catch(e){ console.warn('Audio failed', e); }
+}
+function stopBirthdaySong(){
+  if(_bdTimer){ clearTimeout(_bdTimer); _bdTimer = null; }
+  _bdNodes.forEach(n => { try { n.disconnect(); n.stop && n.stop(); } catch(_){} });
+  _bdNodes = [];
+  if(_bdAudioCtx){ try { _bdAudioCtx.close(); } catch(_){} _bdAudioCtx = null; }
+  const btn = document.getElementById('ctMusic');
+  if(btn) btn.textContent = _bdMuted ? '🔇' : '🎵';
+}
+document.getElementById('ctMusic').onclick = (e) => {
+  e.stopPropagation();
+  if(_bdAudioCtx){ _bdMuted = true;  stopBirthdaySong(); }
+  else            { _bdMuted = false; startBirthdaySong(); }
+};
+
+function launchConfetti(){
+  const canvas = document.getElementById('confettiCanvas');
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  canvas.style.display = 'block';
+  const ctx = canvas.getContext('2d');
+  const colors = ['#b794f4','#7c3aed','#fde047','#eab308','#c9aaff','#fbbf24','#a78bfa','#fff'];
+  const shapes = ['rect','circle','star'];
+  const pieces = Array.from({length:220}, () => ({
+    x: Math.random()*canvas.width, y: -20,
+    w: Math.random()*13+5, h: Math.random()*8+4,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    shape: shapes[Math.floor(Math.random()*shapes.length)],
+    rot: Math.random()*Math.PI*2, rs: (Math.random()-.5)*.18,
+    vx: (Math.random()-.5)*4, vy: Math.random()*5+2, alpha:1,
+  }));
+  let frame = 0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p => {
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      if(p.shape === 'circle'){ ctx.beginPath(); ctx.arc(0,0,p.w/2,0,Math.PI*2); ctx.fill(); }
+      else if(p.shape === 'star'){ ctx.font = `${p.w}px serif`; ctx.fillText('★',0,0); }
+      else { ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); }
+      ctx.restore();
+      p.x+=p.vx; p.y+=p.vy; p.rot+=p.rs; p.vy+=.08;
+      if(frame > 90) p.alpha -= 0.012;
+    });
+    frame++;
+    if(frame < 240) requestAnimationFrame(draw);
+    else { ctx.clearRect(0,0,canvas.width,canvas.height); canvas.style.display='none'; }
+  }
+  draw();
+}
+
+let _siteData = {};
+(async function init(){
+  _siteData = await loadSiteData();
+  _memberPhotos = _siteData.memberPhotos || {};
+  const data = buildBirthdayData();
+  renderTodayBanner(data);
+  renderUpcoming(data);
+  renderAll(data);
+})();
+</script>
+<script>injectNav();window.addEventListener('ec-data-updated', e => { _siteData = e.detail.data || _siteData; _memberPhotos = _siteData.memberPhotos || {}; const data = buildBirthdayData(); renderTodayBanner(data); renderUpcoming(data); renderAll(data); });
+</script>
+</body>
+</html>

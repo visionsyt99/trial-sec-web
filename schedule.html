@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Schedule — The E Chronicles</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .page-hero{background:var(--surface);border-bottom:1px solid var(--border);padding:3.5rem 2.5rem 3rem}
+    .page-hero-inner{max-width:1100px;margin:0 auto}
+    .schedule-section{padding:3rem 2.5rem 5rem}
+    .schedule-inner{max-width:1100px;margin:0 auto}
+
+    /* ── DAY TABS ROW ── */
+    .day-tabs-wrap{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem}
+    .day-tabs{display:flex;gap:.4rem;flex-wrap:wrap;flex:1}
+    .day-tab{
+      padding:.5rem 1.1rem;font-size:.8rem;font-weight:500;
+      border-radius:9px;border:1.5px solid var(--border);
+      background:transparent;color:var(--text2);
+      cursor:pointer;transition:all .2s;
+    }
+    .day-tab:hover{border-color:var(--accent);color:var(--accent)}
+    .day-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+    /* ── SCHEDULE TABLE ── */
+    .schedule-table-wrap{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius);overflow:hidden;
+    }
+    table{width:100%;border-collapse:collapse}
+    thead tr{background:var(--bg2);border-bottom:2px solid var(--border)}
+    thead th{
+      padding:.85rem 1.2rem;font-family:'DM Mono',monospace;
+      font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--text3);text-align:left;font-weight:500;
+    }
+    tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
+    tbody tr:last-child{border-bottom:none}
+    tbody tr:hover{background:var(--bg2)}
+    tbody td{padding:1rem 1.2rem;font-size:.88rem;vertical-align:middle}
+    .time-cell{font-family:'DM Mono',monospace;font-size:.8rem;color:var(--text3);white-space:nowrap}
+
+    /* Subject color pills */
+    .subj-pill{
+      display:inline-flex;align-items:center;gap:.4rem;
+      padding:.22rem .75rem;border-radius:7px;font-size:.82rem;font-weight:600;
+    }
+    .subj-bio   {background:rgba(16,185,129,.12);color:#059669}
+    .subj-chem  {background:rgba(239,68,68,.12);color:#dc2626}
+    .subj-phy   {background:rgba(59,130,246,.12);color:#2563eb}
+    .subj-math  {background:rgba(168,85,247,.12);color:#9333ea}
+    .subj-eng   {background:rgba(249,115,22,.12);color:#ea580c}
+    .subj-nep   {background:rgba(20,184,166,.12);color:#0d9488}
+    .subj-ep    {background:rgba(236,72,153,.12);color:#db2777}
+    .subj-cs    {background:rgba(99,102,241,.12);color:#6366f1}
+    .subj-break {background:var(--bg2);color:var(--text3);font-style:italic;font-weight:400}
+    .subj-lunch {background:rgba(245,158,11,.12);color:#d97706;font-style:italic;font-weight:400}
+    .subj-free  {background:var(--gold-light);color:var(--gold)}
+    .subj-lab   {background:rgba(16,185,129,.18);color:#047857;font-style:italic}
+    .subj-self  {background:rgba(148,163,184,.1);color:#94a3b8;font-style:italic;font-weight:400}
+    .subj-online{background:rgba(99,102,241,.15);color:#818cf8;font-style:italic}
+
+    tr.lunch-row{background:rgba(245,158,11,.04)!important}
+    tr.lunch-row:hover{background:rgba(245,158,11,.08)!important}
+    tr.lunch-row td{padding:.65rem 1.2rem}
+
+    tr.lab-row{background:rgba(16,185,129,.03)!important}
+    tr.lab-row:hover{background:rgba(16,185,129,.07)!important}
+
+    .teacher-cell{color:var(--text2);font-size:.82rem}
+    .teacher-abbr{
+      display:inline-block;font-family:'DM Mono',monospace;
+      font-size:.7rem;letter-spacing:.06em;
+      background:var(--surface2);border:1px solid var(--border);
+      border-radius:5px;padding:.1rem .4rem;color:var(--text3);
+    }
+
+    .no-schedule{text-align:center;padding:4rem 2rem;color:var(--text3);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem}
+
+    @media(max-width:768px){
+      .page-hero,.schedule-section{padding-left:1.25rem;padding-right:1.25rem}
+      .schedule-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+      table{min-width:450px}
+      thead th:nth-child(5),tbody td:nth-child(5){display:none}
+    }
+    @media(max-width:480px){
+      thead th:nth-child(4),tbody td:nth-child(4){display:none}
+      .day-tabs{gap:.25rem}
+      .day-tab{padding:.35rem .65rem;font-size:.72rem}
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="page-hero">
+    <div class="page-hero-inner reveal">
+      <div class="section-label">// Weekly timetable</div>
+      <h1 class="section-title">Class Schedule</h1>
+      <p class="section-desc">Section E's weekly timetable. Click a day to view that day's classes.</p>
+    </div>
+  </div>
+
+  <section class="schedule-section">
+    <div class="schedule-inner">
+      <div class="day-tabs-wrap reveal" id="dayTabsWrap">
+        <div class="day-tabs" id="dayTabs"></div>
+      </div>
+
+      <div class="schedule-table-wrap reveal reveal-delay-1">
+        <table>
+          <thead>
+            <tr>
+              <th>Period</th>
+              <th>Time</th>
+              <th>Subject</th>
+              <th>Teacher</th>
+              <th>Room</th>
+            </tr>
+          </thead>
+          <tbody id="scheduleBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="firebase-client.js"></script>
+<script src="shared.js"></script>
+<script>
+injectNav();
+
+// ════════════════════════════════════════════
+// SCHEDULE DATA — Section E, St. Xavier's College
+// Times: P1 9:30–10:15 | P2 10:15–11:00 | P3 11:10–11:55
+//        Lunch 11:55–12:40 | P4 12:40–1:15 | P5 1:20–2:05
+//        P6 2:05–2:50 | P7 3:00–3:45 | P8 3:45–4:30
+// ════════════════════════════════════════════
+const SCHEDULE = {
+  // ── SUNDAY (online) ──
+  0: { label:'Sunday', periods:[
+    { period:'1', time:'9:30 – 10:15',  subject:'Chemistry',      teacher:'DA',                          room:'Online', subj:'online' },
+    { period:'2', time:'10:15 – 11:00', subject:'Zoology',        teacher:'PT',                          room:'Online', subj:'online' },
+    { period:'3', time:'11:10 – 11:55', subject:'Nepali',         teacher:'KP',                          room:'Online', subj:'online' },
+    { period:'—', time:'11:55 – 12:40', subject:'Lunch Break',    teacher:'',                            room:'',       subj:'lunch', isLunch:true },
+    { period:'4', time:'12:40 – 1:15',  subject:'Self Study Hour',teacher:'',                            room:'Online', subj:'self'  },
+  ]},
+
+  // ── MONDAY ──
+  1: { label:'Monday', periods:[
+    { period:'1', time:'9:30 – 10:15',  subject:'Physics',        teacher:'BP',                          room:'—', subj:'phy'  },
+    { period:'2', time:'10:15 – 11:00', subject:'Botany',         teacher:'SM',                          room:'—', subj:'bio'  },
+    { period:'3', time:'11:10 – 11:55', subject:'Chemistry',      teacher:'DA',                          room:'—', subj:'chem' },
+    { period:'—', time:'11:55 – 12:40', subject:'Lunch Break',    teacher:'',                            room:'',  subj:'lunch', isLunch:true },
+    { period:'4', time:'12:40 – 1:15',  subject:'Nepali',         teacher:'KP',                          room:'—', subj:'nep'  },
+    { period:'5', time:'1:20 – 2:05',   subject:'Mathematics',    teacher:'DP',                          room:'—', subj:'math' },
+    { period:'6', time:'2:05 – 2:50',   subject:'Physics',        teacher:'GJ',                          room:'—', subj:'phy'  },
+    { period:'7', time:'3:00 – 3:45',   subject:'Zoology',        teacher:'GC',                          room:'—', subj:'bio'  },
+    { period:'8', time:'3:45 – 4:30',   subject:'Mathematics',    teacher:'PK',                          room:'—', subj:'math' },
+  ]},
+
+  // ── TUESDAY ──
+  2: { label:'Tuesday', periods:[
+    { period:'1', time:'9:30 – 10:15',  subject:'Botany',         teacher:'SM',                          room:'—', subj:'bio'  },
+    { period:'2', time:'10:15 – 11:00', subject:'Mathematics',    teacher:'PK',                          room:'—', subj:'math' },
+    { period:'3', time:'11:10 – 11:55', subject:'Physics',        teacher:'BP',                          room:'—', subj:'phy'  },
+    { period:'—', time:'11:55 – 12:40', subject:'Lunch Break',    teacher:'',                            room:'',  subj:'lunch', isLunch:true },
+    { period:'4', time:'12:40 – 1:15',  subject:'Chemistry',      teacher:'RR',                          room:'—', subj:'chem' },
+    { period:'5', time:'1:20 – 2:05',   subject:'English',        teacher:'LMJ',                         room:'—', subj:'eng'  },
+    { period:'6', time:'2:05 – 2:50',   subject:'Nepali',         teacher:'DP',                          room:'—', subj:'nep'  },
+    { period:'7', time:'3:00 – 3:45',   subject:'Biology Lab',    teacher:'BS · SM · PT · AJ',           room:'Lab', subj:'lab', isLab:true },
+  ]},
+
+  // ── WEDNESDAY ──
+  3: { label:'Wednesday', periods:[
+    { period:'1', time:'9:30 – 10:15',  subject:'Chemistry',      teacher:'NKS',                         room:'—', subj:'chem' },
+    { period:'2', time:'10:15 – 11:00', subject:'Physics',        teacher:'BP',                          room:'—', subj:'phy'  },
+    { period:'3', time:'11:10 – 11:55', subject:'Zoology',        teacher:'BP',                          room:'—', subj:'bio'  },
+    { period:'—', time:'11:55 – 12:40', subject:'Lunch Break',    teacher:'',                            room:'',  subj:'lunch', isLunch:true },
+    { period:'4', time:'12:40 – 1:15',  subject:'Mathematics',    teacher:'DP',                          room:'—', subj:'math' },
+    { period:'5', time:'1:20 – 2:05',   subject:'English',        teacher:'LMJ',                         room:'—', subj:'eng'  },
+    { period:'6', time:'2:05 – 2:50',   subject:'Physics',        teacher:'VKJ',                         room:'—', subj:'phy'  },
+    { period:'7', time:'3:00 – 3:45',   subject:'Botany',         teacher:'BS',                          room:'—', subj:'bio'  },
+    { period:'8', time:'3:45 – 4:30',   subject:'Mathematics',    teacher:'PK',                          room:'—', subj:'math' },
+  ]},
+
+  // ── THURSDAY ──
+  4: { label:'Thursday', periods:[
+    { period:'1–2', time:'9:30 – 11:00', subject:'Physics Lab',   teacher:'HKS · GJ · KPA · HB',         room:'Lab', subj:'lab', isLab:true },
+    { period:'3', time:'11:10 – 11:55', subject:'Mathematics',    teacher:'AMS',                         room:'—', subj:'math' },
+    { period:'—', time:'11:55 – 12:40', subject:'Lunch Break',    teacher:'',                            room:'',  subj:'lunch', isLunch:true },
+    { period:'4', time:'12:40 – 1:15',  subject:'Chemistry',      teacher:'DA',                          room:'—', subj:'chem' },
+    { period:'5', time:'1:20 – 2:05',   subject:'English',        teacher:'LMJ',                         room:'—', subj:'eng'  },
+    { period:'6', time:'2:05 – 2:50',   subject:'Physics',        teacher:'VKJ',                         room:'—', subj:'phy'  },
+    { period:'7', time:'3:00 – 3:45',   subject:'Zoology',        teacher:'PT',                          room:'—', subj:'bio'  },
+    { period:'8', time:'3:45 – 4:30',   subject:'Chemistry',      teacher:'RR',                          room:'—', subj:'chem' },
+  ]},
+
+  // ── FRIDAY ──
+  5: { label:'Friday', periods:[
+    { period:'1', time:'9:30 – 10:15',  subject:'Mathematics',    teacher:'PK',                          room:'—', subj:'math' },
+    { period:'2', time:'10:15 – 11:00', subject:'Nepali',         teacher:'DP',                          room:'—', subj:'nep'  },
+    { period:'3', time:'11:10 – 11:55', subject:'Botany',         teacher:'NSD',                         room:'—', subj:'bio'  },
+    { period:'—', time:'11:55 – 12:40', subject:'Lunch Break',    teacher:'',                            room:'',  subj:'lunch', isLunch:true },
+    { period:'4', time:'12:40 – 1:15',  subject:'Chemistry',      teacher:'RR',                          room:'—', subj:'chem' },
+    { period:'5', time:'1:20 – 2:05',   subject:'English',        teacher:'LMJ',                         room:'—', subj:'eng'  },
+    { period:'6', time:'2:05 – 2:50',   subject:'Physics',        teacher:'VKJ',                         room:'—', subj:'phy'  },
+    { period:'7–8', time:'3:00 – 4:30', subject:'Chemistry Lab',  teacher:'NR · SP · NP · RR',           room:'Lab', subj:'lab', isLab:true },
+  ]},
+};
+
+// ── Hidden days — loaded from admin data (falls back to localStorage) ──
+let hiddenDays = JSON.parse(localStorage.getItem('ec_hidden_days')||'[]');
+let activeDay = null;
+
+function getVisibleDays(){ return Object.keys(SCHEDULE).map(Number).filter(d=>!hiddenDays.includes(d)); }
+
+function renderTabs(){
+  const container = document.getElementById('dayTabs');
+  container.innerHTML = Object.keys(SCHEDULE).map(d=>{
+    const di = parseInt(d);
+    if(hiddenDays.includes(di)) return '';
+    const isActive = activeDay===di;
+    return `<button class="day-tab${isActive?' active':''}" data-day="${di}" onclick="switchDay(${di})">${SCHEDULE[d].label}</button>`;
+  }).join('');
+}
+
+function switchDay(dayIdx){
+  activeDay = dayIdx;
+  renderTabs();
+  renderDay(dayIdx);
+}
+
+function renderDay(dayIdx){
+  const dayData = SCHEDULE[dayIdx];
+  if(!dayData){ document.getElementById('scheduleBody').innerHTML=''; return; }
+  document.getElementById('scheduleBody').innerHTML = dayData.periods.map(r=>{
+    const rowClass = r.isLunch ? ' class="lunch-row"' : r.isLab ? ' class="lab-row"' : '';
+    // Teacher: split by · and wrap each in abbr pill
+    const teacherHtml = r.teacher
+      ? r.teacher.split('·').map(t=>`<span class="teacher-abbr">${t.trim()}</span>`).join(' ')
+      : '<span style="color:var(--text3)">—</span>';
+    return `
+    <tr${rowClass}>
+      <td style="font-family:'DM Mono',monospace;font-size:.75rem;color:var(--text3)">${r.period}</td>
+      <td class="time-cell">${r.time}</td>
+      <td><span class="subj-pill subj-${r.subj}">${r.subject}</span></td>
+      <td class="teacher-cell">${teacherHtml}</td>
+      <td style="font-family:'DM Mono',monospace;font-size:.75rem;color:var(--text3)">${r.room}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ── INIT ──
+(async function init() {
+  const siteData = await loadSiteData();
+  if (siteData.hiddenDays) hiddenDays = siteData.hiddenDays;
+
+  const today = new Date().getDay(); // 0=Sun … 6=Sat
+  const nepDay = today === 6 ? 0 : today; // Saturday → Sunday
+  const visible = getVisibleDays();
+  activeDay = visible.includes(nepDay) ? nepDay : (visible[0]??null);
+  renderTabs();
+  if(activeDay!==null) renderDay(activeDay);
+  else document.getElementById('scheduleBody').innerHTML='<tr><td colspan="5" class="no-schedule">No schedule available.</td></tr>';
+})();
+window.addEventListener('ec-data-updated', e => { const d=e.detail.data||{}; if(d.hiddenDays) hiddenDays=d.hiddenDays; if(d.schedule) SCHEDULE=d.schedule; renderTabs(); if(activeDay!==null) renderDay(activeDay); });
+</script>
+</body>
+</html>

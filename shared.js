@@ -138,7 +138,7 @@ function injectNav(isRoot = false) {
   if (saved) {
     applyTheme(saved === 'dark');
   } else {
-    toggleBtn.textContent = isDark() ? '☀️' : '🌙';
+    applyTheme(true); // match home page default (dark)
   }
 
   toggleBtn.addEventListener('click', () => applyTheme(!isDark()));

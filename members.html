@@ -38,7 +38,7 @@
 .page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.4),rgba(245,158,11,.3),transparent)}
 .page-hero-inner{max-width:1200px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;position:relative;z-index:1}
 .members-section{padding:3rem 2.5rem 6rem}
-.members-inner{max-width:1200px;margin:0 auto}
+.members-inner{max-width:1240px;margin:0 auto}
 .members-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem}
 .member-count-badge{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--text3);letter-spacing:.12em;padding:.4rem .85rem;background:var(--surface);border:1px solid var(--border);border-radius:8px}
 .search-wrap{display:flex;align-items:center;gap:.65rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.6rem 1rem;transition:border-color .2s,box-shadow .2s;flex:1;max-width:360px}
@@ -47,10 +47,13 @@
 .search-input{background:none;border:none;outline:none;font-family:'DM Mono',monospace;font-size:.78rem;color:var(--text);width:100%}
 .search-input::placeholder{color:var(--text3)}
 
-/* ── CARD GRID (Strictly 4 cards per row on laptop) ── */
-.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.25rem}
-@media (min-width: 992px){
-  .members-grid{grid-template-columns:repeat(4,1fr)!important;gap:1.5rem}
+/* ── CARD GRID (Strictly 5 cards per row on laptop) ── */
+.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.2rem}
+@media (min-width: 1024px){
+  .members-grid{grid-template-columns:repeat(5,1fr)!important;gap:1.25rem}
+}
+@media (min-width: 769px) and (max-width: 1023px){
+  .members-grid{grid-template-columns:repeat(3,1fr)!important;gap:1.15rem}
 }
 
 .member-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;cursor:pointer;transition:transform .32s cubic-bezier(.34,1.56,.64,1),box-shadow .32s,border-color .25s;position:relative}
@@ -70,8 +73,40 @@
 .mc-photo-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(135deg,#1a1030 0%,#0d0d1a 100%)}
 .mc-initials{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
 .mc-photo::before{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,rgba(6,5,15,.8) 0%,transparent 100%);z-index:1;pointer-events:none}
-.mc-quote-overlay{position:absolute;inset:0;z-index:3;background:linear-gradient(160deg,rgba(109,40,217,.92) 0%,rgba(139,92,246,.88) 50%,rgba(245,158,11,.2) 100%);display:flex;align-items:center;justify-content:center;padding:1.25rem;opacity:0;transition:opacity .35s ease}
+
+/* ── HOVER QUOTE OVERLAYS (Curated Matching Gradients per Category) ── */
+.mc-quote-overlay{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:1.15rem;
+  opacity:0;
+  transition:opacity .32s ease;
+  background:linear-gradient(145deg,rgba(22,17,38,0.95) 0%,rgba(46,26,71,0.92) 55%,rgba(88,28,135,0.9) 100%);
+}
 .member-card:hover .mc-quote-overlay{opacity:1}
+
+/* CCR Hover Quote: Imperial Royal Gold Gradient */
+.ccr-card .mc-quote-overlay{
+  background:linear-gradient(145deg,rgba(120,53,15,0.96) 0%,rgba(180,83,9,0.94) 50%,rgba(217,119,6,0.9) 100%)!important;
+}
+.ccr-card .mc-quote-text{color:#fef3c7!important}
+
+/* CR Hover Quote: Radiant Neon Purple / Amethyst Gradient */
+.cr-card .mc-quote-overlay{
+  background:linear-gradient(145deg,rgba(76,29,149,0.96) 0%,rgba(109,40,217,0.94) 50%,rgba(147,51,234,0.9) 100%)!important;
+}
+.cr-card .mc-quote-text{color:#f3e8ff!important}
+
+/* MGMT Hover Quote: Cyber Sapphire / Deep Ocean Cyan Gradient */
+.mgmt-card .mc-quote-overlay{
+  background:linear-gradient(145deg,rgba(12,74,110,0.96) 0%,rgba(2,132,199,0.94) 50%,rgba(14,165,233,0.9) 100%)!important;
+}
+.mgmt-card .mc-quote-text{color:#e0f2fe!important}
+
 .mc-quote-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.88rem;color:#fff;text-align:center;line-height:1.6}
 .mc-badge{position:absolute;top:.65rem;right:.65rem;z-index:2;font-size:.6rem;font-weight:600;letter-spacing:.08em;padding:.22rem .55rem;border-radius:7px;font-family:'DM Mono',monospace}
 
@@ -152,7 +187,7 @@
 .mc-dob{font-family:'DM Mono',monospace;font-size:.56rem;color:var(--text3);margin-top:.35rem;display:flex;align-items:center;gap:.3rem}
 
 /* ══════════════════════════════════════════════════════════════
-   DETAILED VIEW MODAL (Full Edge-to-Edge Image with Signature)
+   DETAILED VIEW MODAL (Desktop Edge-to-Edge + Fixed Mobile 0 Crop)
    ══════════════════════════════════════════════════════════════ */
 .modal-overlay{
   position:fixed;
@@ -197,7 +232,7 @@
 .modal-detailed-card.is-cr{border-color:rgba(192,132,252,0.5);box-shadow:0 30px 90px rgba(0,0,0,0.85),0 0 60px rgba(168,85,247,0.25)}
 .modal-detailed-card.is-mgmt{border-color:rgba(56,189,248,0.5);box-shadow:0 30px 90px rgba(0,0,0,0.85),0 0 60px rgba(56,189,248,0.25)}
 
-/* Left Pane: Fills the entire space edge-to-edge (0 empty borders!) */
+/* Left Pane: Desktop full edge-to-edge (unchanged) */
 .modal-left-pane{
   position:relative;
   background:#090712;
@@ -206,15 +241,18 @@
   width:100%;
   height:100%;
 }
+.modal-left-backdrop{
+  display:none; /* Active only on mobile */
+}
 .modal-left-photo{
   width:100%;
   height:100%;
-  object-fit:cover; /* Edge-to-edge fill with NO empty borders */
+  object-fit:cover; /* Desktop remains full edge-to-edge */
   object-position:center top;
   display:block;
 }
 
-/* Gradient vignette over lower section of photo for signature readability */
+/* Gradient vignette over lower section of photo */
 .modal-left-pane::after{
   content:'';
   position:absolute;
@@ -422,7 +460,9 @@
   line-height:1.7;
 }
 
-/* ── MOBILE MODAL (Edge-to-edge top photo + safe scroll) ── */
+/* ══════════════════════════════════════════════════════════════
+   MOBILE DETAILED VIEW (0 CROPPING WITH AMBIENT BACKDROP)
+   ══════════════════════════════════════════════════════════════ */
 @media(max-width:768px){
   .members-section{padding:2rem 1.25rem 4rem}
   .page-hero{padding:2.75rem 1.25rem 2.25rem}
@@ -447,22 +487,45 @@
     transform:translateY(0);
   }
 
+  /* Mobile Left Pane: Centers photo with 0 cropping */
   .modal-left-pane{
-    min-height:300px;
-    height:320px;
+    min-height:240px;
+    height:auto;
+    max-height:44vh;
     width:100%;
     flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    background:#080612;
+  }
+  .modal-left-backdrop{
+    display:block;
+    position:absolute;
+    inset:-25px;
+    background-size:cover;
+    background-position:center;
+    filter:blur(24px) brightness(0.35);
+    transform:scale(1.2);
+    pointer-events:none;
+    z-index:1;
   }
   .modal-left-photo{
     width:100%;
-    height:100%;
-    object-fit:cover; /* Fills edge to edge without empty borders */
-    object-position:center top;
+    height:auto;
+    max-height:42vh;
+    object-fit:contain!important; /* 0 CROPPING on mobile */
+    object-position:center center!important;
+    position:relative;
+    z-index:2;
   }
+
   .modal-signature-wrap{
-    bottom:14px;
+    bottom:12px;
     left:16px;
     right:16px;
+    z-index:6;
   }
   .modal-signature-text{
     font-size:2.2rem;
@@ -517,6 +580,7 @@
   <div class="modal-detailed-card" id="modalCard">
     <button class="modal-close-btn" id="modalClose">✕</button>
     <div class="modal-left-pane">
+      <div class="modal-left-backdrop" id="modalBackdrop"></div>
       <img src="" alt="" class="modal-left-photo" id="modalPhoto"
         onerror="this.style.display='none';document.getElementById('modalInitialsBox').style.display='flex';"/>
       <div class="mc-photo-placeholder" id="modalInitialsBox" style="display:none">
@@ -621,13 +685,17 @@ function openModal(roll){
   const cardElem = document.getElementById('modalCard');
   cardElem.className = 'modal-detailed-card' + (isCCR ? ' is-ccr' : isCR ? ' is-cr' : isMGMT ? ' is-mgmt' : '');
 
-  // Photo & Signature setup
+  // Photo, Backdrop & Signature setup
   const photoEl = document.getElementById('modalPhoto');
+  const backdropEl = document.getElementById('modalBackdrop');
   const initBox = document.getElementById('modalInitialsBox');
 
   photoEl.style.display = 'block';
   initBox.style.display = 'none';
   photoEl.src = photoSrc;
+  if(backdropEl){
+    backdropEl.style.backgroundImage = `url("${photoSrc}")`;
+  }
   document.getElementById('modalInitials').textContent = initials;
   document.getElementById('modalSignature').textContent = title;
 

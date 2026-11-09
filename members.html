@@ -2,416 +2,1044 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0"/>
   <title>Members — The E Chronicles</title>
   <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="home-theme.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+
   <style>
-*,*::before,*::after{box-sizing:border-box}
-:root{
-  --bg:#0a0a0f;
-  --bg2:#111118;
-  --surface:#151622;
-  --surface2:#1c1e2e;
-  --border:rgba(255,255,255,.08);
-  --border-hover:rgba(139,92,246,.35);
-  --text:#f0f0f5;
-  --text2:#a8a8b8;
-  --text3:#626282;
-  --accent:#8b5cf6;
-  --accent2:#6d28d9;
-  --accent-light:rgba(139,92,246,.12);
-  --gold:#f59e0b;
-  --gold-light:rgba(245,158,11,.14);
-  --gold-glow:rgba(245,158,11,.3);
-  --shadow-lg:0 24px 60px rgba(0,0,0,.65),0 8px 24px rgba(0,0,0,.45);
-  --mesh:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(139,92,246,.16),transparent);
-}
+    *, *::before, *::after { box-sizing: border-box; }
 
-.page-hero{background:var(--surface);border-bottom:1px solid var(--border);padding:4rem 2.5rem 3.5rem;position:relative;overflow:hidden}
-.page-hero::before{content:'';position:absolute;inset:0;background:var(--mesh);pointer-events:none}
-.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.4),rgba(245,158,11,.3),transparent)}
-.page-hero-inner{max-width:1200px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;position:relative;z-index:1}
-.members-section{padding:3rem 2.5rem 6rem}
-.members-inner{max-width:1200px;margin:0 auto}
-.members-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem}
-.member-count-badge{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--text3);letter-spacing:.12em;padding:.4rem .85rem;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+    :root {
+      --bg-dark: #080711;
+      --card-bg: #0e0a1f;
+      --card-border: rgba(168, 85, 247, 0.35);
+      --card-glow: rgba(168, 85, 247, 0.6);
+      --purple-accent: #a855f7;
+      --purple-light: #c084fc;
+      --text-white: #f8f6fd;
+      --text-muted: #9ca3af;
+    }
 
-.search-wrap{display:flex;align-items:center;gap:.65rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.6rem 1rem;transition:border-color .2s,box-shadow .2s;flex:1;max-width:360px}
-.search-wrap:focus-within{border-color:rgba(139,92,246,.5);box-shadow:0 0 0 3px rgba(139,92,246,.12)}
-.search-wrap svg{flex-shrink:0;color:var(--text3)}
-.search-input{background:none;border:none;outline:none;font-family:'DM Mono',monospace;font-size:.78rem;color:var(--text);width:100%}
-.search-input::placeholder{color:var(--text3)}
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-dark);
+      color: var(--text-white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* ══════════════════════════════════════════════════════
-   UPGRADED MEMBER CARD DESIGN
-   ══════════════════════════════════════════════════════ */
-.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.35rem}
+    /* ─── PAGE HERO ─── */
+    .page-hero {
+      background: linear-gradient(180deg, #120c29 0%, var(--bg-dark) 100%);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.15);
+      padding: 3.5rem 2.5rem 2.5rem;
+      position: relative;
+    }
+    .page-hero-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--purple-light);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .section-title {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      margin: 0;
+      background: linear-gradient(135deg, #ffffff 60%, var(--purple-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .section-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: 0.45rem;
+      max-width: 600px;
+    }
 
-.member-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:18px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s ease,border-color .25s ease;
-  position:relative;
-  box-shadow:0 12px 30px rgba(0,0,0,.45);
-  display:flex;
-  flex-direction:column;
-}
-.member-card::before{
-  content:'';position:absolute;inset:0;border-radius:18px;
-  background:linear-gradient(135deg,rgba(139,92,246,.08) 0%,transparent 60%);
-  opacity:0;transition:opacity .3s;pointer-events:none;z-index:0;
-}
-.member-card:hover{
-  transform:translateY(-8px) scale(1.02);
-  box-shadow:var(--shadow-lg),0 0 0 1px rgba(139,92,246,.25);
-  border-color:var(--border-hover);
-}
-.member-card:hover::before{opacity:1}
-.member-card:active{transform:scale(.98)}
+    /* ─── TOOLBAR & SEARCH ─── */
+    .members-section {
+      padding: 2.5rem 2rem 6rem;
+    }
+    .members-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .members-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(22, 17, 44, 0.85);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 100px;
+      padding: 0.65rem 1.2rem;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      transition: all 0.25s ease;
+    }
+    .search-wrap:focus-within {
+      border-color: var(--purple-accent);
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.35);
+    }
+    .search-wrap svg { color: var(--purple-light); }
+    .search-input {
+      background: none;
+      border: none;
+      outline: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.85rem;
+      color: #fff;
+      width: 100%;
+    }
+    .search-input::placeholder { color: #7c7694; }
+    .member-count-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--purple-light);
+      background: rgba(26, 19, 52, 0.8);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 8px;
+      padding: 0.45rem 0.95rem;
+      letter-spacing: 0.08em;
+    }
 
-/* Card Photo */
-.mc-photo{
-  width:100%;
-  aspect-ratio:3/4;
-  background:var(--bg2);
-  overflow:hidden;
-  position:relative;
-}
-.mc-photo img{
-  width:100%;height:100%;object-fit:cover;object-position:top center;
-  transition:transform .45s cubic-bezier(.16,1,.3,1);display:block;
-}
-.member-card:hover .mc-photo img{transform:scale(1.08)}
+    /* ══════════════════════════════════════════════════════
+       MEMBER CARDS (MATCHING REFERENCE IMAGE)
+       ══════════════════════════════════════════════════════ */
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem 1.6rem;
+    }
 
-.mc-photo-placeholder{
-  width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:.5rem;background:linear-gradient(135deg,#1c1333 0%,#0e0e1a 100%);
-}
-.mc-initials{
-  font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;
-  background:linear-gradient(135deg,var(--accent),var(--gold));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;
-}
-.mc-photo::before{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:55%;
-  background:linear-gradient(to top,rgba(12,13,20,.85) 0%,transparent 100%);
-  z-index:1;pointer-events:none;
-}
+    .member-card {
+      position: relative;
+      background: linear-gradient(180deg, #140d2e 0%, #0c081d 100%);
+      border: 1.5px solid var(--card-border);
+      border-radius: 26px;
+      padding: 20px 18px 24px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
 
-/* Frosted Quote Overlay */
-.mc-quote-overlay{
-  position:absolute;inset:0;z-index:3;
-  background:rgba(14,13,24,.88);
-  backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;padding:1.25rem;
-  opacity:0;transition:opacity .28s ease;
-}
-.member-card:hover .mc-quote-overlay{opacity:1}
-.mc-quote-text{
-  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;
-  color:#f4efe6;text-align:center;line-height:1.6;
-}
+    /* Acrylic Glass Reflection highlight on top edge */
+    .member-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+      border-radius: 26px 26px 0 0;
+      pointer-events: none;
+      z-index: 1;
+    }
 
-/* Badges */
-.mc-badge{
-  position:absolute;top:.65rem;right:.65rem;z-index:2;
-  font-size:.62rem;font-weight:700;letter-spacing:.08em;
-  padding:.22rem .55rem;border-radius:7px;font-family:'DM Mono',monospace;
-}
+    /* ─── HOVER STATE GLOW (MATCHING IMAGE 2) ─── */
+    .member-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--purple-accent);
+      box-shadow: 0 0 35px var(--card-glow), 0 0 12px var(--purple-accent), inset 0 0 15px rgba(168, 85, 247, 0.25);
+    }
+    .member-card:active {
+      transform: scale(0.98);
+    }
 
-@keyframes goldShimmer{
-  0%{background-position:200% center}
-  100%{background-position:-200% center}
-}
-.mc-badge-cr{
-  color:#fff;
-  border:1px solid rgba(251,191,36,.5);
-  background:linear-gradient(270deg,#78350f,#d97706,#fbbf24,#d97706,#92400e);
-  background-size:300% 100%;
-  animation:goldShimmer 3.5s linear infinite;
-  box-shadow:0 3px 14px rgba(217,119,6,.6),inset 0 1px 0 rgba(251,191,36,.3);
-}
+    /* Top Right 'E' Glass Badge */
+    .card-corner-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #ede9fe;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 3;
+    }
 
-@keyframes ccrPulse{
-  0%,100%{box-shadow:0 3px 18px rgba(245,158,11,.7),0 0 35px rgba(245,158,11,.25)}
-  50%{box-shadow:0 3px 26px rgba(245,158,11,.95),0 0 50px rgba(245,158,11,.45)}
-}
-.mc-badge-ccr{
-  color:#1a0800;font-weight:800;font-size:.64rem;letter-spacing:.1em;
-  border:1px solid rgba(253,224,71,.8);
-  background:linear-gradient(270deg,#92400e,#d97706,#fde047,#f59e0b,#fbbf24,#d97706,#92400e);
-  background-size:300% 100%;
-  animation:goldShimmer 2.5s linear infinite,ccrPulse 2.5s ease-in-out infinite;
-  padding:.28rem .65rem;border-radius:8px;
-}
+    /* Central Photo Stage */
+    .card-photo-stage {
+      position: relative;
+      width: 170px;
+      height: 190px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.mc-badge-mgmt{
-  color:#fff;border:1px solid rgba(167,139,250,.4);
-  background:linear-gradient(135deg,#3730a3 0%,#4f46e5 45%,#7c3aed 100%);
-  box-shadow:0 2px 12px rgba(124,58,237,.5),inset 0 1px 0 rgba(167,139,250,.25);
-}
+    /* Glowing Planetary Orbit Ring */
+    .card-orbit-ring {
+      position: absolute;
+      width: 220px;
+      height: 95px;
+      border-radius: 50%;
+      border: 2px solid rgba(168, 85, 247, 0.55);
+      box-shadow: 0 0 16px rgba(168, 85, 247, 0.65), inset 0 0 12px rgba(168, 85, 247, 0.4);
+      transform: rotate(-24deg);
+      pointer-events: none;
+      z-index: 0;
+      transition: all 0.35s ease;
+    }
+    .member-card:hover .card-orbit-ring {
+      border-color: #c084fc;
+      box-shadow: 0 0 24px rgba(192, 132, 252, 0.85);
+      transform: rotate(-20deg) scale(1.05);
+    }
 
-/* Glowing Profile Indicator */
-.mc-profile-dot{
-  position:absolute;bottom:.65rem;left:.65rem;z-index:2;
-  width:9px;height:9px;border-radius:50%;border:1.5px solid rgba(255,255,255,.7);
-}
-.mc-profile-dot.has-profile{background:#10b981;box-shadow:0 0 10px rgba(16,185,129,.85)}
-.mc-profile-dot.no-profile{background:#4b5563;border-color:rgba(255,255,255,.3)}
+    /* Central Photo Box */
+    .mc-photo-frame {
+      position: relative;
+      width: 150px;
+      height: 180px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #181230;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+    .mc-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+    .member-card:hover .mc-photo-frame img {
+      transform: scale(1.08);
+    }
 
-/* CR & CCR Card Auras */
-.cr-card{border-color:rgba(217,119,6,.4)!important}
-.cr-card:hover{border-color:rgba(245,158,11,.75)!important;box-shadow:var(--shadow-lg),0 0 25px rgba(245,158,11,.2)!important}
+    .mc-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--purple-light);
+      background: linear-gradient(135deg, #241747 0%, #100b24 100%);
+    }
 
-.ccr-card{
-  border-color:rgba(245,158,11,.65)!important;
-  background:linear-gradient(160deg,rgba(245,158,11,.08) 0%,var(--surface) 45%)!important;
-}
-.ccr-card:hover{
-  border-color:#f59e0b!important;
-  box-shadow:var(--shadow-lg),0 0 45px rgba(245,158,11,.35),0 0 0 1px rgba(245,158,11,.5)!important;
-}
+    /* Student Name & Star Divider */
+    .card-name {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-align: center;
+      margin-top: 16px;
+      letter-spacing: 0.02em;
+      z-index: 2;
+      line-height: 1.3;
+    }
 
-/* Info Dock */
-.mc-info{padding:1rem 1rem 1.15rem;position:relative;z-index:1;background:rgba(21,22,34,.7);flex-grow:1}
-.mc-roll{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--text3);letter-spacing:.15em;margin-bottom:.28rem;text-transform:uppercase}
-.mc-name{font-size:.86rem;font-weight:600;line-height:1.3;color:var(--text)}
-.mc-meta{display:flex;align-items:center;gap:.35rem;margin-top:.45rem;flex-wrap:wrap}
+    .card-star-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 65%;
+      margin: 8px auto 14px;
+      z-index: 2;
+    }
+    .card-star-divider::before,
+    .card-star-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.5), transparent);
+    }
+    .card-star-divider .star-icon {
+      margin: 0 8px;
+      font-size: 0.75rem;
+      color: var(--purple-light);
+      filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.9));
+    }
 
-.mc-tag{
-  display:inline-flex;align-items:center;gap:.2rem;font-family:'DM Mono',monospace;
-  font-size:.54rem;letter-spacing:.06em;text-transform:uppercase;padding:.14rem .46rem;border-radius:5px;
-}
-.mc-tag-cr{background:var(--gold-light);color:var(--gold);border:1px solid rgba(245,158,11,.25)}
-.mc-tag-ccr{background:linear-gradient(135deg,rgba(245,158,11,.28),rgba(253,224,71,.18));color:#fde047;border:1px solid rgba(253,224,71,.45);font-weight:700}
-.mc-tag-mgmt{background:var(--accent-light);color:var(--accent);border:1px solid rgba(139,92,246,.25)}
-.mc-dob{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--text3);margin-top:.35rem;display:flex;align-items:center;gap:.3rem}
+    /* Info Pills Row */
+    .meta-pills-row {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      z-index: 2;
+      transition: transform 0.3s ease;
+    }
+    .meta-pill {
+      flex: 1;
+      background: rgba(26, 19, 52, 0.85);
+      border: 1px solid rgba(168, 85, 247, 0.28);
+      backdrop-filter: blur(8px);
+      border-radius: 12px;
+      padding: 6px 8px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+    }
+    .pill-icon-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(124, 58, 237, 0.35);
+      border: 1px solid rgba(168, 85, 247, 0.55);
+      color: var(--purple-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .pill-text-col {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .pill-lbl {
+      font-size: 0.56rem;
+      color: var(--text-muted);
+      line-height: 1.1;
+    }
+    .pill-val {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #f3f4f6;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.2;
+    }
 
-/* ══════════════════════════════════════════════════════
-   MODAL (Matches style.css seamlessly)
-   ══════════════════════════════════════════════════════ */
-.modal{
-  position:relative;max-width:440px;width:100%;display:flex;flex-direction:column;
-  max-height:90vh;overflow:hidden;border-radius:22px;
-  box-shadow:0 40px 100px rgba(0,0,0,.8),0 0 0 1px rgba(139,92,246,.2);
-  background:var(--surface);
-}
-.modal-top-bar{height:3px;width:100%;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent));background-size:200% 100%;animation:goldShimmer 3s linear infinite;flex-shrink:0}
-.modal-inner{overflow-y:auto;padding:1.6rem 1.6rem 2rem;-webkit-overflow-scrolling:touch}
-.modal-inner::-webkit-scrollbar{width:4px}
-.modal-inner::-webkit-scrollbar-thumb{background:var(--border-hover);border-radius:4px}
+    /* ─── HOVER POPUP QUOTE BOX (IMAGE 2) ─── */
+    .hover-quote-bubble {
+      position: absolute;
+      bottom: 22px;
+      left: 12px;
+      right: 12px;
+      background: rgba(22, 16, 46, 0.92);
+      border: 1px solid rgba(168, 85, 247, 0.55);
+      backdrop-filter: blur(12px);
+      border-radius: 14px;
+      padding: 10px 12px;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 4;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+    }
+    .member-card:hover .hover-quote-bubble {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hover-quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--purple-accent);
+      line-height: 0.7;
+      margin-bottom: 2px;
+    }
+    .hover-quote-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 0.92rem;
+      color: #f3e8ff;
+      line-height: 1.4;
+    }
 
-.modal-header{display:flex;gap:1.25rem;align-items:flex-start;margin-bottom:1.25rem}
-.modal-photo-sm{width:88px;height:112px;flex-shrink:0;border-radius:14px;overflow:hidden;background:var(--bg2)}
-.modal-photo-sm img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
-.modal-photo-sm-placeholder{
-  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
-  font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;
-  background:linear-gradient(135deg,var(--accent),var(--gold));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.cr-modal-photo{border:2px solid var(--gold);box-shadow:0 0 20px var(--gold-glow),0 4px 20px rgba(0,0,0,.4)}
-.ccr-modal-photo{border:2px solid #fde047;box-shadow:0 0 30px rgba(253,224,71,.5),0 0 60px rgba(245,158,11,.25),0 4px 20px rgba(0,0,0,.5)!important}
+    /* ─── MOUNTAINS SILHOUETTE (BOTTOM DECORATION) ─── */
+    .card-mountains {
+      width: calc(100% + 36px);
+      margin: 14px -18px -24px -18px;
+      height: 72px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .card-mountains svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
 
-.modal-header-info{flex:1;min-width:0}
-.modal-roll{font-family:'DM Mono',monospace;font-size:.64rem;color:var(--text3);letter-spacing:.14em;margin-bottom:.35rem}
-.modal-name{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:700;margin-bottom:.55rem;line-height:1.2;color:var(--text)}
-.modal-tags{display:flex;gap:.4rem;flex-wrap:wrap}
+    /* ══════════════════════════════════════════════════════
+       DETAILED VIEW MODAL (MATCHING IMAGE 3)
+       ══════════════════════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 4, 12, 0.88);
+      backdrop-filter: blur(14px);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
 
-.modal-quote-block{
-  background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(109,40,217,.06));
-  border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:.9rem 1.15rem;margin-bottom:1.1rem;
-}
-.modal-quote-block.ccr-quote{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(253,224,71,.05));border-left-color:#f59e0b}
-.modal-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--text);line-height:1.65}
+    .detailed-modal {
+      position: relative;
+      background: linear-gradient(135deg, #150f30 0%, #0c081d 100%);
+      border: 1.5px solid var(--purple-accent);
+      box-shadow: 0 0 50px rgba(168, 85, 247, 0.4), 0 30px 80px rgba(0,0,0,0.85);
+      border-radius: 28px;
+      width: 100%;
+      max-width: 760px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      transform: scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-overlay.open .detailed-modal {
+      transform: scale(1);
+    }
 
-.modal-exp-label{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-bottom:.45rem}
-.modal-exp{font-size:.88rem;color:var(--text2);line-height:1.7;padding:.9rem 1.15rem;background:var(--surface2);border-radius:12px;border:1px solid var(--border)}
+    /* Close Button */
+    .modal-close-btn {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      z-index: 10;
+      transition: all 0.2s;
+    }
+    .modal-close-btn:hover {
+      background: var(--purple-accent);
+      transform: rotate(90deg);
+    }
 
-.modal-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1rem}
-.modal-info-item{background:var(--bg2);border-radius:12px;padding:.75rem .95rem;border:1px solid var(--border)}
-.modal-info-label{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem}
-.modal-info-val{font-size:.84rem;font-weight:600;color:var(--text);word-break:break-all}
+    /* Left Photo Column with Signature */
+    .modal-left-photo-col {
+      position: relative;
+      background: #090615;
+      overflow: hidden;
+      min-height: 420px;
+    }
+    .modal-left-photo-col img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .modal-left-photo-col::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 40%, rgba(12, 8, 29, 0.9) 100%),
+                  linear-gradient(to top, rgba(12, 8, 29, 0.95) 0%, transparent 40%);
+      pointer-events: none;
+    }
 
-.no-results{grid-column:1/-1;text-align:center;padding:5rem 2rem;color:var(--text3);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem}
+    /* Neon Signature across bottom corner */
+    .modal-signature {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 1.5rem;
+      font-family: 'Alex Brush', cursive;
+      font-size: 3.4rem;
+      color: #d8b4fe;
+      text-shadow: 0 0 15px rgba(168, 85, 247, 0.8), 0 0 30px rgba(168, 85, 247, 0.5);
+      z-index: 2;
+      pointer-events: none;
+      transform: rotate(-8deg);
+      line-height: 1;
+    }
 
-/* ══════════════════════════════════════════════════════
-   MOBILE OPTIMIZATION (≤ 768px & ≤ 480px)
-   ══════════════════════════════════════════════════════ */
-@media(max-width:768px){
-  .members-section{padding:2rem 1.25rem 4.5rem}
-  .page-hero{padding:2.75rem 1.25rem 2.25rem}
-  .members-grid{grid-template-columns:repeat(2,1fr);gap:.85rem}
-  .member-card{border-radius:15px}
-  .member-card:hover{transform:none} /* Clean touch on phone without hover glitch */
-  .mc-info{padding:.8rem .85rem .95rem}
-  .mc-name{font-size:.82rem}
-  .modal{border-radius:18px;max-width:92vw}
-}
-@media(max-width:400px){
-  .members-grid{gap:.7rem}
-  .mc-info{padding:.7rem .75rem .85rem}
-  .mc-name{font-size:.78rem}
-}
-</style>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="home-theme.css"/>
+    /* Right Details Column */
+    .modal-right-info-col {
+      padding: 2.2rem 2.2rem 2rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-y: auto;
+      max-height: 85vh;
+    }
+
+    .modal-section-roll-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple-light);
+      margin-bottom: 0.4rem;
+    }
+    .modal-main-name {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 0.5rem;
+      line-height: 1.15;
+    }
+
+    .modal-star-divider {
+      display: flex;
+      align-items: center;
+      margin: 0.4rem 0 1rem;
+    }
+    .modal-star-divider::before,
+    .modal-star-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(168, 85, 247, 0.4), transparent);
+    }
+    .modal-star-divider::before {
+      background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.4));
+    }
+    .modal-star-divider .star-icon {
+      margin: 0 8px;
+      font-size: 0.7rem;
+      color: var(--purple-light);
+    }
+
+    .modal-quote-callout {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: #e9d5ff;
+      line-height: 1.5;
+      margin-bottom: 1.2rem;
+    }
+    .modal-quote-callout .quote-glyph {
+      color: var(--purple-accent);
+      font-size: 1.4rem;
+    }
+
+    /* Modal Info Rows */
+    .modal-info-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 1.2rem;
+    }
+    .modal-info-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .modal-info-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(124, 58, 237, 0.35);
+      border: 1px solid rgba(168, 85, 247, 0.55);
+      color: var(--purple-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .modal-info-texts {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+    }
+    .modal-info-lbl {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .modal-info-val {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .modal-horiz-line {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 0.5rem 0 1rem;
+    }
+
+    /* About Me Box */
+    .modal-about-box {
+      margin-bottom: 1.2rem;
+    }
+    .modal-about-header {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #ede9fe;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 0.4rem;
+    }
+    .modal-about-text {
+      font-size: 0.84rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    .modal-tagline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #7e749c;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       MOBILE RESPONSIVENESS (≤ 768px)
+       ══════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .page-hero {
+        padding: 2.2rem 1.25rem 1.8rem;
+      }
+      .members-section {
+        padding: 1.5rem 1rem 4rem;
+      }
+      .members-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-wrap {
+        max-width: 100%;
+      }
+      
+      /* 2-Column Mobile Grid */
+      .members-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem 0.8rem;
+      }
+      .member-card {
+        padding: 14px 10px 18px;
+        border-radius: 20px;
+      }
+      .card-photo-stage {
+        width: 125px;
+        height: 140px;
+      }
+      .card-orbit-ring {
+        width: 160px;
+        height: 75px;
+      }
+      .mc-photo-frame {
+        width: 110px;
+        height: 130px;
+        border-radius: 14px;
+      }
+      .card-name {
+        font-size: 0.86rem;
+        margin-top: 10px;
+      }
+      .card-star-divider {
+        margin: 5px auto 8px;
+        width: 80%;
+      }
+      .meta-pills-row {
+        flex-direction: column;
+        gap: 5px;
+      }
+      .meta-pill {
+        padding: 4px 6px;
+      }
+      .pill-val {
+        font-size: 0.65rem;
+      }
+      .card-mountains {
+        height: 45px;
+        margin-bottom: -18px;
+      }
+
+      /* Stacked Mobile Modal */
+      .detailed-modal {
+        grid-template-columns: 1fr;
+        max-height: 88vh;
+        border-radius: 22px;
+      }
+      .modal-left-photo-col {
+        min-height: 240px;
+        max-height: 260px;
+      }
+      .modal-signature {
+        font-size: 2.5rem;
+        bottom: 0.8rem;
+        left: 1rem;
+      }
+      .modal-right-info-col {
+        padding: 1.4rem;
+      }
+      .modal-main-name {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
 <div class="page">
-  <div class="page-hero">
+  <!-- Page Hero Header -->
+  <header class="page-hero">
     <div class="page-hero-inner reveal">
       <div>
-        <div class="section-label">// The people</div>
-        <h1 class="section-title" style="margin-bottom:0">Members</h1>
-        <p class="section-desc" style="margin-top:.5rem">All 56 students of Section E — St. Xavier's College, Science Biology, Batch 2025–2027.</p>
+        <div class="section-label">// Class Roll & Profiles</div>
+        <h1 class="section-title">Members</h1>
+        <p class="section-desc">All 56 students of Section E — St. Xavier's College, Science Biology, Batch 2025–2027.</p>
       </div>
+      <div class="member-count-badge" id="countLabel">56 students</div>
     </div>
-  </div>
+  </header>
+
+  <!-- Members Wall -->
   <section class="members-section">
     <div class="members-inner">
-      <div class="members-toolbar reveal">
+      <div class="members-toolbar">
         <div class="search-wrap">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           <input type="text" class="search-input" id="searchInput" placeholder="Search by name or roll number…"/>
         </div>
-        <div class="member-count-badge" id="countLabel">56 students</div>
       </div>
-      <div class="members-grid reveal reveal-delay-1" id="membersGrid"></div>
+
+      <!-- Card Grid -->
+      <div class="members-grid" id="membersGrid"></div>
     </div>
   </section>
 </div>
 
-<!-- MODAL -->
+<!-- DETAILED VIEW MODAL (IMAGE 3) -->
 <div class="modal-overlay" id="modalOverlay">
-  <div class="modal" id="memberModal"><div class="modal-top-bar"></div>
-    <button class="modal-close" id="modalClose">✕</button>
-    <div class="modal-inner" id="modalContent"></div>
+  <div class="detailed-modal" id="memberModal">
+    <button class="modal-close-btn" id="modalClose">✕</button>
+
+    <!-- Left Photo with Signature -->
+    <div class="modal-left-photo-col" id="modalPhotoCol">
+      <img id="modalImg" src="" alt="Student Portrait"/>
+      <div class="modal-signature" id="modalSignature">Ronisha</div>
+    </div>
+
+    <!-- Right Detailed Information -->
+    <div class="modal-right-info-col">
+      <div>
+        <div class="modal-section-roll-tag" id="modalRollTag">SECTION E • ROLL NO. 503</div>
+        <h2 class="modal-main-name" id="modalName">Ronisha Khadka</h2>
+        
+        <div class="modal-star-divider">
+          <span class="star-icon">✦</span>
+        </div>
+
+        <div class="modal-quote-callout">
+          <span class="quote-glyph">“</span>
+          <span id="modalQuote">Friendly, chill and always learning.</span>
+          <span class="quote-glyph">”</span>
+        </div>
+
+        <div class="modal-info-stack">
+          <!-- Birthday row -->
+          <div class="modal-info-row">
+            <div class="modal-info-circle">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="modal-info-texts">
+              <span class="modal-info-lbl">Birthday</span>
+              <span class="modal-info-val" id="modalDob">Magh 29, 2065 BS</span>
+            </div>
+          </div>
+
+          <!-- Roll row -->
+          <div class="modal-info-row">
+            <div class="modal-info-circle">#</div>
+            <div class="modal-info-texts">
+              <span class="modal-info-lbl">Roll No.</span>
+              <span class="modal-info-val" id="modalRollVal">503</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-horiz-line"></div>
+
+        <!-- About Me Section -->
+        <div class="modal-about-box">
+          <div class="modal-about-header">
+            <span>👤</span> About Me
+          </div>
+          <div class="modal-about-text" id="modalAbout">
+            A curious mind, a calm soul, and someone who never stops learning. Always here to make memories.
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-tagline">DREAM • LEARN • GROW</div>
+    </div>
   </div>
 </div>
 
+<!-- Mountain Silhouette SVG Component -->
+<template id="mountainSvgTpl">
+  <svg viewBox="0 0 400 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="mntG1" x1="200" y1="0" x2="200" y2="120" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#4c1d95" stop-opacity="0.85"/>
+        <stop offset="50%" stop-color="#241154" stop-opacity="0.95"/>
+        <stop offset="100%" stop-color="#0e0824" stop-opacity="1"/>
+      </linearGradient>
+      <linearGradient id="mntG2" x1="200" y1="20" x2="200" y2="120" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#6d28d9" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#140a32" stop-opacity="0.95"/>
+      </linearGradient>
+    </defs>
+    <!-- Back Peak Silhouette -->
+    <path d="M0 120 L0 75 L60 55 L120 72 L180 35 L240 65 L310 30 L370 60 L400 45 L400 120 Z" fill="url(#mntG2)"/>
+    <!-- Sharp Front Peak Silhouette -->
+    <path d="M0 120 L0 90 L45 70 L95 90 L160 48 L205 75 L260 45 L320 85 L365 65 L400 80 L400 120 Z" fill="url(#mntG1)"/>
+    <path d="M160 48 L145 120 M205 75 L220 120 M260 45 L275 120 M310 30 L325 120" stroke="rgba(196,181,253,0.3)" stroke-width="1.2"/>
+  </svg>
+</template>
+
+<!-- Scripts -->
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="firebase-client.js"></script>
 <script src="shared.js"></script>
+
 <script>
-injectNav();
+if (typeof injectNav === 'function') injectNav();
 
-function toTitle(str){return str.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase())}
-function getInitials(name){return name.split(' ').slice(0,2).map(w=>w[0]).join('')}
+function toTitle(str) {
+  return (str || '').toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+}
 
-function renderGrid(filter=''){
-  const grid=document.getElementById('membersGrid');
-  const f=filter.toLowerCase().trim();
-  const filtered=STUDENTS.filter(s=>!f||s.name.toLowerCase().includes(f)||String(s.roll).includes(f));
-  document.getElementById('countLabel').textContent=`${filtered.length} student${filtered.length!==1?'s':''}`;
-  if(!filtered.length){grid.innerHTML='<div class="no-results">No students found matching your search.</div>';return;}
-  grid.innerHTML=filtered.map(s=>{
-    const initials=getInitials(s.name);
-    const title=toTitle(s.name);
-    const cardClass=s.ccr?'cr-card ccr-card':s.cr?'cr-card':'';
-    const p=STUDENT_PROFILES[s.roll];
-    const hasProfile=!!p;
-    const wantsMgmt=p&&p.wantsManagement;
-    const quote=p&&p.quote?p.quote:'';
-    const photoSrc=getDriveFolderPhotoUrl(s.roll, _memberPhotos);
+function getInitials(name) {
+  const parts = (name || '').trim().split(/\s+/);
+  return parts.slice(0, 2).map(p => p[0]).join('').toUpperCase();
+}
+
+let _memberPhotos = {};
+const mountainSvgHtml = document.getElementById('mountainSvgTpl').innerHTML;
+
+function renderGrid(filter = '') {
+  const grid = document.getElementById('membersGrid');
+  const countLabel = document.getElementById('countLabel');
+  const f = filter.toLowerCase().trim();
+
+  const filtered = STUDENTS.filter(s => 
+    !f || s.name.toLowerCase().includes(f) || String(s.roll).includes(f)
+  );
+
+  countLabel.textContent = `${filtered.length} student${filtered.length !== 1 ? 's' : ''}`;
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:5rem 1rem;color:#7e749c;font-family:\'Cinzel\',serif;font-size:1.2rem;">No students found matching your search.</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(s => {
+    const title = toTitle(s.name);
+    const initials = getInitials(s.name);
+    const p = STUDENT_PROFILES[s.roll];
+    const photoSrc = getDriveFolderPhotoUrl(s.roll, _memberPhotos);
     
-    let badge='';
-    if(s.ccr)       badge=`<div class="mc-badge mc-badge-ccr">👑 CCR</div>`;
-    else if(s.cr)   badge=`<div class="mc-badge mc-badge-cr">★ CR</div>`;
-    else if(wantsMgmt) badge=`<div class="mc-badge mc-badge-mgmt">⚡ MGMT</div>`;
-    
-    let tag='';
-    if(s.ccr)            tag=`<span class="mc-tag mc-tag-ccr">👑 ${s.crTitle||'Chief CR'}</span>`;
-    else if(s.cr)        tag=`<span class="mc-tag mc-tag-cr">★ ${s.crTitle||'Class Rep'}</span>`;
-    else if(wantsMgmt)   tag='<span class="mc-tag mc-tag-mgmt">⚡ Mgmt</span>';
-    
+    // Default quote fallback if not available
+    const quote = p && p.quote ? p.quote : "Friendly, chill and always learning.";
+
+    // Birthday fallback
+    let dobStr = "Magh 29, 2065 BS";
+    if (p && p.dob) {
+      const d = p.dob;
+      dobStr = d.bsDay ? `${d.monthName} ${d.bsDay}, ${d.bsYear || 2065} BS` : `${d.monthName} ${d.bsYear || 2065} BS`;
+    }
+
     return `
-    <div class="member-card ${cardClass}" onclick="openModal(${s.roll})">
-      <div class="mc-photo">
-        <img src="${photoSrc}" alt="${title}"
-          onerror="this.parentElement.innerHTML='<div class=mc-photo-placeholder><div class=mc-initials>${initials}</div></div>'"
-          loading="lazy"/>
-        ${badge}
-        <div class="mc-profile-dot ${hasProfile?'has-profile':'no-profile'}"></div>
-        ${quote?`<div class="mc-quote-overlay"><div class="mc-quote-text">${quote.length>80?quote.substring(0,80)+'…':quote}</div></div>`:''}
+      <div class="member-card" onclick="openModal(${s.roll})">
+        <!-- Top 'E' Badge -->
+        <div class="card-corner-badge">E</div>
+
+        <!-- Photo & Orbit Ring -->
+        <div class="card-photo-stage">
+          <div class="card-orbit-ring"></div>
+          <div class="mc-photo-frame">
+            <img src="${photoSrc}" alt="${title}" loading="lazy" decoding="async"
+                 onerror="this.parentElement.innerHTML='<div class=mc-placeholder>${initials}</div>'"/>
+          </div>
+        </div>
+
+        <!-- Student Name -->
+        <div class="card-name">${title}</div>
+
+        <!-- Star Divider -->
+        <div class="card-star-divider">
+          <span class="star-icon">✦</span>
+        </div>
+
+        <!-- Info Pills -->
+        <div class="meta-pills-row">
+          <div class="meta-pill">
+            <div class="pill-icon-circle">#</div>
+            <div class="pill-text-col">
+              <span class="pill-lbl">Roll No.</span>
+              <span class="pill-val">${s.roll}</span>
+            </div>
+          </div>
+
+          <div class="meta-pill">
+            <div class="pill-icon-circle">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="pill-text-col">
+              <span class="pill-lbl">Birthday</span>
+              <span class="pill-val">${dobStr}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hover Quote Bubble (Image 2) -->
+        <div class="hover-quote-bubble">
+          <div class="hover-quote-mark">“</div>
+          <div class="hover-quote-text">${quote}</div>
+        </div>
+
+        <!-- Himalayan Mountain Silhouette -->
+        <div class="card-mountains">
+          ${mountainSvgHtml}
+        </div>
       </div>
-      <div class="mc-info">
-        <div class="mc-roll">#${s.roll}</div>
-        <div class="mc-name">${title}</div>
-        <div class="mc-meta">${tag}</div>
-        ${(p&&p.dob&&p.dob.bsDay)?`<div class="mc-dob">🎂 ${p.dob.monthName} ${p.dob.bsDay}</div>`:''}
-      </div>
-    </div>`;
+    `;
   }).join('');
 }
 
-const BS_MONTHS=['Baishakh','Jestha','Ashadh','Shrawan','Bhadra','Ashwin','Kartik','Mangsir','Poush','Magh','Falgun','Chaitra'];
+// ─── DETAILED VIEW MODAL (IMAGE 3) ───
+function openModal(roll) {
+  const s = STUDENTS.find(item => item.roll === roll);
+  if (!s) return;
 
-function openModal(roll){
-  const s=STUDENTS.find(s=>s.roll===roll);
-  if(!s) return;
-  const title=toTitle(s.name);
-  const initials=getInitials(s.name);
-  const p=STUDENT_PROFILES[s.roll];
-  const photoSrc=getDriveFolderPhotoUrl(roll, _memberPhotos);
-  const photoClass=s.ccr?'ccr-modal-photo':s.cr?'cr-modal-photo':'';
-  
-  let dobStr='—';
-  if(p&&p.dob){
-    const d=p.dob;
-    dobStr=d.bsDay?`${d.monthName} ${d.bsDay}, ${d.bsYear} BS`:`${d.monthName} ${d.bsYear} BS`;
+  const title = toTitle(s.name);
+  const firstName = toTitle(s.name.split(' ')[0]);
+  const p = STUDENT_PROFILES[s.roll];
+  const photoSrc = getDriveFolderPhotoUrl(roll, _memberPhotos);
+
+  // Quote
+  const quote = p && p.quote ? p.quote : "Friendly, chill and always learning.";
+
+  // Birthday
+  let dobStr = "Magh 29, 2065 BS";
+  if (p && p.dob) {
+    const d = p.dob;
+    dobStr = d.bsDay ? `${d.monthName} ${d.bsDay}, ${d.bsYear || 2065} BS` : `${d.monthName} ${d.bsYear || 2065} BS`;
   }
-  
-  let modalTag='';
-  if(s.ccr)          modalTag=`<span class="mc-tag mc-tag-ccr">👑 ${s.crTitle}</span>`;
-  else if(s.cr)      modalTag=`<span class="mc-tag mc-tag-cr">★ ${s.crTitle}</span>`;
-  if(p&&p.wantsManagement) modalTag+=`<span class="mc-tag mc-tag-mgmt">⚡ Management Team</span>`;
-  
-  document.getElementById('modalContent').innerHTML=`
-    <div class="modal-header">
-      <div class="modal-photo-sm ${photoClass}">
-        <img src="${photoSrc}" alt="${title}"
-          onerror="this.parentElement.innerHTML='<div class=modal-photo-sm-placeholder>${initials}</div>'"
-          style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block"/>
-      </div>
-      <div class="modal-header-info">
-        <div class="modal-roll">Roll No. ${s.roll} · Section E</div>
-        <div class="modal-name">${title}</div>
-        <div class="modal-tags">${modalTag}</div>
-      </div>
-    </div>
-    ${(p&&p.quote)?`
-    <div class="modal-quote-block${s.ccr?' ccr-quote':''}">
-      <div class="modal-quote">${p.quote}</div>
-    </div>`:''}
-    ${(p&&p.experience)?`
-    <div class="modal-exp-label">✦ Their Section E Story</div>
-    <div class="modal-exp">${p.experience}</div>`:''}
-    ${(p&&(p.dob||p.email))?`
-    <div class="modal-info-grid">
-      ${p.dob?`<div class="modal-info-item"><div class="modal-info-label">🎂 Birthday (BS)</div><div class="modal-info-val">${dobStr}</div></div>`:''}
-      ${p.email?`<div class="modal-info-item"><div class="modal-info-label">✉️ Email</div><div class="modal-info-val" style="font-size:.74rem;word-break:break-all">${p.email}</div></div>`:''}
-    </div>`:''}
-  `;
+
+  // About Me
+  const aboutText = (p && p.experience) 
+    ? p.experience 
+    : "A curious mind, a calm soul, and someone who never stops learning. Always here to make memories.";
+
+  // Populate Modal
+  document.getElementById('modalImg').src = photoSrc;
+  document.getElementById('modalSignature').textContent = firstName;
+  document.getElementById('modalRollTag').textContent = `SECTION E • ROLL NO. ${s.roll}`;
+  document.getElementById('modalName').textContent = title;
+  document.getElementById('modalQuote').textContent = quote;
+  document.getElementById('modalDob').textContent = dobStr;
+  document.getElementById('modalRollVal').textContent = s.roll;
+  document.getElementById('modalAbout').textContent = aboutText;
+
   document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
-document.getElementById('modalClose').addEventListener('click',()=>document.getElementById('modalOverlay').classList.remove('open'));
-document.getElementById('modalOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('open')});
-document.getElementById('searchInput').addEventListener('input',e=>renderGrid(e.target.value));
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
 
-let _memberPhotos = {};
-(async function init(){
-  const siteData = await loadSiteData();
-  _memberPhotos = siteData.memberPhotos || {};
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeModal();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  renderGrid(e.target.value);
+});
+
+// ─── INITIALIZATION ───
+(async function init() {
+  try {
+    const siteData = typeof loadSiteData === 'function' ? await loadSiteData() : {};
+    _memberPhotos = siteData.memberPhotos || {};
+  } catch (err) {
+    console.warn('Failed loading member photos', err);
+  }
   renderGrid();
 })();
-window.addEventListener('ec-data-updated', e => { _memberPhotos = (e.detail.data||{}).memberPhotos || {}; renderGrid(document.getElementById('searchInput')?.value || ''); });
+
+window.addEventListener('ec-data-updated', (e) => {
+  _memberPhotos = (e.detail.data || {}).memberPhotos || {};
+  renderGrid(document.getElementById('searchInput')?.value || '');
+});
 </script>
 </body>
 </html>

@@ -3,699 +3,862 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Gallery Exhibition — The E Chronicles</title>
+  <title>The Exhibition Wall — The E Chronicles</title>
   <link rel="stylesheet" href="style.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Caveat:wght@600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="home-theme.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
   <style>
-    /* ══════════════════════════════════════════════════════
-       THE E CHRONICLES — FRAMED PHOTO EXHIBITION WALL
-       ══════════════════════════════════════════════════════ */
-    .gallery-hero {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 3.5rem 2.5rem 2.8rem;
+    :root {
+      --wall-bg: #f8f6f0;
+      --wall-spotlight: radial-gradient(circle at 50% 15%, rgba(255,255,255,0.95) 0%, rgba(246,243,234,0.6) 60%, rgba(235,230,218,0.3) 100%);
+      --wall-shadow: rgba(30, 24, 16, 0.18);
+      --brass-gold: #c9a44c;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--wall-bg);
+      color: #2b2723;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── EXHIBITION BANNER ─── */
+    .exhibition-header {
+      padding: 2.5rem 2rem 1.5rem;
+      background: linear-gradient(180deg, #f4f2ec 0%, var(--wall-bg) 100%);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
       position: relative;
-      overflow: hidden;
-    }
-    .gallery-hero-bg {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 65% 85% at 75% 40%, var(--gold-light), transparent 70%);
-      pointer-events: none;
-    }
-    .gallery-hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-
-    /* Exhibition Wall Surface */
-    .wall-section {
-      padding: 3.5rem 2rem 6rem;
-      position: relative;
-      transition: background .4s ease;
-    }
-    .wall-inner { max-width: 1240px; margin: 0 auto; }
-
-    /* Overhead Spotlights */
-    .wall-spotlights {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: 
-        radial-gradient(circle 380px at 15% 10%, rgba(255, 225, 150, 0.08), transparent 75%),
-        radial-gradient(circle 420px at 50% 12%, rgba(255, 225, 150, 0.08), transparent 75%),
-        radial-gradient(circle 380px at 85% 10%, rgba(255, 225, 150, 0.08), transparent 75%);
-      opacity: 0.6;
-      transition: opacity .4s ease;
-    }
-    body.spotlight-mode .wall-spotlights {
-      opacity: 1;
-      background: 
-        radial-gradient(circle 420px at 20% 15%, rgba(255, 215, 110, 0.20), transparent 75%),
-        radial-gradient(circle 450px at 50% 12%, rgba(255, 215, 110, 0.20), transparent 75%),
-        radial-gradient(circle 420px at 80% 15%, rgba(255, 215, 110, 0.20), transparent 75%),
-        rgba(0, 0, 0, 0.38);
-    }
-
-    /* Wall Controls */
-    .wall-toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.2rem;
-      margin-bottom: 2.5rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .gallery-filters { display: flex; gap: .4rem; flex-wrap: wrap; }
-    .filter-btn {
-      padding: .42rem 1.05rem;
-      font-size: .8rem;
-      font-weight: 500;
-      border-radius: 100px;
-      border: 1.5px solid var(--border);
-      background: var(--surface);
-      color: var(--text2);
-      cursor: pointer;
-      transition: all .2s;
-      font-family: inherit;
-    }
-    .filter-btn:hover, .filter-btn.active {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: var(--gold-light);
-      box-shadow: 0 0 12px var(--gold-glow);
-    }
-
-    .style-switches {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      flex-wrap: wrap;
-    }
-    .tool-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: .35rem;
-      padding: .38rem .85rem;
-      border-radius: 100px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text2);
-      font-size: .78rem;
-      cursor: pointer;
-      transition: all .2s;
-      font-family: inherit;
-      user-select: none;
-    }
-    .tool-chip:hover { border-color: var(--accent); color: var(--text); }
-    .tool-chip.active {
-      background: var(--accent-light);
-      border-color: var(--accent);
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    /* ── FRAMED WALL GRID ── */
-    .framed-wall-grid {
-      columns: 3;
-      column-gap: 2rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .frame-wrapper {
-      break-inside: avoid;
-      margin-bottom: 2.2rem;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      transition: transform .32s cubic-bezier(0.2, 0.8, 0.2, 1);
-      animation: frameAppear .5s ease both;
-    }
-    .frame-wrapper:hover {
-      transform: translateY(-8px) scale(1.02);
       z-index: 10;
     }
-
-    /* Peg & Cord */
-    .frame-peg {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #fff 10%, #d4af37 60%, #8c7322 100%);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-      margin-bottom: -4px;
-      z-index: 2;
-    }
-    .frame-cord {
-      width: 2px;
-      height: 14px;
-      background: linear-gradient(to bottom, #d4af37, #8c7322);
-      opacity: 0.8;
-      margin-bottom: -1px;
-    }
-
-    .frame-box {
-      width: 100%;
-      box-sizing: border-box;
-      position: relative;
-      border-radius: 4px;
-      transition: all .25s ease;
-      overflow: hidden;
-    }
-
-    /* ── STYLE 1: CLASSIC EXHIBITION (Brass & Gilded Molding) ── */
-    .theme-exhibition .frame-box {
-      background: #1a1612;
-      padding: 14px;
-      border: 8px solid #2b2219;
-      outline: 2px solid #d4af37;
-      outline-offset: -5px;
-      box-shadow: 
-        0 18px 36px -12px rgba(0, 0, 0, 0.65),
-        0 4px 10px rgba(0, 0, 0, 0.35),
-        inset 0 0 12px rgba(0, 0, 0, 0.7);
-    }
-    .theme-exhibition .frame-mat {
-      background: #fbf9f4;
-      padding: 12px 12px 8px;
-      border-radius: 2px;
-      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.35);
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1.5rem;
     }
-    html.dark .theme-exhibition .frame-mat {
-      background: #1f1b26;
-      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
-    }
-    .museum-plaque {
-      margin-top: 10px;
-      padding: 5px 8px;
-      background: linear-gradient(135deg, #e3c472 0%, #d4af37 50%, #ad8c28 100%);
-      color: #1a1205;
-      border: 1px solid #8c7120;
-      border-radius: 2px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.25), inset 0 1px 1px rgba(255,255,255,0.6);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-    .plaque-title {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: .74rem;
+    .exhibition-title-group h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
       font-weight: 700;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      margin: 0 0 0.35rem;
+      color: #1a1714;
+      letter-spacing: -0.02em;
     }
-    .plaque-meta {
+    .exhibition-subtitle {
+      font-size: 0.92rem;
+      color: #726a5f;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .badge-pill {
       font-family: 'JetBrains Mono', monospace;
-      font-size: .62rem;
-      opacity: .85;
+      font-size: 0.72rem;
+      background: #e9e4d6;
+      color: #514a3e;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
       text-transform: uppercase;
-      letter-spacing: .06em;
+      letter-spacing: 0.05em;
     }
 
-    /* ── STYLE 2: POLAROID PINNED WALL ── */
-    .theme-polaroid .frame-cord,
-    .theme-polaroid .frame-peg { display: none; }
-    .theme-polaroid .frame-box {
-      background: #fdfdfd;
-      padding: 10px 10px 18px;
-      border-radius: 3px;
-      box-shadow: 0 12px 28px -6px rgba(0,0,0,0.35);
-      border: 1px solid rgba(0,0,0,0.08);
-      position: relative;
+    /* ─── FILTER TABS & DESKTOP CONTROLS ─── */
+    .controls-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
-    .theme-polaroid .frame-box::before {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%) rotate(-2deg);
-      width: 70px;
-      height: 20px;
-      background: rgba(255, 245, 200, 0.65);
-      border: 1px dashed rgba(210, 190, 130, 0.5);
-      z-index: 5;
+    .filter-pills {
+      display: inline-flex;
+      background: #eeebe1;
+      padding: 4px;
+      border-radius: 100px;
+      gap: 4px;
+      border: 1px solid rgba(0,0,0,0.05);
     }
-    .theme-polaroid .frame-mat { background: transparent; padding: 0; box-shadow: none; }
-    .theme-polaroid .museum-plaque {
-      background: transparent; border: none; box-shadow: none;
-      color: #2b223a; margin-top: 8px; padding: 2px 4px;
+    .f-pill {
+      border: none;
+      background: transparent;
+      padding: 0.45rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #635b50;
+      cursor: pointer;
+      transition: all 0.22s ease;
     }
-    .theme-polaroid .plaque-title {
-      font-family: 'Caveat', cursive, sans-serif;
-      font-size: 1.15rem; font-weight: 600; color: #1e162a;
+    .f-pill:hover {
+      color: #1a1714;
     }
-    .theme-polaroid .plaque-meta {
-      font-family: 'Space Grotesk', sans-serif; font-size: .65rem; color: #7b6f91;
+    .f-pill.active {
+      background: #ffffff;
+      color: #1a1714;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
-    /* ── STYLE 3: MODERN MINIMALIST SHADOWBOX ── */
-    .theme-modern .frame-cord,
-    .theme-modern .frame-peg { display: none; }
-    .theme-modern .frame-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 10px;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+    .scroll-arrows {
+      display: flex;
+      gap: 6px;
     }
-    .theme-modern .frame-mat {
-      background: var(--bg2);
-      padding: 8px;
-      border-radius: calc(var(--radius) - 4px);
-    }
-    .theme-modern .museum-plaque {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      color: var(--text);
-      box-shadow: none;
-      margin-top: 8px;
-      border-radius: 6px;
-    }
-    .theme-modern .plaque-title { font-family: 'Space Grotesk', sans-serif; font-size: .78rem; }
-    .theme-modern .plaque-meta { color: var(--accent); }
-
-    /* Photo & Glass Sheen */
-    .frame-photo-wrap {
-      position: relative;
-      overflow: hidden;
-      border-radius: 2px;
-      aspect-ratio: 4/3;
-      background: #111;
+    .arrow-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.12);
+      background: #fff;
+      color: #1a1714;
+      font-size: 1rem;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: all 0.2s;
     }
-    .frame-photo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform .4s ease;
+    .arrow-btn:hover {
+      background: #1a1714;
+      color: #fff;
+      border-color: #1a1714;
     }
-    .frame-wrapper:hover .frame-photo-wrap img { transform: scale(1.05); }
 
-    /* Glare across the glass */
-    .frame-photo-wrap::after {
+    /* ─── THE WHITE WALL CANVAS ─── */
+    .wall-stage {
+      position: relative;
+      background-color: var(--wall-bg);
+      background-image: 
+        radial-gradient(circle at 20% 25%, rgba(255,255,255,0.7) 0%, transparent 45%),
+        radial-gradient(circle at 60% 30%, rgba(255,255,255,0.65) 0%, transparent 50%),
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,0.7) 0%, transparent 40%),
+        linear-gradient(to bottom, rgba(0,0,0,0.02) 0%, transparent 8%, transparent 92%, rgba(0,0,0,0.05) 100%);
+      min-height: calc(100vh - 180px);
+      box-sizing: border-box;
+      padding: 3rem 0 4rem;
+      cursor: grab;
+    }
+    .wall-stage:active {
+      cursor: grabbing;
+    }
+
+    /* Gallery Rail line on top */
+    .wall-stage::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: linear-gradient(125deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.02) 40%, transparent 60%);
-      pointer-events: none;
-      opacity: 0.6;
-      transition: opacity .3s ease;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background: linear-gradient(180deg, #d3cec1 0%, #b8b1a2 100%);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.07);
     }
-    .frame-wrapper:hover .frame-photo-wrap::after { opacity: 0.9; }
 
-    /* Lightbox */
+    /* Baseboard wooden trim on floor */
+    .wall-stage::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 22px;
+      background: linear-gradient(180deg, #dfdacf 0%, #cdc7b9 100%);
+      border-top: 2px solid #bbb4a3;
+    }
+
+    /* ─── HORIZONTAL DESKTOP SCROLL STREAM ─── */
+    .wall-scroll-container {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      padding: 1.5rem 4rem 3rem 4rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Hide default scrollbar */
+    }
+    .wall-scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* 2 Staggered salon-hanging rows */
+    .wall-row {
+      display: flex;
+      align-items: center;
+      gap: 3.2rem;
+      width: max-content;
+    }
+    .wall-row:nth-child(2) {
+      padding-left: 5rem; /* Stagger second row for salon rhythm */
+    }
+
+    /* ─── COMMON FRAME STRUCTURE (NO PHOTO CROPPING) ─── */
+    .art-piece {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    .art-piece:hover {
+      transform: translateY(-8px) scale(1.02);
+      z-index: 20;
+    }
+
+    /* True aspect ratio container: photos fit naturally */
+    .mat-board {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #fbfaf6;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .frame-photo {
+      display: block;
+      /* Crucial: natural uncropped scale */
+      max-height: 290px;
+      max-width: 380px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      cursor: zoom-in;
+      background: #ece8dd;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.1);
+      transition: filter 0.25s;
+    }
+    .art-piece:hover .frame-photo {
+      filter: brightness(1.03);
+    }
+
+    /* ─── FRAME STYLE 1: CLASSROOM (Rich Mahogany & Gold Fillet) ─── */
+    .frame-class {
+      background: linear-gradient(135deg, #442111 0%, #291207 50%, #4a2412 100%);
+      padding: 18px;
+      border: 4px solid #1a0b04;
+      border-radius: 4px;
+      box-shadow: 
+        0 18px 40px -8px var(--wall-shadow),
+        0 8px 16px -4px rgba(0,0,0,0.2),
+        inset 0 0 12px rgba(0,0,0,0.6);
+    }
+    .frame-class .mat-board {
+      padding: 22px 22px 34px 22px;
+      background: #f7f5eb;
+      border: 2px solid #caa85d; /* Gilded gold fillet */
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.14);
+    }
+    .frame-class .plaque {
+      position: absolute;
+      bottom: 8px;
+      background: linear-gradient(180deg, #dfc278 0%, #b8913b 100%);
+      color: #312102;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 2px;
+      border: 1px solid #7c5c16;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.22);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      max-width: 82%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* ─── FRAME STYLE 2: TRIPS (Scandinavian White Oak & Driftwood) ─── */
+    .frame-trips {
+      background: linear-gradient(135deg, #c4a982 0%, #ab8e67 50%, #bca17c 100%);
+      padding: 16px;
+      border: 3px solid #8e724b;
+      border-radius: 3px;
+      box-shadow: 
+        0 20px 42px -10px var(--wall-shadow),
+        0 6px 14px -3px rgba(0,0,0,0.15),
+        inset 0 0 8px rgba(0,0,0,0.25);
+    }
+    .frame-trips .mat-board {
+      padding: 24px;
+      background: #f4f0e4;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.12);
+      border: 1px solid #d5cdbd;
+    }
+    .frame-trips::before {
+      content: 'EXPEDITION';
+      position: absolute;
+      top: 4px;
+      right: 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      color: #fff;
+      opacity: 0.7;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── FRAME STYLE 3: EVENTS (Antique Gilded Gold Baroque) ─── */
+    .frame-events {
+      background: linear-gradient(135deg, #d8ba66 0%, #aa8529 50%, #e8cc7d 100%);
+      padding: 22px;
+      border: 5px double #6d5214;
+      border-radius: 6px;
+      box-shadow: 
+        0 24px 48px -10px rgba(45, 34, 12, 0.28),
+        0 10px 20px -5px rgba(0,0,0,0.25),
+        inset 0 0 16px rgba(110,83,21,0.5);
+    }
+    .frame-events .mat-board {
+      padding: 24px;
+      background: #faf8f2;
+      border: 3px solid #84651e;
+      box-shadow: inset 0 3px 12px rgba(0,0,0,0.2);
+    }
+
+    /* ─── FRAME STYLE 4: FUN TIMES (Curated Polaroid & Memory Mat) ─── */
+    .frame-fun {
+      background: #ffffff;
+      padding: 14px 14px 38px 14px;
+      border: 1px solid #e2ddd3;
+      border-radius: 3px;
+      box-shadow: 
+        0 16px 36px -8px rgba(0,0,0,0.16),
+        0 4px 10px -2px rgba(0,0,0,0.08);
+      position: relative;
+    }
+    /* Playful washi tape on top corner */
+    .frame-fun::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 32%;
+      width: 60px;
+      height: 20px;
+      background: rgba(220, 196, 142, 0.75);
+      backdrop-filter: blur(1px);
+      transform: rotate(-3deg);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border-left: 2px dashed rgba(255,255,255,0.4);
+      border-right: 2px dashed rgba(255,255,255,0.4);
+    }
+    .frame-fun .mat-board {
+      padding: 0;
+      background: transparent;
+    }
+    .frame-fun .caption-handwritten {
+      position: absolute;
+      bottom: 10px;
+      left: 14px;
+      right: 14px;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: #3b352e;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Natural subtle organic tilts for fun frames */
+    .tilt-left { transform: rotate(-1.4deg); }
+    .tilt-right { transform: rotate(1.2deg); }
+    .tilt-straight { transform: rotate(0deg); }
+
+    /* ─── FLOOR PROGRESS INDICATOR ─── */
+    .gallery-floor-bar {
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(244, 241, 233, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 0.8rem 2rem;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      font-size: 0.8rem;
+      color: #726a5f;
+    }
+    .progress-track {
+      flex: 1;
+      max-width: 500px;
+      height: 4px;
+      background: #ded9cd;
+      border-radius: 10px;
+      margin: 0 1.5rem;
+      overflow: hidden;
+    }
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: #2b2723;
+      border-radius: 10px;
+      transition: width 0.1s linear;
+    }
+
+    /* ─── RESPONSIVE: MOBILE VERTICAL EXHIBITION ─── */
+    @media (max-width: 768px) {
+      .wall-stage {
+        padding: 1.5rem 1rem 3rem;
+        cursor: default;
+      }
+      .wall-scroll-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+        overflow-x: visible;
+        overflow-y: visible;
+        padding: 1rem 0;
+      }
+      .wall-row {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 2.5rem;
+        align-items: center;
+      }
+      .wall-row:nth-child(2) {
+        padding-left: 0;
+      }
+      .frame-photo {
+        max-height: 380px;
+        max-width: 86vw;
+      }
+      .scroll-arrows {
+        display: none;
+      }
+      .gallery-floor-bar {
+        display: none;
+      }
+    }
+
+    /* ─── FULL-SPECTRUM SPOTLIGHT LIGHTBOX ─── */
     .lightbox {
       position: fixed;
       inset: 0;
       z-index: 99999;
-      background: rgba(8, 5, 18, 0.94);
+      background: rgba(14, 12, 10, 0.94);
       backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity .25s ease;
+      transition: opacity 0.28s ease;
       padding: 1.5rem;
     }
-    .lightbox.open { opacity: 1; pointer-events: all; }
-    .lightbox-content {
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .lightbox-frame-wrap {
+      position: relative;
       max-width: 90vw;
       max-height: 85vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative;
     }
-    .lightbox-frame {
-      border: 8px solid #231b14;
-      outline: 2px solid var(--gold);
-      border-radius: 4px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+    .lightbox-frame-wrap img {
+      max-width: 88vw;
       max-height: 75vh;
-      overflow: hidden;
-      background: #000;
-    }
-    .lightbox-frame img {
-      max-width: 85vw;
-      max-height: 72vh;
-      display: block;
       object-fit: contain;
+      border: 8px solid #ffffff;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.1);
+      border-radius: 4px;
     }
-    .lightbox-caption-card {
+    .lightbox-caption-box {
       margin-top: 1rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: .6rem 1.4rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 0.6rem 1.4rem;
       border-radius: 100px;
-      font-size: .85rem;
-      color: var(--text);
+      color: #f2efe9;
+      font-size: 0.88rem;
       display: flex;
       align-items: center;
-      gap: .75rem;
-      box-shadow: var(--shadow-lg);
+      gap: 0.8rem;
     }
-    .lightbox-category-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .65rem;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      color: var(--gold);
-      border-right: 1px solid var(--border);
-      padding-right: .75rem;
-    }
-    .lightbox-close {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: #fff;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all .2s;
-    }
-    .lightbox-close:hover { background: var(--accent); transform: rotate(90deg); }
     .lightbox-nav {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.2);
       color: #fff;
-      width: 46px;
-      height: 46px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.2rem;
-      transition: background .2s, transform .2s;
-      user-select: none;
+      transition: background 0.2s;
     }
-    .lightbox-nav:hover { background: var(--accent); transform: translateY(-50%) scale(1.1); }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.28); }
     .lightbox-prev { left: 1.5rem; }
     .lightbox-next { right: 1.5rem; }
-
-    .empty-wall {
-      text-align: center;
-      padding: 5rem 1rem;
-      color: var(--text3);
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 1.35rem;
+    .lightbox-close-btn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255,255,255,0.12);
+      border: none;
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    .lightbox-close-btn:hover { background: rgba(255,255,255,0.25); }
 
-    @keyframes frameAppear {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Skeleton Placeholder */
+    .skeleton-wall {
+      display: flex;
+      gap: 2.5rem;
+      padding: 3rem;
     }
-
-    @media (max-width: 950px) {
-      .framed-wall-grid { columns: 2; column-gap: 1.5rem; }
+    .skeleton-frame {
+      width: 280px;
+      height: 240px;
+      background: #ece8de;
+      border: 10px solid #dfd8cb;
+      border-radius: 4px;
+      animation: pulse 1.6s infinite ease-in-out;
     }
-    @media (max-width: 600px) {
-      .framed-wall-grid { columns: 1; }
-      .gallery-hero, .wall-section { padding-left: 1.25rem; padding-right: 1.25rem; }
-      .wall-toolbar { flex-direction: column; align-items: stretch; }
-      .lightbox-nav { display: none; }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
     }
   </style>
 </head>
-<body class="theme-exhibition">
+
+<body>
 <div class="page">
-  <div class="gallery-hero">
-    <div class="gallery-hero-bg"></div>
-    <div class="gallery-hero-inner reveal">
-      <div class="section-label">// Section E Exhibition Wall</div>
-      <h1 class="section-title">Photo Gallery</h1>
-      <p class="section-desc">A curated wall of framed moments — classes, events, practicals, and unscripted memories.</p>
-    </div>
-  </div>
-
-  <section class="wall-section">
-    <div class="wall-spotlights"></div>
-    <div class="wall-inner">
-
-      <!-- Wall Controls -->
-      <div class="wall-toolbar reveal">
-        <div class="gallery-filters" id="filterBtns">
-          <button class="filter-btn active" data-cat="all">All Frames</button>
-          <button class="filter-btn" data-cat="class">Classroom</button>
-          <button class="filter-btn" data-cat="events">Events</button>
-          <button class="filter-btn" data-cat="trips">Trips</button>
-          <button class="filter-btn" data-cat="fun">Fun Moments</button>
+  <!-- Exhibition Room Header -->
+  <header class="exhibition-header">
+    <div class="header-inner">
+      <div class="exhibition-title-group">
+        <div class="exhibition-subtitle">
+          <span>St. Xavier's College • Section E</span>
+          <span class="badge-pill">Permanent Wall Exhibition</span>
         </div>
-
-        <div class="style-switches">
-          <button class="tool-chip active" id="btnThemeExhibition" title="Classic Gold & Brass Frame">
-            🏛️ Exhibition
-          </button>
-          <button class="tool-chip" id="btnThemePolaroid" title="Vintage Polaroid Pinboard">
-            📌 Polaroid
-          </button>
-          <button class="tool-chip" id="btnThemeModern" title="Modern Shadowbox">
-            ✨ Minimalist
-          </button>
-          <button class="tool-chip" id="btnToggleSpotlight" title="Toggle warm gallery lighting">
-            💡 Spotlight
-          </button>
-          <button class="tool-chip active" id="btnRandomTilt" title="Toggle natural picture tilt">
-            📐 Natural Tilt
-          </button>
-        </div>
+        <h1>The Memory Gallery</h1>
       </div>
 
-      <!-- Framed Wall Grid -->
-      <div class="framed-wall-grid" id="framedGrid"></div>
+      <div class="controls-wrap">
+        <div class="filter-pills" id="filterPills">
+          <button class="f-pill active" data-cat="all">All Frames</button>
+          <button class="f-pill" data-cat="class">Classroom</button>
+          <button class="f-pill" data-cat="trips">Trips & Excursions</button>
+          <button class="f-pill" data-cat="fun">Fun & Candids</button>
+          <button class="f-pill" data-cat="events">Events</button>
+        </div>
 
-      <div id="emptyWall" class="empty-wall" style="display:none;">
-        This exhibition wall is waiting for its first framed photograph.
+        <div class="scroll-arrows">
+          <button class="arrow-btn" id="scrollLeftBtn" title="Scroll Left">‹</button>
+          <button class="arrow-btn" id="scrollRightBtn" title="Scroll Right">›</button>
+        </div>
       </div>
-
     </div>
-  </section>
+  </header>
+
+  <!-- The White Gallery Wall -->
+  <main class="wall-stage" id="wallStage">
+    <div id="loadingSkeleton" class="skeleton-wall">
+      <div class="skeleton-frame"></div>
+      <div class="skeleton-frame"></div>
+      <div class="skeleton-frame"></div>
+      <div class="skeleton-frame"></div>
+    </div>
+
+    <!-- Multi-tier Salon Rows for Infinite Stroll -->
+    <div class="wall-scroll-container" id="scrollContainer" style="display:none;">
+      <div class="wall-row" id="wallRow1"></div>
+      <div class="wall-row" id="wallRow2"></div>
+    </div>
+
+    <div id="emptyMsg" style="display:none; text-align:center; padding: 6rem 2rem; color: #8a8275; font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic;">
+      No framed memories found in this collection.
+    </div>
+  </main>
+
+  <!-- Floor Progress Bar -->
+  <footer class="gallery-floor-bar">
+    <span id="photoCounter">159 Artworks on Display</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <span>Mouse wheel scrolls horizontally • Click photo to inspect</span>
+  </footer>
 </div>
 
-<!-- Exhibition Lightbox -->
+<!-- Spotlight Modal Lightbox -->
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
-  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
-  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">›</button>
-  
-  <div class="lightbox-content">
-    <div class="lightbox-frame">
-      <img id="lightboxImg" src="" alt="Framed exhibition photograph"/>
-    </div>
-    <div class="lightbox-caption-card">
-      <span class="lightbox-category-tag" id="lightboxCat">Section E</span>
-      <span id="lightboxCap">Photograph</span>
+  <button class="lightbox-close-btn" id="lightboxClose">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev">‹</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext">›</button>
+
+  <div class="lightbox-frame-wrap">
+    <img id="lightboxImg" src="" alt="Exhibition Photo"/>
+    <div class="lightbox-caption-box">
+      <span id="lightboxCategory" class="badge-pill">ARCHIVE</span>
+      <span id="lightboxCaption"></span>
     </div>
   </div>
 </div>
 
+<!-- Scripts -->
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="firebase-client.js"></script>
 <script src="shared.js"></script>
+
 <script>
-  if (typeof injectNav === 'function') injectNav();
-  if (typeof initReveal === 'function') initReveal();
+// Mount standard site navigation
+if (typeof injectNav === 'function') injectNav();
 
-  const GALLERY_PHOTOS_HARDCODED = [];
+// Drive thumbnail generator
+function driveUrl(id, size) {
+  return 'https://drive.google.com/thumbnail?id=' + id + '&sz=' + (size || 'w800');
+}
 
-  function driveUrl(id, size) {
-    return 'https://drive.google.com/thumbnail?id=' + id + '&sz=' + (size || 'w800');
+let allPhotos = [];
+let filteredPhotos = [];
+let currentCat = 'all';
+let currentLightboxIdx = 0;
+
+const scrollContainer = document.getElementById('scrollContainer');
+const wallRow1 = document.getElementById('wallRow1');
+const wallRow2 = document.getElementById('wallRow2');
+const progressFill = document.getElementById('progressFill');
+const photoCounter = document.getElementById('photoCounter');
+
+// ─── RENDER FRAMES WITH CATEGORY STYLING & UNBROKEN ASPECT RATIO ───
+function renderWall() {
+  document.getElementById('loadingSkeleton').style.display = 'none';
+
+  filteredPhotos = currentCat === 'all' 
+    ? allPhotos 
+    : allPhotos.filter(p => p.cat === currentCat);
+
+  if (!filteredPhotos.length) {
+    scrollContainer.style.display = 'none';
+    document.getElementById('emptyMsg').style.display = 'block';
+    photoCounter.textContent = '0 Frames';
+    return;
   }
 
-  let allPhotos = [];
-  let filteredPhotos = [];
-  let currentCat = 'all';
-  let activeIndex = 0;
-  let naturalTilt = true;
+  document.getElementById('emptyMsg').style.display = 'none';
+  scrollContainer.style.display = 'flex';
+  photoCounter.textContent = filteredPhotos.length + ' Frames on Exhibition';
 
-  function renderWall() {
-    const grid = document.getElementById('framedGrid');
-    const empty = document.getElementById('emptyWall');
+  wallRow1.innerHTML = '';
+  wallRow2.innerHTML = '';
 
-    filteredPhotos = currentCat === 'all' 
-      ? allPhotos 
-      : allPhotos.filter(p => p.cat === currentCat);
+  const tilts = ['tilt-left', 'tilt-straight', 'tilt-right', 'tilt-straight'];
 
-    if (!allPhotos.length) {
-      grid.style.display = 'none';
-      empty.style.display = 'block';
-      return;
+  filteredPhotos.forEach((photo, idx) => {
+    const imgSrc = photo.base64 
+      ? 'data:image/jpeg;base64,' + photo.base64 
+      : driveUrl(photo.id, 'w800');
+
+    const cat = photo.cat || 'fun';
+    const caption = photo.caption || '';
+    const tilt = tilts[idx % tilts.length];
+
+    let frameClass = 'frame-fun ' + tilt;
+    let plaqueHtml = '';
+
+    if (cat === 'class') {
+      frameClass = 'frame-class';
+      plaqueHtml = '<div class="plaque">' + (caption || 'SECTION E CLASSROOM') + '</div>';
+    } else if (cat === 'trips') {
+      frameClass = 'frame-trips';
+      if (caption) plaqueHtml = '<div style="margin-top:8px;font-size:0.75rem;font-weight:600;color:#5a4c37;text-align:center;">' + caption + '</div>';
+    } else if (cat === 'events') {
+      frameClass = 'frame-events';
+      if (caption) plaqueHtml = '<div style="margin-top:8px;font-size:0.8rem;font-weight:600;color:#6b521c;text-align:center;">' + caption + '</div>';
+    } else {
+      // Fun candids (Polaroid style with handwritten caption)
+      if (caption) plaqueHtml = '<div class="caption-handwritten">' + caption + '</div>';
     }
-    empty.style.display = 'none';
-    grid.style.display = 'block';
 
-    if (!filteredPhotos.length) {
-      grid.innerHTML = '<div class="empty-wall">No framed photos in this exhibition section yet.</div>';
-      return;
+    const itemHtml = document.createElement('div');
+    itemHtml.className = 'art-piece ' + frameClass;
+    itemHtml.onclick = () => openLightbox(idx);
+
+    itemHtml.innerHTML = `
+      <div class="mat-board">
+        <img class="frame-photo" src="${imgSrc}" alt="${caption || 'Section E Photo'}" loading="lazy"/>
+        ${plaqueHtml}
+      </div>
+    `;
+
+    // Distribute into 2 salon rows for desktop horizontal stroll
+    if (idx % 2 === 0) {
+      wallRow1.appendChild(itemHtml);
+    } else {
+      wallRow2.appendChild(itemHtml);
     }
+  });
 
-    grid.innerHTML = filteredPhotos.map((p, idx) => {
-      const imgSrc = p.base64
-        ? 'data:image/jpeg;base64,' + p.base64
-        : driveUrl(p.id);
+  updateProgress();
+}
 
-      const title = p.caption && p.caption.trim() ? p.caption.trim() : 'Section E Memory';
-      const catLabel = (p.cat || 'Class of 2027').toUpperCase();
-
-      const tiltAngles = [-1.4, 1.2, -0.8, 1.5, -1.6, 0.9, -1.1, 1.3];
-      const tilt = naturalTilt ? tiltAngles[idx % tiltAngles.length] : 0;
-
-      return `
-        <div class="frame-wrapper" style="transform: rotate(${tilt}deg)" onclick="openGalleryLightbox(${idx})">
-          <div class="frame-peg"></div>
-          <div class="frame-cord"></div>
-          <div class="frame-box">
-            <div class="frame-mat">
-              <div class="frame-photo-wrap">
-                <img src="${imgSrc}" alt="${title.replace(/"/g, '&quot;')}" loading="lazy" />
-              </div>
-              <div class="museum-plaque">
-                <span class="plaque-title">${title}</span>
-                <span class="plaque-meta">${catLabel}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    }).join('');
+// ─── HORIZONTAL DESKTOP MOUSE-WHEEL INTERCEPTION ───
+// Converts standard vertical mouse scroll into seamless horizontal gallery walking
+scrollContainer.addEventListener('wheel', (e) => {
+  if (window.innerWidth > 768) {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      scrollContainer.scrollLeft += e.deltaY * 1.35;
+    }
   }
+}, { passive: false });
 
-  // ── CATEGORY FILTERS ──
-  document.getElementById('filterBtns').addEventListener('click', (e) => {
-    const btn = e.target.closest('.filter-btn');
-    if (!btn) return;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentCat = btn.dataset.cat;
-    renderWall();
-  });
-
-  // ── THEME / FRAME SWITCHES ──
-  const body = document.body;
-  const btnExhibition = document.getElementById('btnThemeExhibition');
-  const btnPolaroid = document.getElementById('btnThemePolaroid');
-  const btnModern = document.getElementById('btnThemeModern');
-  const btnSpotlight = document.getElementById('btnToggleSpotlight');
-  const btnTilt = document.getElementById('btnRandomTilt');
-
-  function setFrameStyle(styleClass, activeBtn) {
-    body.classList.remove('theme-exhibition', 'theme-polaroid', 'theme-modern');
-    body.classList.add(styleClass);
-    [btnExhibition, btnPolaroid, btnModern].forEach(b => b.classList.remove('active'));
-    activeBtn.classList.add('active');
+// Scroll progress bar
+function updateProgress() {
+  const max = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+  if (max > 0) {
+    const pct = Math.min(100, Math.max(0, (scrollContainer.scrollLeft / max) * 100));
+    progressFill.style.width = pct + '%';
+  } else {
+    progressFill.style.width = '100%';
   }
+}
+scrollContainer.addEventListener('scroll', updateProgress);
 
-  btnExhibition.addEventListener('click', () => setFrameStyle('theme-exhibition', btnExhibition));
-  btnPolaroid.addEventListener('click', () => setFrameStyle('theme-polaroid', btnPolaroid));
-  btnModern.addEventListener('click', () => setFrameStyle('theme-modern', btnModern));
+// Arrow buttons navigation
+document.getElementById('scrollLeftBtn').addEventListener('click', () => {
+  scrollContainer.scrollBy({ left: -600, behavior: 'smooth' });
+});
+document.getElementById('scrollRightBtn').addEventListener('click', () => {
+  scrollContainer.scrollBy({ left: 600, behavior: 'smooth' });
+});
 
-  btnSpotlight.addEventListener('click', () => {
-    body.classList.toggle('spotlight-mode');
-    btnSpotlight.classList.toggle('active');
-  });
+// Click and drag to pan on desktop
+let isDown = false;
+let startX;
+let scrollStart;
 
-  btnTilt.addEventListener('click', () => {
-    naturalTilt = !naturalTilt;
-    btnTilt.classList.toggle('active');
-    renderWall();
-  });
+scrollContainer.addEventListener('mousedown', (e) => {
+  if (window.innerWidth <= 768) return;
+  isDown = true;
+  startX = e.pageX - scrollContainer.offsetLeft;
+  scrollStart = scrollContainer.scrollLeft;
+});
+window.addEventListener('mouseup', () => { isDown = false; });
+scrollContainer.addEventListener('mousemove', (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - scrollContainer.offsetLeft;
+  const walk = (x - startX) * 1.5;
+  scrollContainer.scrollLeft = scrollStart - walk;
+});
 
-  // ── LIGHTBOX ──
+// ─── CATEGORY FILTER TABS ───
+document.getElementById('filterPills').addEventListener('click', (e) => {
+  const pill = e.target.closest('.f-pill');
+  if (!pill) return;
+  document.querySelectorAll('.f-pill').forEach(p => p.classList.remove('active'));
+  pill.classList.add('active');
+  currentCat = pill.dataset.cat;
+  renderWall();
+  scrollContainer.scrollLeft = 0;
+});
+
+// ─── SPOTLIGHT LIGHTBOX ───
+function openLightbox(idx) {
+  currentLightboxIdx = idx;
+  const photo = filteredPhotos[idx];
+  if (!photo) return;
+
+  const src = photo.base64 
+    ? 'data:image/jpeg;base64,' + photo.base64 
+    : driveUrl(photo.id, 'w1200');
+
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightboxCategory').textContent = (photo.cat || 'Archive').toUpperCase();
+  document.getElementById('lightboxCaption').textContent = photo.caption || 'Section E Memory';
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function nextLightbox(delta) {
+  if (!filteredPhotos.length) return;
+  currentLightboxIdx = (currentLightboxIdx + delta + filteredPhotos.length) % filteredPhotos.length;
+  openLightbox(currentLightboxIdx);
+}
+
+document.getElementById('lightboxClose').addEventListener('click', () => {
+  document.getElementById('lightbox').classList.remove('open');
+});
+document.getElementById('lightboxPrev').addEventListener('click', (e) => {
+  e.stopPropagation();
+  nextLightbox(-1);
+});
+document.getElementById('lightboxNext').addEventListener('click', (e) => {
+  e.stopPropagation();
+  nextLightbox(1);
+});
+document.getElementById('lightbox').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
+});
+
+// Keyboard navigation (Arrow keys + Esc)
+window.addEventListener('keydown', (e) => {
   const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lightboxImg');
-  const lbCap = document.getElementById('lightboxCap');
-  const lbCat = document.getElementById('lightboxCat');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') lb.classList.remove('open');
+  if (e.key === 'ArrowRight') nextLightbox(1);
+  if (e.key === 'ArrowLeft') nextLightbox(-1);
+});
 
-  window.openGalleryLightbox = function(index) {
-    if (!filteredPhotos[index]) return;
-    activeIndex = index;
-    const p = filteredPhotos[index];
-    const src = p.base64 ? 'data:image/jpeg;base64,' + p.base64 : driveUrl(p.id, 'w1400');
-    lbImg.src = src;
-    lbCap.textContent = p.caption || 'Section E Memory';
-    lbCat.textContent = (p.cat || 'Section E').toUpperCase();
-    lb.classList.add('open');
-  };
-
-  function updateLightbox() {
-    openGalleryLightbox(activeIndex);
-  }
-
-  document.getElementById('lightboxClose').addEventListener('click', () => lb.classList.remove('open'));
-  document.getElementById('lightboxPrev').addEventListener('click', (e) => {
-    e.stopPropagation();
-    activeIndex = (activeIndex - 1 + filteredPhotos.length) % filteredPhotos.length;
-    updateLightbox();
-  });
-  document.getElementById('lightboxNext').addEventListener('click', (e) => {
-    e.stopPropagation();
-    activeIndex = (activeIndex + 1) % filteredPhotos.length;
-    updateLightbox();
-  });
-  lb.addEventListener('click', (e) => {
-    if (e.target === lb) lb.classList.remove('open');
-  });
-
-  window.addEventListener('keydown', (e) => {
-    if (!lb.classList.contains('open')) return;
-    if (e.key === 'Escape') lb.classList.remove('open');
-    if (e.key === 'ArrowLeft') {
-      activeIndex = (activeIndex - 1 + filteredPhotos.length) % filteredPhotos.length;
-      updateLightbox();
-    }
-    if (e.key === 'ArrowRight') {
-      activeIndex = (activeIndex + 1) % filteredPhotos.length;
-      updateLightbox();
-    }
-  });
-
-  // ── LOAD DATA ──
-  (async function init() {
+// ─── INITIALIZATION ───
+(async function init() {
+  try {
+    const siteData = typeof loadSiteData === 'function' ? await loadSiteData() : {};
+    allPhotos = siteData.gallery || [];
+  } catch (err) {
+    console.warn('Falling back to local data fetch', err);
     try {
-      if (typeof loadSiteData === 'function') {
-        const siteData = await loadSiteData();
-        const adminPhotos = (siteData.gallery || []);
-        allPhotos = GALLERY_PHOTOS_HARDCODED.concat(adminPhotos);
-      } else {
-        allPhotos = GALLERY_PHOTOS_HARDCODED;
-      }
-    } catch(err) {
-      console.warn('Gallery data load error:', err);
-      allPhotos = GALLERY_PHOTOS_HARDCODED;
+      const res = await fetch('data/ec-data.json');
+      const d = await res.json();
+      allPhotos = d.gallery || [];
+    } catch (e) {
+      console.error('Failed to load gallery data', e);
     }
-    renderWall();
-  })();
+  }
+  renderWall();
+})();
 
-  window.addEventListener('ec-data-updated', (e) => {
-    const d = e.detail.data || {};
-    allPhotos = GALLERY_PHOTOS_HARDCODED.concat(d.gallery || []);
-    renderWall();
-  });
+window.addEventListener('ec-data-updated', (e) => {
+  const d = e.detail.data || {};
+  allPhotos = d.gallery || [];
+  renderWall();
+});
 </script>
 </body>
 </html>

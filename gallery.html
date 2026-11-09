@@ -3,112 +3,513 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Gallery — The E Chronicles</title>
+  <title>Gallery Exhibition — The E Chronicles</title>
   <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Caveat:wght@600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="home-theme.css"/>
   <style>
-    .gallery-hero { background:var(--surface);border-bottom:1px solid var(--border);padding:3.5rem 2.5rem 3rem; }
-    .gallery-hero-inner { max-width:1100px;margin:0 auto; }
-    .gallery-section { padding:3rem 2.5rem 5rem; }
-    .gallery-inner { max-width:1100px;margin:0 auto; }
+    /* ══════════════════════════════════════════════════════
+       THE E CHRONICLES — FRAMED PHOTO EXHIBITION WALL
+       ══════════════════════════════════════════════════════ */
+    .gallery-hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 3.5rem 2.5rem 2.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .gallery-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 65% 85% at 75% 40%, var(--gold-light), transparent 70%);
+      pointer-events: none;
+    }
+    .gallery-hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 
-    .gallery-filters { display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem; }
+    /* Exhibition Wall Surface */
+    .wall-section {
+      padding: 3.5rem 2rem 6rem;
+      position: relative;
+      transition: background .4s ease;
+    }
+    .wall-inner { max-width: 1240px; margin: 0 auto; }
+
+    /* Overhead Spotlights */
+    .wall-spotlights {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: 
+        radial-gradient(circle 380px at 15% 10%, rgba(255, 225, 150, 0.08), transparent 75%),
+        radial-gradient(circle 420px at 50% 12%, rgba(255, 225, 150, 0.08), transparent 75%),
+        radial-gradient(circle 380px at 85% 10%, rgba(255, 225, 150, 0.08), transparent 75%);
+      opacity: 0.6;
+      transition: opacity .4s ease;
+    }
+    body.spotlight-mode .wall-spotlights {
+      opacity: 1;
+      background: 
+        radial-gradient(circle 420px at 20% 15%, rgba(255, 215, 110, 0.20), transparent 75%),
+        radial-gradient(circle 450px at 50% 12%, rgba(255, 215, 110, 0.20), transparent 75%),
+        radial-gradient(circle 420px at 80% 15%, rgba(255, 215, 110, 0.20), transparent 75%),
+        rgba(0, 0, 0, 0.38);
+    }
+
+    /* Wall Controls */
+    .wall-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .gallery-filters { display: flex; gap: .4rem; flex-wrap: wrap; }
     .filter-btn {
-      padding:.4rem 1rem;font-size:.78rem;font-weight:500;border-radius:100px;
-      border:1.5px solid var(--border);background:transparent;color:var(--text2);
-      cursor:pointer;transition:all .2s;
+      padding: .42rem 1.05rem;
+      font-size: .8rem;
+      font-weight: 500;
+      border-radius: 100px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--text2);
+      cursor: pointer;
+      transition: all .2s;
+      font-family: inherit;
     }
-    .filter-btn:hover,.filter-btn.active { border-color:var(--accent);color:var(--accent);background:var(--accent-light); }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--gold-light);
+      box-shadow: 0 0 12px var(--gold-glow);
+    }
 
-    /* Masonry grid */
-    .gallery-grid { columns:4;column-gap:1rem; }
-    .gallery-item {
-      break-inside:avoid;margin-bottom:1rem;border-radius:10px;overflow:hidden;
-      cursor:pointer;position:relative;border:1px solid var(--border);
-      background:var(--surface);
+    .style-switches {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      flex-wrap: wrap;
     }
-    .gallery-item img { width:100%;display:block;transition:transform .35s; }
-    .gallery-item:hover img { transform:scale(1.04); }
-    .gallery-item-overlay {
-      position:absolute;inset:0;
-      background:linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 50%);
-      opacity:0;transition:opacity .25s;display:flex;align-items:flex-end;padding:.8rem;
+    .tool-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .38rem .85rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text2);
+      font-size: .78rem;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: inherit;
+      user-select: none;
     }
-    .gallery-item:hover .gallery-item-overlay { opacity:1; }
-    .gallery-item-caption { font-size:.78rem;color:#fff;font-weight:500; }
+    .tool-chip:hover { border-color: var(--accent); color: var(--text); }
+    .tool-chip.active {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
 
-    /* Loading skeleton */
-    .gallery-skeleton {
-      display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;
+    /* ── FRAMED WALL GRID ── */
+    .framed-wall-grid {
+      columns: 3;
+      column-gap: 2rem;
+      position: relative;
+      z-index: 2;
     }
-    .skeleton-item {
-      aspect-ratio:4/3;background:linear-gradient(90deg,var(--surface) 25%,var(--border) 50%,var(--surface) 75%);
-      background-size:200% 100%;animation:shimmer 1.5s infinite;
-      border-radius:10px;border:1px solid var(--border);
-    }
-    @keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
 
-    .empty-state{text-align:center;padding:4rem 2rem;color:var(--text3);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem}
-
-    .drive-note{
-      background:var(--accent-light);border:1px solid rgba(26,79,160,.2);border-radius:var(--radius);
-      padding:1rem 1.4rem;margin-bottom:2rem;font-size:.82rem;color:var(--accent);line-height:1.6;
+    .frame-wrapper {
+      break-inside: avoid;
+      margin-bottom: 2.2rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform .32s cubic-bezier(0.2, 0.8, 0.2, 1);
+      animation: frameAppear .5s ease both;
     }
-    .drive-note code{font-family:'DM Mono',monospace;background:var(--bg2);padding:.1rem .35rem;border-radius:3px}
+    .frame-wrapper:hover {
+      transform: translateY(-8px) scale(1.02);
+      z-index: 10;
+    }
+
+    /* Peg & Cord */
+    .frame-peg {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff 10%, #d4af37 60%, #8c7322 100%);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      margin-bottom: -4px;
+      z-index: 2;
+    }
+    .frame-cord {
+      width: 2px;
+      height: 14px;
+      background: linear-gradient(to bottom, #d4af37, #8c7322);
+      opacity: 0.8;
+      margin-bottom: -1px;
+    }
+
+    .frame-box {
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+      border-radius: 4px;
+      transition: all .25s ease;
+      overflow: hidden;
+    }
+
+    /* ── STYLE 1: CLASSIC EXHIBITION (Brass & Gilded Molding) ── */
+    .theme-exhibition .frame-box {
+      background: #1a1612;
+      padding: 14px;
+      border: 8px solid #2b2219;
+      outline: 2px solid #d4af37;
+      outline-offset: -5px;
+      box-shadow: 
+        0 18px 36px -12px rgba(0, 0, 0, 0.65),
+        0 4px 10px rgba(0, 0, 0, 0.35),
+        inset 0 0 12px rgba(0, 0, 0, 0.7);
+    }
+    .theme-exhibition .frame-mat {
+      background: #fbf9f4;
+      padding: 12px 12px 8px;
+      border-radius: 2px;
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+    }
+    html.dark .theme-exhibition .frame-mat {
+      background: #1f1b26;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+    }
+    .museum-plaque {
+      margin-top: 10px;
+      padding: 5px 8px;
+      background: linear-gradient(135deg, #e3c472 0%, #d4af37 50%, #ad8c28 100%);
+      color: #1a1205;
+      border: 1px solid #8c7120;
+      border-radius: 2px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.25), inset 0 1px 1px rgba(255,255,255,0.6);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .plaque-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: .74rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .plaque-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      opacity: .85;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    /* ── STYLE 2: POLAROID PINNED WALL ── */
+    .theme-polaroid .frame-cord,
+    .theme-polaroid .frame-peg { display: none; }
+    .theme-polaroid .frame-box {
+      background: #fdfdfd;
+      padding: 10px 10px 18px;
+      border-radius: 3px;
+      box-shadow: 0 12px 28px -6px rgba(0,0,0,0.35);
+      border: 1px solid rgba(0,0,0,0.08);
+      position: relative;
+    }
+    .theme-polaroid .frame-box::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 70px;
+      height: 20px;
+      background: rgba(255, 245, 200, 0.65);
+      border: 1px dashed rgba(210, 190, 130, 0.5);
+      z-index: 5;
+    }
+    .theme-polaroid .frame-mat { background: transparent; padding: 0; box-shadow: none; }
+    .theme-polaroid .museum-plaque {
+      background: transparent; border: none; box-shadow: none;
+      color: #2b223a; margin-top: 8px; padding: 2px 4px;
+    }
+    .theme-polaroid .plaque-title {
+      font-family: 'Caveat', cursive, sans-serif;
+      font-size: 1.15rem; font-weight: 600; color: #1e162a;
+    }
+    .theme-polaroid .plaque-meta {
+      font-family: 'Space Grotesk', sans-serif; font-size: .65rem; color: #7b6f91;
+    }
+
+    /* ── STYLE 3: MODERN MINIMALIST SHADOWBOX ── */
+    .theme-modern .frame-cord,
+    .theme-modern .frame-peg { display: none; }
+    .theme-modern .frame-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+    }
+    .theme-modern .frame-mat {
+      background: var(--bg2);
+      padding: 8px;
+      border-radius: calc(var(--radius) - 4px);
+    }
+    .theme-modern .museum-plaque {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      box-shadow: none;
+      margin-top: 8px;
+      border-radius: 6px;
+    }
+    .theme-modern .plaque-title { font-family: 'Space Grotesk', sans-serif; font-size: .78rem; }
+    .theme-modern .plaque-meta { color: var(--accent); }
+
+    /* Photo & Glass Sheen */
+    .frame-photo-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+      aspect-ratio: 4/3;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .frame-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .frame-wrapper:hover .frame-photo-wrap img { transform: scale(1.05); }
+
+    /* Glare across the glass */
+    .frame-photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(125deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.02) 40%, transparent 60%);
+      pointer-events: none;
+      opacity: 0.6;
+      transition: opacity .3s ease;
+    }
+    .frame-wrapper:hover .frame-photo-wrap::after { opacity: 0.9; }
 
     /* Lightbox */
-    .lightbox { position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;padding:1rem; }
-    .lightbox.open { opacity:1;pointer-events:all; }
-    .lightbox img { max-width:90vw;max-height:85vh;border-radius:8px;object-fit:contain; }
-    .lightbox-close { position:absolute;top:1.5rem;right:1.5rem;background:rgba(255,255,255,.1);border:none;color:#fff;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background .2s; }
-    .lightbox-close:hover { background:rgba(255,255,255,.2); }
-    .lightbox-caption{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:#fff;padding:.4rem 1rem;border-radius:100px;font-size:.8rem;white-space:nowrap}
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(8, 5, 18, 0.94);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+      padding: 1.5rem;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox-content {
+      max-width: 90vw;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .lightbox-frame {
+      border: 8px solid #231b14;
+      outline: 2px solid var(--gold);
+      border-radius: 4px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+      max-height: 75vh;
+      overflow: hidden;
+      background: #000;
+    }
+    .lightbox-frame img {
+      max-width: 85vw;
+      max-height: 72vh;
+      display: block;
+      object-fit: contain;
+    }
+    .lightbox-caption-card {
+      margin-top: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: .6rem 1.4rem;
+      border-radius: 100px;
+      font-size: .85rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      box-shadow: var(--shadow-lg);
+    }
+    .lightbox-category-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--gold);
+      border-right: 1px solid var(--border);
+      padding-right: .75rem;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: #fff;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+    }
+    .lightbox-close:hover { background: var(--accent); transform: rotate(90deg); }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: background .2s, transform .2s;
+      user-select: none;
+    }
+    .lightbox-nav:hover { background: var(--accent); transform: translateY(-50%) scale(1.1); }
+    .lightbox-prev { left: 1.5rem; }
+    .lightbox-next { right: 1.5rem; }
 
-    @media(max-width:768px) { .gallery-grid{columns:2}.gallery-hero,.gallery-section{padding-left:1.25rem;padding-right:1.25rem} }
-    @media(max-width:480px) { .gallery-grid{columns:1} }
+    .empty-wall {
+      text-align: center;
+      padding: 5rem 1rem;
+      color: var(--text3);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.35rem;
+    }
+
+    @keyframes frameAppear {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 950px) {
+      .framed-wall-grid { columns: 2; column-gap: 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .framed-wall-grid { columns: 1; }
+      .gallery-hero, .wall-section { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .wall-toolbar { flex-direction: column; align-items: stretch; }
+      .lightbox-nav { display: none; }
+    }
   </style>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="home-theme.css"/>
 </head>
-<body>
+<body class="theme-exhibition">
 <div class="page">
   <div class="gallery-hero">
+    <div class="gallery-hero-bg"></div>
     <div class="gallery-hero-inner reveal">
-      <div class="section-label">// Our memories</div>
-      <h1 class="section-title">Gallery</h1>
-      <p class="section-desc">Photos from Section E's journey — classes, events, trips, and everyday moments.</p>
+      <div class="section-label">// Section E Exhibition Wall</div>
+      <h1 class="section-title">Photo Gallery</h1>
+      <p class="section-desc">A curated wall of framed moments — classes, events, practicals, and unscripted memories.</p>
     </div>
   </div>
 
-  <section class="gallery-section">
-    <div class="gallery-inner">
+  <section class="wall-section">
+    <div class="wall-spotlights"></div>
+    <div class="wall-inner">
 
-      
+      <!-- Wall Controls -->
+      <div class="wall-toolbar reveal">
+        <div class="gallery-filters" id="filterBtns">
+          <button class="filter-btn active" data-cat="all">All Frames</button>
+          <button class="filter-btn" data-cat="class">Classroom</button>
+          <button class="filter-btn" data-cat="events">Events</button>
+          <button class="filter-btn" data-cat="trips">Trips</button>
+          <button class="filter-btn" data-cat="fun">Fun Moments</button>
+        </div>
 
-      <div class="gallery-filters reveal" id="filterBtns">
-        <button class="filter-btn active" data-cat="all">All Photos</button>
-        <button class="filter-btn" data-cat="class">Classroom</button>
-        <button class="filter-btn" data-cat="events">Events</button>
-        <button class="filter-btn" data-cat="trips">Trips</button>
-        <button class="filter-btn" data-cat="fun">Fun Times</button>
+        <div class="style-switches">
+          <button class="tool-chip active" id="btnThemeExhibition" title="Classic Gold & Brass Frame">
+            🏛️ Exhibition
+          </button>
+          <button class="tool-chip" id="btnThemePolaroid" title="Vintage Polaroid Pinboard">
+            📌 Polaroid
+          </button>
+          <button class="tool-chip" id="btnThemeModern" title="Modern Shadowbox">
+            ✨ Minimalist
+          </button>
+          <button class="tool-chip" id="btnToggleSpotlight" title="Toggle warm gallery lighting">
+            💡 Spotlight
+          </button>
+          <button class="tool-chip active" id="btnRandomTilt" title="Toggle natural picture tilt">
+            📐 Natural Tilt
+          </button>
+        </div>
       </div>
 
-      <div id="skeletonGrid" class="gallery-skeleton reveal">
-        <div class="skeleton-item"></div><div class="skeleton-item"></div>
-        <div class="skeleton-item"></div><div class="skeleton-item"></div>
-        <div class="skeleton-item"></div><div class="skeleton-item"></div>
-      </div>
+      <!-- Framed Wall Grid -->
+      <div class="framed-wall-grid" id="framedGrid"></div>
 
-      <div class="gallery-grid reveal reveal-delay-1" id="galleryGrid" style="display:none"></div>
-      <div id="emptyState" class="empty-state" style="display:none">No photos added yet. Upload via the admin panel!</div>
+      <div id="emptyWall" class="empty-wall" style="display:none;">
+        This exhibition wall is waiting for its first framed photograph.
+      </div>
 
     </div>
   </section>
 </div>
 
+<!-- Exhibition Lightbox -->
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose">✕</button>
-  <img id="lightboxImg" src="" alt=""/>
-  <div class="lightbox-caption" id="lightboxCaption" style="display:none"></div>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">›</button>
+  
+  <div class="lightbox-content">
+    <div class="lightbox-frame">
+      <img id="lightboxImg" src="" alt="Framed exhibition photograph"/>
+    </div>
+    <div class="lightbox-caption-card">
+      <span class="lightbox-category-tag" id="lightboxCat">Section E</span>
+      <span id="lightboxCap">Photograph</span>
+    </div>
+  </div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -117,90 +518,184 @@
 <script src="firebase-client.js"></script>
 <script src="shared.js"></script>
 <script>
-injectNav();
+  if (typeof injectNav === 'function') injectNav();
+  if (typeof initReveal === 'function') initReveal();
 
-// ════════════════════════════════════════════
-// GALLERY PHOTOS — Add Drive file IDs here
-// Each: { id: "DRIVE_FILE_ID", cat: "class|events|trips|fun", caption: "Caption" }
-// Photos also auto-load from ec_gallery localStorage (set via admin panel)
-// ════════════════════════════════════════════
-const GALLERY_PHOTOS_HARDCODED = [
-  // { id: "GOOGLE_DRIVE_FILE_ID", cat: "events", caption: "Sports Day 2025" },
-];
+  const GALLERY_PHOTOS_HARDCODED = [];
 
-function driveUrl(id, size) {
-  return 'https://drive.google.com/thumbnail?id=' + id + '&sz=' + (size||'w800');
-}
-
-let allPhotos = [];
-let currentCat = 'all';
-
-function renderGallery() {
-  const grid = document.getElementById('galleryGrid');
-  const empty = document.getElementById('emptyState');
-  const filtered = currentCat === 'all' ? allPhotos : allPhotos.filter(p => p.cat === currentCat);
-
-  document.getElementById('skeletonGrid').style.display = 'none';
-
-  if (!allPhotos.length) {
-    grid.style.display = 'none';
-    empty.style.display = 'block';
-    return;
-  }
-  empty.style.display = 'none';
-  grid.style.display = 'block';
-
-  if (!filtered.length) {
-    grid.innerHTML = '<div style="color:var(--text3);font-size:.85rem;font-style:italic;padding:2rem 0">No photos in this category yet.</div>';
-    return;
+  function driveUrl(id, size) {
+    return 'https://drive.google.com/thumbnail?id=' + id + '&sz=' + (size || 'w800');
   }
 
-  grid.innerHTML = filtered.map(function(p) {
-    var imgSrc = p.base64
-      ? 'data:image/jpeg;base64,' + p.base64
-      : driveUrl(p.id);
-    return '<div class="gallery-item" onclick="openLightbox(\'' + p.id + '\',\'' + (p.caption||'').replace(/'/g,"\\'") + '\',' + (p.base64?'true':'false') + ',\'' + (p.base64||'') + '\')">' +
-      '<img src="' + imgSrc + '" alt="' + (p.caption||'Photo') + '" loading="lazy"/>' +
-      '<div class="gallery-item-overlay"><div class="gallery-item-caption">' + (p.caption||'') + '</div></div>' +
-      '</div>';
-  }).join('');
-}
+  let allPhotos = [];
+  let filteredPhotos = [];
+  let currentCat = 'all';
+  let activeIndex = 0;
+  let naturalTilt = true;
 
-// Filter buttons
-document.getElementById('filterBtns').addEventListener('click', function(e) {
-  var btn = e.target.closest('.filter-btn');
-  if (!btn) return;
-  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
-  btn.classList.add('active');
-  currentCat = btn.dataset.cat;
-  renderGallery();
-});
+  function renderWall() {
+    const grid = document.getElementById('framedGrid');
+    const empty = document.getElementById('emptyWall');
 
-// Lightbox
-function openLightbox(id, caption, isBase64, base64Data) {
-  var src = isBase64 ? 'data:image/jpeg;base64,' + base64Data : driveUrl(id, 'w1200');
-  document.getElementById('lightboxImg').src = src;
-  var capEl = document.getElementById('lightboxCaption');
-  if(caption) { capEl.textContent = caption; capEl.style.display='block'; }
-  else capEl.style.display='none';
-  document.getElementById('lightbox').classList.add('open');
-}
-document.getElementById('lightboxClose').addEventListener('click', function() {
-  document.getElementById('lightbox').classList.remove('open');
-});
-document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
-});
+    filteredPhotos = currentCat === 'all' 
+      ? allPhotos 
+      : allPhotos.filter(p => p.cat === currentCat);
 
-// ── INIT ──
-(async function init() {
-  const siteData = await loadSiteData();
-  // Use Firebase-backed gallery data with bundled JSON fallback
-  const adminPhotos = (siteData.gallery || []);
-  allPhotos = GALLERY_PHOTOS_HARDCODED.concat(adminPhotos);
-  renderGallery();
-})();
-window.addEventListener('ec-data-updated', e => { const d=e.detail.data||{}; allPhotos = GALLERY_PHOTOS_HARDCODED.concat(d.gallery || []); renderGallery(); });
+    if (!allPhotos.length) {
+      grid.style.display = 'none';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    grid.style.display = 'block';
+
+    if (!filteredPhotos.length) {
+      grid.innerHTML = '<div class="empty-wall">No framed photos in this exhibition section yet.</div>';
+      return;
+    }
+
+    grid.innerHTML = filteredPhotos.map((p, idx) => {
+      const imgSrc = p.base64
+        ? 'data:image/jpeg;base64,' + p.base64
+        : driveUrl(p.id);
+
+      const title = p.caption && p.caption.trim() ? p.caption.trim() : 'Section E Memory';
+      const catLabel = (p.cat || 'Class of 2027').toUpperCase();
+
+      const tiltAngles = [-1.4, 1.2, -0.8, 1.5, -1.6, 0.9, -1.1, 1.3];
+      const tilt = naturalTilt ? tiltAngles[idx % tiltAngles.length] : 0;
+
+      return `
+        <div class="frame-wrapper" style="transform: rotate(${tilt}deg)" onclick="openGalleryLightbox(${idx})">
+          <div class="frame-peg"></div>
+          <div class="frame-cord"></div>
+          <div class="frame-box">
+            <div class="frame-mat">
+              <div class="frame-photo-wrap">
+                <img src="${imgSrc}" alt="${title.replace(/"/g, '&quot;')}" loading="lazy" />
+              </div>
+              <div class="museum-plaque">
+                <span class="plaque-title">${title}</span>
+                <span class="plaque-meta">${catLabel}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // ── CATEGORY FILTERS ──
+  document.getElementById('filterBtns').addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = btn.dataset.cat;
+    renderWall();
+  });
+
+  // ── THEME / FRAME SWITCHES ──
+  const body = document.body;
+  const btnExhibition = document.getElementById('btnThemeExhibition');
+  const btnPolaroid = document.getElementById('btnThemePolaroid');
+  const btnModern = document.getElementById('btnThemeModern');
+  const btnSpotlight = document.getElementById('btnToggleSpotlight');
+  const btnTilt = document.getElementById('btnRandomTilt');
+
+  function setFrameStyle(styleClass, activeBtn) {
+    body.classList.remove('theme-exhibition', 'theme-polaroid', 'theme-modern');
+    body.classList.add(styleClass);
+    [btnExhibition, btnPolaroid, btnModern].forEach(b => b.classList.remove('active'));
+    activeBtn.classList.add('active');
+  }
+
+  btnExhibition.addEventListener('click', () => setFrameStyle('theme-exhibition', btnExhibition));
+  btnPolaroid.addEventListener('click', () => setFrameStyle('theme-polaroid', btnPolaroid));
+  btnModern.addEventListener('click', () => setFrameStyle('theme-modern', btnModern));
+
+  btnSpotlight.addEventListener('click', () => {
+    body.classList.toggle('spotlight-mode');
+    btnSpotlight.classList.toggle('active');
+  });
+
+  btnTilt.addEventListener('click', () => {
+    naturalTilt = !naturalTilt;
+    btnTilt.classList.toggle('active');
+    renderWall();
+  });
+
+  // ── LIGHTBOX ──
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  const lbCap = document.getElementById('lightboxCap');
+  const lbCat = document.getElementById('lightboxCat');
+
+  window.openGalleryLightbox = function(index) {
+    if (!filteredPhotos[index]) return;
+    activeIndex = index;
+    const p = filteredPhotos[index];
+    const src = p.base64 ? 'data:image/jpeg;base64,' + p.base64 : driveUrl(p.id, 'w1400');
+    lbImg.src = src;
+    lbCap.textContent = p.caption || 'Section E Memory';
+    lbCat.textContent = (p.cat || 'Section E').toUpperCase();
+    lb.classList.add('open');
+  };
+
+  function updateLightbox() {
+    openGalleryLightbox(activeIndex);
+  }
+
+  document.getElementById('lightboxClose').addEventListener('click', () => lb.classList.remove('open'));
+  document.getElementById('lightboxPrev').addEventListener('click', (e) => {
+    e.stopPropagation();
+    activeIndex = (activeIndex - 1 + filteredPhotos.length) % filteredPhotos.length;
+    updateLightbox();
+  });
+  document.getElementById('lightboxNext').addEventListener('click', (e) => {
+    e.stopPropagation();
+    activeIndex = (activeIndex + 1) % filteredPhotos.length;
+    updateLightbox();
+  });
+  lb.addEventListener('click', (e) => {
+    if (e.target === lb) lb.classList.remove('open');
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') lb.classList.remove('open');
+    if (e.key === 'ArrowLeft') {
+      activeIndex = (activeIndex - 1 + filteredPhotos.length) % filteredPhotos.length;
+      updateLightbox();
+    }
+    if (e.key === 'ArrowRight') {
+      activeIndex = (activeIndex + 1) % filteredPhotos.length;
+      updateLightbox();
+    }
+  });
+
+  // ── LOAD DATA ──
+  (async function init() {
+    try {
+      if (typeof loadSiteData === 'function') {
+        const siteData = await loadSiteData();
+        const adminPhotos = (siteData.gallery || []);
+        allPhotos = GALLERY_PHOTOS_HARDCODED.concat(adminPhotos);
+      } else {
+        allPhotos = GALLERY_PHOTOS_HARDCODED;
+      }
+    } catch(err) {
+      console.warn('Gallery data load error:', err);
+      allPhotos = GALLERY_PHOTOS_HARDCODED;
+    }
+    renderWall();
+  })();
+
+  window.addEventListener('ec-data-updated', (e) => {
+    const d = e.detail.data || {};
+    allPhotos = GALLERY_PHOTOS_HARDCODED.concat(d.gallery || []);
+    renderWall();
+  });
 </script>
 </body>
 </html>

@@ -8,35 +8,79 @@
   <link rel="stylesheet" href="home-theme.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 
   <style>
+    /* ══════════════════════════════════════════════════════
+       THEME SYSTEM: Galaxy Cosmic Dark vs. Museum White Wall
+       ══════════════════════════════════════════════════════ */
     :root {
+      /* LIGHT THEME (Museum Plaster Wall) */
       --wall-bg: #f8f6f0;
-      --wall-spotlight: radial-gradient(circle at 50% 15%, rgba(255,255,255,0.95) 0%, rgba(246,243,234,0.6) 60%, rgba(235,230,218,0.3) 100%);
-      --wall-shadow: rgba(30, 24, 16, 0.18);
-      --brass-gold: #c9a44c;
+      --header-bg: linear-gradient(180deg, #f2efe7 0%, var(--wall-bg) 100%);
+      --text-main: #1f1b16;
+      --text-sub: #6e665a;
+      --pill-bg: #eae5d8;
+      --pill-active: #ffffff;
+      --wall-shadow: rgba(28, 22, 14, 0.2);
+      --rail-gradient: linear-gradient(180deg, #d3cec1 0%, #b8b1a2 100%);
+      --baseboard-bg: linear-gradient(180deg, #dfdacf 0%, #cdc7b9 100%);
+      --floor-bar-bg: rgba(244, 241, 233, 0.94);
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --frame-halo: transparent;
+    }
+
+    html.dark {
+      /* DARK THEME (Deep Galaxy & Cosmic Nebula) */
+      --wall-bg: #080912;
+      --header-bg: linear-gradient(180deg, #0d0f1e 0%, var(--wall-bg) 100%);
+      --text-main: #f3f1ed;
+      --text-sub: #9ea4bc;
+      --pill-bg: #151829;
+      --pill-active: #242944;
+      --wall-shadow: rgba(0, 0, 0, 0.7);
+      --rail-gradient: linear-gradient(180deg, #2a2e4a 0%, #151726 100%);
+      --baseboard-bg: linear-gradient(180deg, #1c2035 0%, #0d0f1b 100%);
+      --floor-bar-bg: rgba(11, 13, 23, 0.92);
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --frame-halo: 0 0 35px rgba(110, 86, 207, 0.22);
     }
 
     body {
       margin: 0;
       padding: 0;
       background: var(--wall-bg);
-      color: #2b2723;
+      color: var(--text-main);
       font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background 0.4s ease, color 0.4s ease;
       overflow-x: hidden;
     }
 
-    /* ─── EXHIBITION BANNER ─── */
+    /* ─── GALAXY STARFIELD CANVAS (Dark Mode Only) ─── */
+    #galaxyCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    html.dark #galaxyCanvas {
+      opacity: 1;
+    }
+
+    /* ─── EXHIBITION ROOM HEADER ─── */
     .exhibition-header {
-      padding: 2.5rem 2rem 1.5rem;
-      background: linear-gradient(180deg, #f4f2ec 0%, var(--wall-bg) 100%);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 2.2rem 2.5rem 1.4rem;
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border-subtle);
       position: relative;
       z-index: 10;
     }
     .header-inner {
-      max-width: 1400px;
+      max-width: 1440px;
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
@@ -45,16 +89,18 @@
       gap: 1.5rem;
     }
     .exhibition-title-group h1 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(2rem, 3.8vw, 3rem);
       font-weight: 700;
-      margin: 0 0 0.35rem;
-      color: #1a1714;
-      letter-spacing: -0.02em;
+      margin: 0 0 0.4rem;
+      letter-spacing: -0.01em;
+      background: linear-gradient(135deg, var(--text-main) 60%, #c9a44c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .exhibition-subtitle {
-      font-size: 0.92rem;
-      color: #726a5f;
+      font-size: 0.88rem;
+      color: var(--text-sub);
       margin: 0;
       display: flex;
       align-items: center;
@@ -63,15 +109,16 @@
     .badge-pill {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.72rem;
-      background: #e9e4d6;
-      color: #514a3e;
-      padding: 0.2rem 0.55rem;
+      background: var(--pill-bg);
+      color: var(--text-main);
+      padding: 0.2rem 0.6rem;
       border-radius: 4px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
+      border: 1px solid var(--border-subtle);
     }
 
-    /* ─── FILTER TABS & DESKTOP CONTROLS ─── */
+    /* ─── FILTER CONTROLS & ARROWS ─── */
     .controls-wrap {
       display: flex;
       align-items: center;
@@ -80,30 +127,30 @@
     }
     .filter-pills {
       display: inline-flex;
-      background: #eeebe1;
+      background: var(--pill-bg);
       padding: 4px;
       border-radius: 100px;
       gap: 4px;
-      border: 1px solid rgba(0,0,0,0.05);
+      border: 1px solid var(--border-subtle);
     }
     .f-pill {
       border: none;
       background: transparent;
-      padding: 0.45rem 1rem;
+      padding: 0.45rem 1.1rem;
       border-radius: 100px;
       font-size: 0.8rem;
       font-weight: 600;
-      color: #635b50;
+      color: var(--text-sub);
       cursor: pointer;
       transition: all 0.22s ease;
     }
     .f-pill:hover {
-      color: #1a1714;
+      color: var(--text-main);
     }
     .f-pill.active {
-      background: #ffffff;
-      color: #1a1714;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      background: var(--pill-active);
+      color: var(--text-main);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
     }
 
     .scroll-arrows {
@@ -111,247 +158,366 @@
       gap: 6px;
     }
     .arrow-btn {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      border: 1px solid rgba(0,0,0,0.12);
-      background: #fff;
-      color: #1a1714;
-      font-size: 1rem;
+      border: 1px solid var(--border-subtle);
+      background: var(--pill-bg);
+      color: var(--text-main);
+      font-size: 1.1rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       transition: all 0.2s;
     }
     .arrow-btn:hover {
-      background: #1a1714;
-      color: #fff;
-      border-color: #1a1714;
+      transform: scale(1.08);
+      background: var(--pill-active);
     }
 
-    /* ─── THE WHITE WALL CANVAS ─── */
+    /* ─── WALL STAGE & NEBULA AURA ─── */
     .wall-stage {
       position: relative;
       background-color: var(--wall-bg);
-      background-image: 
-        radial-gradient(circle at 20% 25%, rgba(255,255,255,0.7) 0%, transparent 45%),
-        radial-gradient(circle at 60% 30%, rgba(255,255,255,0.65) 0%, transparent 50%),
-        radial-gradient(circle at 85% 20%, rgba(255,255,255,0.7) 0%, transparent 40%),
-        linear-gradient(to bottom, rgba(0,0,0,0.02) 0%, transparent 8%, transparent 92%, rgba(0,0,0,0.05) 100%);
-      min-height: calc(100vh - 180px);
+      min-height: calc(100vh - 190px);
       box-sizing: border-box;
-      padding: 3rem 0 4rem;
+      padding: 3.5rem 0 4.5rem;
+      overflow: hidden;
       cursor: grab;
     }
     .wall-stage:active {
       cursor: grabbing;
     }
 
-    /* Gallery Rail line on top */
+    /* Light mode plaster wall spotlight texture */
     .wall-stage::before {
       content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(circle at 22% 28%, rgba(255,255,255,0.75) 0%, transparent 42%),
+        radial-gradient(circle at 62% 34%, rgba(255,255,255,0.7) 0%, transparent 48%),
+        radial-gradient(circle at 88% 22%, rgba(255,255,255,0.8) 0%, transparent 40%),
+        linear-gradient(to bottom, rgba(0,0,0,0.02) 0%, transparent 10%, transparent 90%, rgba(0,0,0,0.06) 100%);
+      pointer-events: none;
+      z-index: 2;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+    html.dark .wall-stage::before {
+      opacity: 0;
+    }
+
+    /* Dark mode cosmic nebula glow */
+    .nebula-glow {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 75% 45%, rgba(0, 191, 255, 0.14) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(255, 20, 147, 0.12) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    html.dark .nebula-glow {
+      opacity: 1;
+    }
+
+    /* Gallery top rail */
+    .gallery-top-rail {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       height: 10px;
-      background: linear-gradient(180deg, #d3cec1 0%, #b8b1a2 100%);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+      background: var(--rail-gradient);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 5;
     }
 
-    /* Baseboard wooden trim on floor */
-    .wall-stage::after {
-      content: '';
+    /* Museum bottom baseboard */
+    .gallery-baseboard {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
       height: 22px;
-      background: linear-gradient(180deg, #dfdacf 0%, #cdc7b9 100%);
-      border-top: 2px solid #bbb4a3;
+      background: var(--baseboard-bg);
+      border-top: 2px solid rgba(0,0,0,0.18);
+      z-index: 5;
     }
 
     /* ─── HORIZONTAL DESKTOP SCROLL STREAM ─── */
     .wall-scroll-container {
+      position: relative;
+      z-index: 4;
       display: flex;
       flex-direction: column;
-      gap: 3.5rem;
+      gap: 3.8rem;
       overflow-x: auto;
       overflow-y: hidden;
       scroll-behavior: smooth;
-      padding: 1.5rem 4rem 3rem 4rem;
+      padding: 2rem 5rem 3.5rem 5rem;
       -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; /* Hide default scrollbar */
+      scrollbar-width: none;
     }
     .wall-scroll-container::-webkit-scrollbar {
       display: none;
     }
 
-    /* 2 Staggered salon-hanging rows */
+    /* Staggered salon-hanging rows */
     .wall-row {
       display: flex;
       align-items: center;
-      gap: 3.2rem;
+      gap: 3.6rem;
       width: max-content;
     }
     .wall-row:nth-child(2) {
-      padding-left: 5rem; /* Stagger second row for salon rhythm */
+      padding-left: 6.5rem;
     }
 
-    /* ─── COMMON FRAME STRUCTURE (NO PHOTO CROPPING) ─── */
+    /* ─── COMMON ART PIECE CONTAINER (NO PHOTO CROPPING) ─── */
     .art-piece {
       position: relative;
       display: inline-flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s ease;
       user-select: none;
       flex-shrink: 0;
     }
     .art-piece:hover {
-      transform: translateY(-8px) scale(1.02);
-      z-index: 20;
+      transform: translateY(-10px) scale(1.025);
+      z-index: 30;
     }
 
-    /* True aspect ratio container: photos fit naturally */
     .mat-board {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: #fbfaf6;
-      box-sizing: border-box;
       position: relative;
     }
 
+    /* Authentic uncropped natural image rendering */
     .frame-photo {
       display: block;
-      /* Crucial: natural uncropped scale */
-      max-height: 290px;
+      max-height: 280px;
       max-width: 380px;
       width: auto;
       height: auto;
       object-fit: contain;
       cursor: zoom-in;
-      background: #ece8dd;
-      box-shadow: inset 0 0 8px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.1);
-      transition: filter 0.25s;
+      background: #000;
+      transition: filter 0.25s, transform 0.25s;
     }
     .art-piece:hover .frame-photo {
-      filter: brightness(1.03);
+      filter: brightness(1.04);
     }
 
-    /* ─── FRAME STYLE 1: CLASSROOM (Rich Mahogany & Gold Fillet) ─── */
+    /* ══════════════════════════════════════════════════════
+       SUPER-CREATIVE CUSTOM FRAMES
+       ══════════════════════════════════════════════════════ */
+
+    /* ─── 1. CLASSROOM: ST. XAVIER'S HERITAGE MAHOGANY & BRASS FILIGREE ─── */
     .frame-class {
-      background: linear-gradient(135deg, #442111 0%, #291207 50%, #4a2412 100%);
+      background: linear-gradient(135deg, #3d1b0c 0%, #1f0b04 40%, #2f1308 100%);
       padding: 18px;
-      border: 4px solid #1a0b04;
+      border: 5px solid #130602;
       border-radius: 4px;
       box-shadow: 
-        0 18px 40px -8px var(--wall-shadow),
-        0 8px 16px -4px rgba(0,0,0,0.2),
-        inset 0 0 12px rgba(0,0,0,0.6);
+        0 22px 50px -10px var(--wall-shadow),
+        0 10px 20px -5px rgba(0,0,0,0.3),
+        var(--frame-halo);
+      position: relative;
     }
+    /* Hanging brass chain & eyelet */
+    .frame-class::before {
+      content: '';
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 24px;
+      background: repeating-linear-gradient(180deg, #c5a059 0, #c5a059 4px, #423214 4px, #423214 8px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    /* Cast Brass Corner Brackets */
     .frame-class .mat-board {
-      padding: 22px 22px 34px 22px;
-      background: #f7f5eb;
-      border: 2px solid #caa85d; /* Gilded gold fillet */
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.14);
+      padding: 24px 24px 38px 24px;
+      background: #f8f6ec;
+      border: 3px double #b88d3d;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.18);
+      position: relative;
     }
+    html.dark .frame-class .mat-board {
+      background: #14131b;
+      border-color: #d1a84f;
+    }
+    /* 4 Corner Ornaments */
+    .frame-class .mat-board::before,
+    .frame-class .mat-board::after {
+      content: '❖';
+      position: absolute;
+      font-size: 0.95rem;
+      color: #b88d3d;
+      line-height: 1;
+    }
+    .frame-class .mat-board::before { top: 6px; left: 8px; }
+    .frame-class .mat-board::after { top: 6px; right: 8px; }
+
+    /* Engraved Antique Brass Plaque with Screws */
     .frame-class .plaque {
       position: absolute;
       bottom: 8px;
-      background: linear-gradient(180deg, #dfc278 0%, #b8913b 100%);
-      color: #312102;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 0.76rem;
-      font-weight: 700;
-      padding: 3px 12px;
+      background: linear-gradient(180deg, #ebd698 0%, #ba913c 50%, #8c6720 100%);
+      color: #261803;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 18px;
       border-radius: 2px;
-      border: 1px solid #7c5c16;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.22);
+      border: 1px solid #5a4110;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.35);
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      max-width: 82%;
+      letter-spacing: 0.1em;
+      max-width: 80%;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .frame-class .plaque::before,
+    .frame-class .plaque::after {
+      content: '•';
+      font-size: 0.9rem;
+      color: #3b2803;
     }
 
-    /* ─── FRAME STYLE 2: TRIPS (Scandinavian White Oak & Driftwood) ─── */
+    /* ─── 2. ADVENTURE & TRIPS: EXPEDITION RUGGED TIMBER & FIELD COMPASS ─── */
     .frame-trips {
-      background: linear-gradient(135deg, #c4a982 0%, #ab8e67 50%, #bca17c 100%);
+      background: linear-gradient(135deg, #a48153 0%, #7d5c34 50%, #916f42 100%);
       padding: 16px;
-      border: 3px solid #8e724b;
-      border-radius: 3px;
+      border: 4px solid #573c1c;
+      border-radius: 2px;
       box-shadow: 
-        0 20px 42px -10px var(--wall-shadow),
-        0 6px 14px -3px rgba(0,0,0,0.15),
-        inset 0 0 8px rgba(0,0,0,0.25);
+        0 24px 50px -10px var(--wall-shadow),
+        0 8px 18px -4px rgba(0,0,0,0.25),
+        var(--frame-halo);
+      position: relative;
     }
-    .frame-trips .mat-board {
-      padding: 24px;
-      background: #f4f0e4;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.12);
-      border: 1px solid #d5cdbd;
-    }
+    /* Braided leather hanging cord */
     .frame-trips::before {
-      content: 'EXPEDITION';
+      content: '';
       position: absolute;
-      top: 4px;
-      right: 18px;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 22px;
+      border-left: 2.5px solid #815b31;
+      border-right: 2.5px solid #815b31;
+      border-top: 2.5px solid #815b31;
+      border-radius: 8px 8px 0 0;
+    }
+    /* Topographic Field Mat */
+    .frame-trips .mat-board {
+      padding: 24px 24px 34px 24px;
+      background: #f1ebd8;
+      background-image: 
+        radial-gradient(#c2b59b 0.75px, transparent 0.75px),
+        radial-gradient(#c2b59b 0.75px, #f1ebd8 0.75px);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+      border: 2px solid #8b6b41;
+      box-shadow: inset 0 0 12px rgba(90, 68, 38, 0.2);
+    }
+    html.dark .frame-trips .mat-board {
+      background-color: #1a1a1f;
+      background-image: radial-gradient(#3a3944 0.75px, #1a1a1f 0.75px);
+      border-color: #725732;
+    }
+    /* Expedition Compass Coordinates Label */
+    .frame-trips .expedition-stamp {
+      position: absolute;
+      bottom: 7px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      color: #fff;
-      opacity: 0.7;
-      letter-spacing: 0.1em;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #6b502b;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.7);
+      padding: 2px 8px;
+      border-radius: 2px;
+      border: 1px dashed #8b6b41;
+    }
+    html.dark .frame-trips .expedition-stamp {
+      color: #dfba82;
+      background: rgba(0,0,0,0.5);
     }
 
-    /* ─── FRAME STYLE 3: EVENTS (Antique Gilded Gold Baroque) ─── */
+    /* ─── 3. EVENTS: ROYAL GILDED BAROQUE GOLD LEAF ─── */
     .frame-events {
-      background: linear-gradient(135deg, #d8ba66 0%, #aa8529 50%, #e8cc7d 100%);
+      background: linear-gradient(135deg, #e3c46b 0%, #aa8428 50%, #f1d782 100%);
       padding: 22px;
-      border: 5px double #6d5214;
+      border: 6px double #624810;
       border-radius: 6px;
       box-shadow: 
-        0 24px 48px -10px rgba(45, 34, 12, 0.28),
-        0 10px 20px -5px rgba(0,0,0,0.25),
-        inset 0 0 16px rgba(110,83,21,0.5);
+        0 26px 55px -10px rgba(100, 75, 18, 0.4),
+        0 12px 24px -6px rgba(0,0,0,0.3),
+        var(--frame-halo);
     }
     .frame-events .mat-board {
       padding: 24px;
-      background: #faf8f2;
-      border: 3px solid #84651e;
-      box-shadow: inset 0 3px 12px rgba(0,0,0,0.2);
+      background: #faf7ee;
+      border: 3px solid #8f6e21;
+      box-shadow: inset 0 4px 14px rgba(0,0,0,0.22);
+    }
+    html.dark .frame-events .mat-board {
+      background: #181512;
+      border-color: #e3c46b;
     }
 
-    /* ─── FRAME STYLE 4: FUN TIMES (Curated Polaroid & Memory Mat) ─── */
+    /* ─── 4. FUN TIMES: CURATED INSTANT POLAROID WITH NEON WASHI TAPE ─── */
     .frame-fun {
       background: #ffffff;
       padding: 14px 14px 38px 14px;
-      border: 1px solid #e2ddd3;
+      border: 1px solid #ddd7cb;
       border-radius: 3px;
       box-shadow: 
-        0 16px 36px -8px rgba(0,0,0,0.16),
-        0 4px 10px -2px rgba(0,0,0,0.08);
+        0 18px 40px -8px rgba(0,0,0,0.18),
+        0 4px 10px -2px rgba(0,0,0,0.08),
+        var(--frame-halo);
       position: relative;
     }
-    /* Playful washi tape on top corner */
+    html.dark .frame-fun {
+      background: #1a1c29;
+      border-color: #2e334d;
+    }
+    /* Translucent Gold/Neon Washi Tape */
     .frame-fun::after {
       content: '';
       position: absolute;
-      top: -10px;
-      left: 32%;
-      width: 60px;
-      height: 20px;
-      background: rgba(220, 196, 142, 0.75);
-      backdrop-filter: blur(1px);
+      top: -12px;
+      left: 30%;
+      width: 65px;
+      height: 22px;
+      background: rgba(228, 198, 118, 0.85);
+      backdrop-filter: blur(2px);
       transform: rotate(-3deg);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.12);
       border-left: 2px dashed rgba(255,255,255,0.4);
       border-right: 2px dashed rgba(255,255,255,0.4);
+    }
+    html.dark .frame-fun::after {
+      background: rgba(142, 94, 255, 0.8);
     }
     .frame-fun .mat-board {
       padding: 0;
@@ -364,17 +530,21 @@
       right: 14px;
       font-family: 'Cormorant Garamond', Georgia, serif;
       font-style: italic;
+      font-weight: 600;
       font-size: 0.95rem;
-      color: #3b352e;
+      color: #2b2723;
       text-align: center;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+    html.dark .frame-fun .caption-handwritten {
+      color: #e5e3de;
+    }
 
-    /* Natural subtle organic tilts for fun frames */
-    .tilt-left { transform: rotate(-1.4deg); }
-    .tilt-right { transform: rotate(1.2deg); }
+    /* Organic hanging tilts for fun frames */
+    .tilt-left { transform: rotate(-1.5deg); }
+    .tilt-right { transform: rotate(1.4deg); }
     .tilt-straight { transform: rotate(0deg); }
 
     /* ─── FLOOR PROGRESS INDICATOR ─── */
@@ -383,30 +553,33 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(244, 241, 233, 0.95);
-      backdrop-filter: blur(8px);
-      padding: 0.8rem 2rem;
-      border-top: 1px solid rgba(0,0,0,0.08);
+      background: var(--floor-bar-bg);
+      backdrop-filter: blur(10px);
+      padding: 0.85rem 2.5rem;
+      border-top: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 100;
-      font-size: 0.8rem;
-      color: #726a5f;
+      font-size: 0.82rem;
+      color: var(--text-sub);
     }
     .progress-track {
       flex: 1;
-      max-width: 500px;
-      height: 4px;
-      background: #ded9cd;
+      max-width: 520px;
+      height: 5px;
+      background: rgba(0,0,0,0.1);
       border-radius: 10px;
       margin: 0 1.5rem;
       overflow: hidden;
     }
+    html.dark .progress-track {
+      background: rgba(255,255,255,0.12);
+    }
     .progress-fill {
       width: 0%;
       height: 100%;
-      background: #2b2723;
+      background: #c9a44c;
       border-radius: 10px;
       transition: width 0.1s linear;
     }
@@ -414,14 +587,14 @@
     /* ─── RESPONSIVE: MOBILE VERTICAL EXHIBITION ─── */
     @media (max-width: 768px) {
       .wall-stage {
-        padding: 1.5rem 1rem 3rem;
+        padding: 2rem 1rem 3.5rem;
         cursor: default;
       }
       .wall-scroll-container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 2.5rem;
+        gap: 3rem;
         overflow-x: visible;
         overflow-y: visible;
         padding: 1rem 0;
@@ -430,7 +603,7 @@
         display: flex;
         flex-direction: column;
         width: 100%;
-        gap: 2.5rem;
+        gap: 3rem;
         align-items: center;
       }
       .wall-row:nth-child(2) {
@@ -448,13 +621,13 @@
       }
     }
 
-    /* ─── FULL-SPECTRUM SPOTLIGHT LIGHTBOX ─── */
+    /* ─── SPOTLIGHT LIGHTBOX ─── */
     .lightbox {
       position: fixed;
       inset: 0;
       z-index: 99999;
-      background: rgba(14, 12, 10, 0.94);
-      backdrop-filter: blur(12px);
+      background: rgba(8, 9, 15, 0.95);
+      backdrop-filter: blur(14px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -480,20 +653,20 @@
       max-height: 75vh;
       object-fit: contain;
       border: 8px solid #ffffff;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.1);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.85);
       border-radius: 4px;
     }
     .lightbox-caption-box {
-      margin-top: 1rem;
+      margin-top: 1.2rem;
       background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      padding: 0.6rem 1.4rem;
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 0.6rem 1.6rem;
       border-radius: 100px;
       color: #f2efe9;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.9rem;
     }
     .lightbox-nav {
       position: absolute;
@@ -502,14 +675,14 @@
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.2);
       color: #fff;
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       transition: background 0.2s;
     }
     .lightbox-nav:hover { background: rgba(255,255,255,0.28); }
@@ -542,14 +715,14 @@
     .skeleton-frame {
       width: 280px;
       height: 240px;
-      background: #ece8de;
-      border: 10px solid #dfd8cb;
+      background: var(--pill-bg);
+      border: 8px solid var(--border-subtle);
       border-radius: 4px;
       animation: pulse 1.6s infinite ease-in-out;
     }
     @keyframes pulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 0.9; }
     }
   </style>
 </head>
@@ -584,8 +757,14 @@
     </div>
   </header>
 
-  <!-- The White Gallery Wall -->
+  <!-- The Gallery Wall -->
   <main class="wall-stage" id="wallStage">
+    <!-- Starfield canvas for galaxy dark theme -->
+    <canvas id="galaxyCanvas"></canvas>
+    <div class="nebula-glow"></div>
+    <div class="gallery-top-rail"></div>
+    <div class="gallery-baseboard"></div>
+
     <div id="loadingSkeleton" class="skeleton-wall">
       <div class="skeleton-frame"></div>
       <div class="skeleton-frame"></div>
@@ -593,13 +772,13 @@
       <div class="skeleton-frame"></div>
     </div>
 
-    <!-- Multi-tier Salon Rows for Infinite Stroll -->
+    <!-- Multi-tier Salon Rows for Strolling -->
     <div class="wall-scroll-container" id="scrollContainer" style="display:none;">
       <div class="wall-row" id="wallRow1"></div>
       <div class="wall-row" id="wallRow2"></div>
     </div>
 
-    <div id="emptyMsg" style="display:none; text-align:center; padding: 6rem 2rem; color: #8a8275; font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic;">
+    <div id="emptyMsg" style="display:none; text-align:center; padding: 6rem 2rem; color: var(--text-sub); font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic;">
       No framed memories found in this collection.
     </div>
   </main>
@@ -610,7 +789,7 @@
     <div class="progress-track">
       <div class="progress-fill" id="progressFill"></div>
     </div>
-    <span>Mouse wheel scrolls horizontally • Click photo to inspect</span>
+    <span>Swipe or drag horizontally • Click photo to inspect</span>
   </footer>
 </div>
 
@@ -656,7 +835,53 @@ const wallRow2 = document.getElementById('wallRow2');
 const progressFill = document.getElementById('progressFill');
 const photoCounter = document.getElementById('photoCounter');
 
-// ─── RENDER FRAMES WITH CATEGORY STYLING & UNBROKEN ASPECT RATIO ───
+// ─── GALAXY STARFIELD CANVAS (FOR GALAXY DARK THEME) ───
+const canvas = document.getElementById('galaxyCanvas');
+const ctx = canvas.getContext('2d');
+let stars = [];
+
+function resizeCanvas() {
+  canvas.width = canvas.parentElement.clientWidth;
+  canvas.height = canvas.parentElement.clientHeight;
+  initStars();
+}
+window.addEventListener('resize', resizeCanvas);
+
+function initStars() {
+  stars = [];
+  const count = Math.floor((canvas.width * canvas.height) / 4500);
+  for (let i = 0; i < count; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 1.4 + 0.3,
+      alpha: Math.random(),
+      speed: Math.random() * 0.015 + 0.005,
+      hue: Math.random() > 0.8 ? (Math.random() > 0.5 ? 280 : 190) : 0
+    });
+  }
+}
+
+function animateGalaxy() {
+  if (document.documentElement.classList.contains('dark')) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.alpha += s.speed;
+      if (s.alpha > 1 || s.alpha < 0.1) s.speed = -s.speed;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.fillStyle = s.hue 
+        ? `hsla(${s.hue}, 90%, 75%, ${s.alpha})`
+        : `rgba(255, 255, 255, ${s.alpha * 0.85})`;
+      ctx.fill();
+    });
+  }
+  requestAnimationFrame(animateGalaxy);
+}
+resizeCanvas();
+animateGalaxy();
+
+// ─── RENDER THE ART WALL ───
 function renderWall() {
   document.getElementById('loadingSkeleton').style.display = 'none';
 
@@ -697,12 +922,11 @@ function renderWall() {
       plaqueHtml = '<div class="plaque">' + (caption || 'SECTION E CLASSROOM') + '</div>';
     } else if (cat === 'trips') {
       frameClass = 'frame-trips';
-      if (caption) plaqueHtml = '<div style="margin-top:8px;font-size:0.75rem;font-weight:600;color:#5a4c37;text-align:center;">' + caption + '</div>';
+      plaqueHtml = '<div class="expedition-stamp">' + (caption || '27°42\'N • 85°19\'E EXPEDITION') + '</div>';
     } else if (cat === 'events') {
       frameClass = 'frame-events';
-      if (caption) plaqueHtml = '<div style="margin-top:8px;font-size:0.8rem;font-weight:600;color:#6b521c;text-align:center;">' + caption + '</div>';
+      if (caption) plaqueHtml = '<div style="margin-top:10px;font-family:\'Cinzel\',serif;font-size:0.75rem;font-weight:700;color:#8f6e21;text-align:center;letter-spacing:0.06em;">' + caption + '</div>';
     } else {
-      // Fun candids (Polaroid style with handwritten caption)
       if (caption) plaqueHtml = '<div class="caption-handwritten">' + caption + '</div>';
     }
 
@@ -712,12 +936,11 @@ function renderWall() {
 
     itemHtml.innerHTML = `
       <div class="mat-board">
-        <img class="frame-photo" src="${imgSrc}" alt="${caption || 'Section E Photo'}" loading="lazy"/>
+        <img class="frame-photo" src="${imgSrc}" alt="${caption || 'Section E Memory'}" loading="lazy"/>
         ${plaqueHtml}
       </div>
     `;
 
-    // Distribute into 2 salon rows for desktop horizontal stroll
     if (idx % 2 === 0) {
       wallRow1.appendChild(itemHtml);
     } else {
@@ -728,18 +951,7 @@ function renderWall() {
   updateProgress();
 }
 
-// ─── HORIZONTAL DESKTOP MOUSE-WHEEL INTERCEPTION ───
-// Converts standard vertical mouse scroll into seamless horizontal gallery walking
-scrollContainer.addEventListener('wheel', (e) => {
-  if (window.innerWidth > 768) {
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      e.preventDefault();
-      scrollContainer.scrollLeft += e.deltaY * 1.35;
-    }
-  }
-}, { passive: false });
-
-// Scroll progress bar
+// ─── NATURAL SCROLLING & CONTROLS (NO MOUSE WHEEL HIJACK) ───
 function updateProgress() {
   const max = scrollContainer.scrollWidth - scrollContainer.clientWidth;
   if (max > 0) {
@@ -751,15 +963,14 @@ function updateProgress() {
 }
 scrollContainer.addEventListener('scroll', updateProgress);
 
-// Arrow buttons navigation
 document.getElementById('scrollLeftBtn').addEventListener('click', () => {
-  scrollContainer.scrollBy({ left: -600, behavior: 'smooth' });
+  scrollContainer.scrollBy({ left: -650, behavior: 'smooth' });
 });
 document.getElementById('scrollRightBtn').addEventListener('click', () => {
-  scrollContainer.scrollBy({ left: 600, behavior: 'smooth' });
+  scrollContainer.scrollBy({ left: 650, behavior: 'smooth' });
 });
 
-// Click and drag to pan on desktop
+// Click and drag to pan horizontally on desktop
 let isDown = false;
 let startX;
 let scrollStart;
@@ -779,7 +990,7 @@ scrollContainer.addEventListener('mousemove', (e) => {
   scrollContainer.scrollLeft = scrollStart - walk;
 });
 
-// ─── CATEGORY FILTER TABS ───
+// ─── FILTER TABS ───
 document.getElementById('filterPills').addEventListener('click', (e) => {
   const pill = e.target.closest('.f-pill');
   if (!pill) return;
@@ -827,7 +1038,6 @@ document.getElementById('lightbox').addEventListener('click', (e) => {
   if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
 });
 
-// Keyboard navigation (Arrow keys + Esc)
 window.addEventListener('keydown', (e) => {
   const lb = document.getElementById('lightbox');
   if (!lb.classList.contains('open')) return;
@@ -842,7 +1052,6 @@ window.addEventListener('keydown', (e) => {
     const siteData = typeof loadSiteData === 'function' ? await loadSiteData() : {};
     allPhotos = siteData.gallery || [];
   } catch (err) {
-    console.warn('Falling back to local data fetch', err);
     try {
       const res = await fetch('data/ec-data.json');
       const d = await res.json();

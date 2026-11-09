@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
   <title>Members — The E Chronicles</title>
   <link rel="stylesheet" href="style.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="home-theme.css"/>
   <style>
 *,*::before,*::after{box-sizing:border-box}
@@ -16,7 +16,6 @@
   --bg2:#0f0d1a;
   --surface:#131122;
   --surface2:#1a172e;
-  --surface-glass:rgba(19,17,34,0.72);
   --border:rgba(255,255,255,0.08);
   --border-hover:rgba(168,85,247,0.4);
   --text:#f8f8fc;
@@ -44,7 +43,7 @@ body{
 .page-hero{
   background:radial-gradient(ellipse 90% 60% at 50% -20%,rgba(124,58,237,0.22),transparent 75%),var(--bg);
   border-bottom:1px solid var(--border);
-  padding:4rem 2rem 3rem;
+  padding:3.5rem 2rem 2.8rem;
   position:relative;
   overflow:hidden;
 }
@@ -60,11 +59,11 @@ body{
   letter-spacing:0.18em;
   color:var(--accent);
   text-transform:uppercase;
-  margin-bottom:0.5rem;
+  margin-bottom:0.4rem;
 }
 .section-title{
   font-family:'Fraunces',serif;
-  font-size:clamp(2.4rem,5vw,3.8rem);
+  font-size:clamp(2.2rem,4.5vw,3.5rem);
   font-weight:700;
   letter-spacing:-0.02em;
   margin:0;
@@ -74,59 +73,56 @@ body{
 }
 .section-desc{
   color:var(--text2);
-  font-size:0.95rem;
-  max-width:600px;
-  margin-top:0.6rem;
+  font-size:0.92rem;
+  max-width:620px;
+  margin-top:0.5rem;
   line-height:1.6;
 }
 
-/* ── ROLE SHOWCASE BADGES ── */
+/* Role Showcase Pills */
 .role-pills-bar{
   display:flex;
   align-items:center;
-  gap:1rem;
-  margin-top:1.8rem;
+  gap:0.85rem;
+  margin-top:1.6rem;
   flex-wrap:wrap;
 }
 .role-pill-item{
   display:inline-flex;
   align-items:center;
-  gap:0.65rem;
-  padding:0.45rem 1rem;
+  gap:0.6rem;
+  padding:0.4rem 0.9rem;
   border-radius:100px;
   background:rgba(255,255,255,0.03);
   border:1px solid rgba(255,255,255,0.08);
-  font-size:0.8rem;
+  font-size:0.78rem;
   backdrop-filter:blur(8px);
 }
 .role-pill-badge{
   font-family:'JetBrains Mono',monospace;
-  font-size:0.72rem;
+  font-size:0.7rem;
   font-weight:700;
-  letter-spacing:0.08em;
-  padding:0.2rem 0.55rem;
+  letter-spacing:0.06em;
+  padding:0.18rem 0.5rem;
   border-radius:100px;
-  display:inline-flex;
-  align-items:center;
-  gap:0.25rem;
 }
 .role-pill-motto{
   font-family:'Fraunces',serif;
   font-style:italic;
   color:var(--text2);
-  font-size:0.82rem;
+  font-size:0.8rem;
 }
 
-.pill-ccr .role-pill-badge{background:linear-gradient(135deg,#78350f,#d97706);color:#fef3c7;border:1px solid rgba(251,191,36,0.5);box-shadow:0 0 12px rgba(245,158,11,0.35)}
+.pill-ccr .role-pill-badge{background:linear-gradient(135deg,#78350f,#d97706);color:#fef3c7;border:1px solid rgba(251,191,36,0.5);box-shadow:0 0 10px rgba(245,158,11,0.3)}
 .pill-ccr .role-pill-motto{color:#fde68a}
-.pill-cr .role-pill-badge{background:linear-gradient(135deg,#581c87,#9333ea);color:#f3e8ff;border:1px solid rgba(192,132,252,0.4);box-shadow:0 0 12px rgba(168,85,247,0.35)}
+.pill-cr .role-pill-badge{background:linear-gradient(135deg,#581c87,#9333ea);color:#f3e8ff;border:1px solid rgba(192,132,252,0.4);box-shadow:0 0 10px rgba(168,85,247,0.3)}
 .pill-cr .role-pill-motto{color:#e9d5ff}
-.pill-mgmt .role-pill-badge{background:linear-gradient(135deg,#0c4a6e,#0284c7);color:#e0f2fe;border:1px solid rgba(56,189,248,0.4);box-shadow:0 0 12px rgba(56,189,248,0.35)}
+.pill-mgmt .role-pill-badge{background:linear-gradient(135deg,#0c4a6e,#0284c7);color:#e0f2fe;border:1px solid rgba(56,189,248,0.4);box-shadow:0 0 10px rgba(56,189,248,0.3)}
 .pill-mgmt .role-pill-motto{color:#bae6fd}
 
-/* ── MAIN CONTENT ── */
+/* ── TOOLBAR & SEARCH ── */
 .members-section{
-  padding:2.5rem 2rem 6rem;
+  padding:2.2rem 2rem 6rem;
   max-width:1280px;
   margin:0 auto;
 }
@@ -134,26 +130,26 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:1.2rem;
-  margin-bottom:2.2rem;
+  gap:1rem;
+  margin-bottom:2rem;
   flex-wrap:wrap;
 }
 .search-wrap{
   display:flex;
   align-items:center;
-  gap:0.75rem;
+  gap:0.7rem;
   background:rgba(22,18,38,0.85);
   border:1px solid rgba(255,255,255,0.09);
   border-radius:14px;
-  padding:0.7rem 1.1rem;
+  padding:0.65rem 1.1rem;
   flex:1;
-  max-width:400px;
+  max-width:380px;
   transition:all 0.25s ease;
   backdrop-filter:blur(10px);
 }
 .search-wrap:focus-within{
   border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(168,85,247,0.2),0 0 25px rgba(168,85,247,0.15);
+  box-shadow:0 0 0 3px rgba(168,85,247,0.2),0 0 20px rgba(168,85,247,0.15);
 }
 .search-input{
   background:none;
@@ -170,7 +166,7 @@ body{
   font-size:0.72rem;
   color:var(--text2);
   letter-spacing:0.12em;
-  padding:0.45rem 1rem;
+  padding:0.45rem 0.95rem;
   background:rgba(255,255,255,0.03);
   border:1px solid rgba(255,255,255,0.08);
   border-radius:100px;
@@ -179,158 +175,203 @@ body{
 /* ── GRID SYSTEM ── */
 .members-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-  gap:1.8rem;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:1.4rem;
 }
 
-/* ── CARD DESIGN ── */
+/* ════════════════════════════════════════════════
+   UPGRADED DEFAULT CARDS (Matches Clean Layout)
+   ════════════════════════════════════════════════ */
 .member-card{
-  background:linear-gradient(180deg,rgba(26,20,44,0.85) 0%,rgba(13,10,22,0.96) 100%);
+  background:linear-gradient(180deg,rgba(22,18,36,0.92) 0%,rgba(12,10,20,0.98) 100%);
   border:1px solid rgba(255,255,255,0.08);
-  border-radius:24px;
+  border-radius:20px;
   overflow:hidden;
   cursor:pointer;
   position:relative;
-  transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),box-shadow 0.4s ease,border-color 0.4s ease;
+  transition:transform 0.32s cubic-bezier(0.16,1,0.3,1),box-shadow 0.32s ease,border-color 0.32s ease;
   display:flex;
   flex-direction:column;
-  box-shadow:0 12px 35px rgba(0,0,0,0.5);
+  box-shadow:0 10px 28px rgba(0,0,0,0.45);
 }
 
 .member-card:hover{
-  transform:translateY(-8px);
-  border-color:rgba(168,85,247,0.7);
-  box-shadow:0 0 0 2px rgba(168,85,247,0.8),0 20px 50px rgba(168,85,247,0.35),0 0 30px rgba(168,85,247,0.2);
+  transform:translateY(-7px);
+  border-color:rgba(168,85,247,0.6);
+  box-shadow:0 0 0 2px rgba(168,85,247,0.7),0 16px 45px rgba(168,85,247,0.3);
 }
 
-/* ── SPECIAL CCR CARD (Imperial Gold) ── */
+/* CCR Card (Royal Gold) */
 .member-card.is-ccr{
-  border-color:rgba(245,158,11,0.4);
-  background:linear-gradient(180deg,rgba(40,24,10,0.85) 0%,rgba(18,12,6,0.96) 100%);
+  border-color:rgba(245,158,11,0.35);
+  background:linear-gradient(180deg,rgba(36,22,10,0.92) 0%,rgba(14,10,6,0.98) 100%);
 }
 .member-card.is-ccr:hover{
   border-color:#fbbf24;
-  box-shadow:0 0 0 2px #fbbf24,0 20px 60px rgba(245,158,11,0.5),0 0 40px rgba(245,158,11,0.3);
+  box-shadow:0 0 0 2px #fbbf24,0 18px 50px rgba(245,158,11,0.45);
 }
 
-/* ── SPECIAL CR CARD (Neon Purple Star) ── */
+/* CR Card (Neon Violet) */
 .member-card.is-cr{
-  border-color:rgba(192,132,252,0.35);
+  border-color:rgba(192,132,252,0.32);
 }
 .member-card.is-cr:hover{
   border-color:#c084fc;
-  box-shadow:0 0 0 2px #c084fc,0 20px 55px rgba(192,132,252,0.45),0 0 35px rgba(168,85,247,0.25);
+  box-shadow:0 0 0 2px #c084fc,0 18px 48px rgba(192,132,252,0.4);
 }
 
-/* ── SPECIAL MGMT CARD (Cyber Sapphire) ── */
+/* MGMT Card (Cyber Sapphire) */
 .member-card.is-mgmt{
-  border-color:rgba(56,189,248,0.35);
-  background:linear-gradient(180deg,rgba(12,28,48,0.85) 0%,rgba(8,14,24,0.96) 100%);
+  border-color:rgba(56,189,248,0.32);
+  background:linear-gradient(180deg,rgba(12,24,42,0.92) 0%,rgba(8,12,22,0.98) 100%);
 }
 .member-card.is-mgmt:hover{
   border-color:#38bdf8;
-  box-shadow:0 0 0 2px #38bdf8,0 20px 55px rgba(56,189,248,0.45),0 0 35px rgba(56,189,248,0.25);
+  box-shadow:0 0 0 2px #38bdf8,0 18px 48px rgba(56,189,248,0.4);
 }
 
 /* Card Photo Zone */
 .card-photo-box{
   width:100%;
-  aspect-ratio:3/3.8;
+  aspect-ratio:3/4;
   position:relative;
   overflow:hidden;
-  background:#0a0812;
+  background:#090812;
 }
 .card-photo-box img{
   width:100%;
   height:100%;
   object-fit:cover;
   object-position:top center;
-  transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);
+  transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);
   display:block;
 }
 .member-card:hover .card-photo-box img{
   transform:scale(1.06);
 }
 
-/* Natural vignette gradient over photo bottom */
+/* Photo bottom subtle vignette */
 .card-photo-box::after{
   content:'';
   position:absolute;
-  inset:0;
-  background:linear-gradient(to top,rgba(13,10,22,0.95) 0%,rgba(13,10,22,0.4) 40%,transparent 80%);
+  bottom:0;
+  left:0;
+  right:0;
+  height:40%;
+  background:linear-gradient(to top,rgba(12,10,20,0.85) 0%,transparent 100%);
   pointer-events:none;
 }
 
-/* Top Right Watermark Emblem (CCR Crown, CR Star, MGMT Gear) */
-.card-emblem{
+/* Status Indicator Dot (bottom-left of photo) */
+.card-status-dot{
   position:absolute;
-  top:14px;
-  right:14px;
+  bottom:10px;
+  left:12px;
   z-index:3;
-  width:38px;
-  height:38px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:12px;
-  background:rgba(10,8,18,0.65);
-  backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,0.12);
-  pointer-events:none;
-  transition:all 0.3s ease;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  border:1.5px solid rgba(255,255,255,0.4);
+  box-shadow:0 1px 4px rgba(0,0,0,0.6);
 }
-.card-emblem svg{width:20px;height:20px}
-.is-ccr .card-emblem{border-color:rgba(251,191,36,0.45);box-shadow:0 0 15px rgba(245,158,11,0.35);color:#fbbf24}
-.is-cr .card-emblem{border-color:rgba(192,132,252,0.4);box-shadow:0 0 15px rgba(168,85,247,0.3);color:#c084fc}
-.is-mgmt .card-emblem{border-color:rgba(56,189,248,0.4);box-shadow:0 0 15px rgba(56,189,248,0.3);color:#38bdf8}
+.card-status-dot.has-profile{
+  background:#10b981;
+  box-shadow:0 0 8px rgba(16,185,129,0.8);
+  border-color:#ffffff;
+}
+.card-status-dot.no-profile{
+  background:#4b5563;
+}
 
-/* Hover Quote Overlay */
-.card-hover-quote-overlay{
+/* Role Badge/Tag (Top right of photo) */
+.card-role-tag{
   position:absolute;
-  inset:0;
-  z-index:4;
+  top:10px;
+  right:10px;
+  z-index:3;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.62rem;
+  font-weight:700;
+  letter-spacing:0.06em;
+  padding:0.22rem 0.55rem;
+  border-radius:8px;
+  display:inline-flex;
+  align-items:center;
+  gap:0.3rem;
+  backdrop-filter:blur(8px);
+}
+.is-ccr .card-role-tag{
+  background:linear-gradient(135deg,rgba(120,53,15,0.9),rgba(217,119,6,0.9));
+  color:#fef3c7;
+  border:1px solid rgba(253,224,71,0.5);
+  box-shadow:0 2px 10px rgba(245,158,11,0.4);
+}
+.is-cr .card-role-tag{
+  background:linear-gradient(135deg,rgba(88,28,135,0.9),rgba(147,51,234,0.9));
+  color:#f3e8ff;
+  border:1px solid rgba(192,132,252,0.4);
+  box-shadow:0 2px 10px rgba(168,85,247,0.35);
+}
+.is-mgmt .card-role-tag{
+  background:linear-gradient(135deg,rgba(12,74,110,0.9),rgba(2,132,199,0.9));
+  color:#e0f2fe;
+  border:1px solid rgba(56,189,248,0.4);
+  box-shadow:0 2px 10px rgba(56,189,248,0.35);
+}
+
+/* Missing Photo Initials Placeholder */
+.card-placeholder{
+  width:100%;
+  height:100%;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:1.4rem;
+  background:radial-gradient(circle at 50% 35%,#20173a 0%,#0c0a16 100%);
+  gap:0.4rem;
+}
+.card-placeholder-initials{
+  font-family:'Fraunces',serif;
+  font-size:2.4rem;
+  font-weight:700;
+  letter-spacing:0.05em;
+  background:linear-gradient(135deg,#c084fc 20%,#fbbf24 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* Hover Quote Preview */
+.card-hover-overlay{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:1.1rem;
   opacity:0;
   visibility:hidden;
-  transition:all 0.35s cubic-bezier(0.16,1,0.3,1);
-  background:radial-gradient(circle at center,rgba(18,14,32,0.85) 0%,rgba(10,8,18,0.92) 100%);
-  backdrop-filter:blur(10px);
+  transition:all 0.32s cubic-bezier(0.16,1,0.3,1);
+  background:radial-gradient(circle at center,rgba(16,12,28,0.85) 0%,rgba(8,6,16,0.94) 100%);
+  backdrop-filter:blur(8px);
 }
-.member-card:hover .card-hover-quote-overlay{
+.member-card:hover .card-hover-overlay{
   opacity:1;
   visibility:visible;
 }
-.card-hover-quote-bubble{
-  background:rgba(255,255,255,0.05);
+.card-hover-bubble{
+  background:rgba(255,255,255,0.06);
   border:1px solid rgba(255,255,255,0.12);
-  border-radius:18px;
-  padding:1.1rem 1.2rem;
+  border-radius:14px;
+  padding:0.9rem 1rem;
   text-align:center;
-  box-shadow:0 12px 30px rgba(0,0,0,0.6);
-  max-width:100%;
+  box-shadow:0 10px 25px rgba(0,0,0,0.6);
 }
-.is-ccr .card-hover-quote-bubble{border-color:rgba(251,191,36,0.3);box-shadow:0 0 25px rgba(245,158,11,0.2)}
-.is-cr .card-hover-quote-bubble{border-color:rgba(192,132,252,0.3);box-shadow:0 0 25px rgba(168,85,247,0.2)}
-.is-mgmt .card-hover-quote-bubble{border-color:rgba(56,189,248,0.3);box-shadow:0 0 25px rgba(56,189,248,0.2)}
-.card-hover-quote-mark{
-  font-size:1.4rem;
-  line-height:1;
-  margin-bottom:0.4rem;
-  display:inline-block;
-  color:var(--accent);
-}
-.is-ccr .card-hover-quote-mark{color:#fbbf24}
-.is-cr .card-hover-quote-mark{color:#c084fc}
-.is-mgmt .card-hover-quote-mark{color:#38bdf8}
-.card-hover-quote-text{
+.card-hover-quote{
   font-family:'Fraunces',serif;
   font-style:italic;
-  font-size:0.9rem;
-  line-height:1.55;
+  font-size:0.84rem;
+  line-height:1.5;
   color:#f1f0f7;
   display:-webkit-box;
   -webkit-line-clamp:4;
@@ -338,105 +379,49 @@ body{
   overflow:hidden;
 }
 
-/* Fallback Initials Placeholder */
-.photo-placeholder{
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:radial-gradient(circle at 50% 30%,#26194a 0%,#0c0918 100%);
-}
-.photo-initials{
-  font-family:'Fraunces',serif;
-  font-size:3.2rem;
-  font-weight:700;
-  background:linear-gradient(135deg,#c084fc,#fbbf24);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-/* Card Body Info */
+/* Card Body (Clean Left-Aligned Layout) */
 .card-body{
-  padding:1.1rem 1.2rem 1.3rem;
+  padding:0.95rem 1.1rem 1.15rem;
   display:flex;
   flex-direction:column;
-  align-items:center;
-  text-align:center;
+  gap:0.3rem;
   position:relative;
   z-index:2;
-  margin-top:-0.5rem;
 }
+.card-roll{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.65rem;
+  font-weight:600;
+  color:var(--accent);
+  letter-spacing:0.06em;
+}
+.is-ccr .card-roll{color:#fde047}
+.is-cr .card-roll{color:#d8b4fe}
+.is-mgmt .card-roll{color:#7dd3fc}
+
 .card-name{
-  font-family:'Fraunces',serif;
-  font-size:1.15rem;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.96rem;
   font-weight:700;
   color:#ffffff;
-  margin-bottom:0.5rem;
-  letter-spacing:-0.01em;
+  line-height:1.25;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  width:100%;
 }
-.card-role-sub{
-  font-size:0.7rem;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  margin-bottom:0.55rem;
-  font-family:'JetBrains Mono',monospace;
-}
-.is-ccr .card-role-sub{color:#fde047;font-weight:700}
-.is-cr .card-role-sub{color:#d8b4fe}
-.is-mgmt .card-role-sub{color:#7dd3fc}
 
-.card-pills-row{
+.card-birthday{
   display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:0.4rem;
-  width:100%;
-}
-.pill-roll{
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:100px;
-  padding:0.22rem 0.9rem;
-  font-family:'JetBrains Mono',monospace;
-  font-size:0.68rem;
-  font-weight:600;
-  color:var(--text2);
-  letter-spacing:0.05em;
-}
-.is-ccr .pill-roll{background:rgba(245,158,11,0.12);border-color:rgba(251,191,36,0.3);color:#fde68a}
-.is-cr .pill-roll{background:rgba(168,85,247,0.12);border-color:rgba(192,132,252,0.3);color:#e9d5ff}
-.is-mgmt .pill-roll{background:rgba(56,189,248,0.12);border-color:rgba(56,189,248,0.3);color:#bae6fd}
-
-.pill-birthday{
-  display:inline-flex;
   align-items:center;
   gap:0.35rem;
   font-family:'JetBrains Mono',monospace;
-  font-size:0.65rem;
+  font-size:0.62rem;
   color:var(--text3);
+  margin-top:0.15rem;
 }
-
-/* Himalayan mountain silhouette reflection bottom */
-.card-mountain-deco{
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  height:40px;
-  background-image:radial-gradient(ellipse 80% 100% at 50% 120%,rgba(168,85,247,0.18),transparent);
-  pointer-events:none;
-}
-.is-ccr .card-mountain-deco{background-image:radial-gradient(ellipse 80% 100% at 50% 120%,rgba(245,158,11,0.22),transparent)}
-.is-cr .card-mountain-deco{background-image:radial-gradient(ellipse 80% 100% at 50% 120%,rgba(192,132,252,0.22),transparent)}
-.is-mgmt .card-mountain-deco{background-image:radial-gradient(ellipse 80% 100% at 50% 120%,rgba(56,189,248,0.22),transparent)}
 
 /* ════════════════════════════════════════════════
-   DETAILED MODAL (Desktop & Tablet)
+   UPGRADED DETAILED MODAL (Desktop & Mobile)
    ════════════════════════════════════════════════ */
 .modal-overlay{
   position:fixed;
@@ -460,36 +445,51 @@ body{
 .modal-detailed-card{
   width:100%;
   max-width:880px;
-  background:linear-gradient(135deg,rgba(22,17,38,0.95) 0%,rgba(11,8,20,0.98) 100%);
+  background:linear-gradient(135deg,rgba(22,17,38,0.96) 0%,rgba(11,8,20,0.99) 100%);
   border:1px solid rgba(255,255,255,0.12);
   border-radius:28px;
   overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,0.8),0 0 60px rgba(168,85,247,0.18);
+  box-shadow:0 30px 80px rgba(0,0,0,0.85);
   display:grid;
   grid-template-columns:360px 1fr;
   position:relative;
   max-height:88vh;
-  transform:scale(0.94) translateY(15px);
-  transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  transform:scale(0.95) translateY(12px);
+  transition:transform 0.32s cubic-bezier(0.16,1,0.3,1);
 }
 .modal-overlay.open .modal-detailed-card{
   transform:scale(1) translateY(0);
 }
 
-.modal-detailed-card.is-ccr{border-color:rgba(251,191,36,0.45);box-shadow:0 30px 90px rgba(0,0,0,0.8),0 0 70px rgba(245,158,11,0.25)}
-.modal-detailed-card.is-cr{border-color:rgba(192,132,252,0.45);box-shadow:0 30px 90px rgba(0,0,0,0.8),0 0 70px rgba(168,85,247,0.25)}
-.modal-detailed-card.is-mgmt{border-color:rgba(56,189,248,0.45);box-shadow:0 30px 90px rgba(0,0,0,0.8),0 0 70px rgba(56,189,248,0.25)}
+.modal-detailed-card.is-ccr{border-color:rgba(251,191,36,0.45);box-shadow:0 30px 90px rgba(0,0,0,0.85),0 0 60px rgba(245,158,11,0.25)}
+.modal-detailed-card.is-cr{border-color:rgba(192,132,252,0.45);box-shadow:0 30px 90px rgba(0,0,0,0.85),0 0 60px rgba(168,85,247,0.25)}
+.modal-detailed-card.is-mgmt{border-color:rgba(56,189,248,0.45);box-shadow:0 30px 90px rgba(0,0,0,0.85),0 0 60px rgba(56,189,248,0.25)}
 
-/* Left Photo Pane with Signature */
+/* Left Photo Pane with Ambient Fill so NO face is ever cut off */
 .modal-left-pane{
   position:relative;
   background:#090712;
   overflow:hidden;
   min-height:480px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.modal-ambient-blur{
+  position:absolute;
+  inset:-20px;
+  background-size:cover;
+  background-position:center;
+  filter:blur(24px) brightness(0.35);
+  transform:scale(1.2);
+  pointer-events:none;
 }
 .modal-left-photo{
+  position:relative;
+  z-index:2;
   width:100%;
   height:100%;
+  max-height:500px;
   object-fit:cover;
   object-position:top center;
   display:block;
@@ -498,26 +498,28 @@ body{
   content:'';
   position:absolute;
   inset:0;
-  background:linear-gradient(to top,rgba(11,8,20,0.95) 0%,rgba(11,8,20,0.3) 45%,transparent 80%);
+  z-index:3;
+  background:linear-gradient(to top,rgba(11,8,20,0.95) 0%,rgba(11,8,20,0.2) 40%,transparent 80%);
   pointer-events:none;
 }
+
+/* Signature script - placed cleanly at bottom */
 .modal-signature-wrap{
   position:absolute;
-  bottom:24px;
-  left:24px;
-  right:24px;
-  z-index:3;
+  bottom:20px;
+  left:20px;
+  right:20px;
+  z-index:4;
   pointer-events:none;
 }
 .modal-signature-text{
   font-family:'Caveat',cursive;
-  font-size:2.8rem;
+  font-size:2.5rem;
   font-weight:700;
   line-height:1;
   color:#ffffff;
-  text-shadow:0 2px 12px rgba(0,0,0,0.9);
-  opacity:0.92;
-  transform:rotate(-4deg);
+  text-shadow:0 2px 10px rgba(0,0,0,0.9);
+  transform:rotate(-3deg);
 }
 .is-ccr .modal-signature-text{color:#fde047}
 .is-cr .modal-signature-text{color:#e9d5ff}
@@ -529,32 +531,32 @@ body{
   overflow-y:auto;
   display:flex;
   flex-direction:column;
-  gap:1.2rem;
+  gap:1.15rem;
 }
 .modal-right-pane::-webkit-scrollbar{width:5px}
 .modal-right-pane::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:10px}
 
 .modal-close-btn{
   position:absolute;
-  top:20px;
-  right:20px;
-  z-index:10;
-  width:38px;
-  height:38px;
+  top:18px;
+  right:18px;
+  z-index:15;
+  width:40px;
+  height:40px;
   border-radius:50%;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.15);
   color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:1rem;
+  font-size:1.1rem;
   cursor:pointer;
   transition:all 0.2s ease;
-  backdrop-filter:blur(8px);
+  backdrop-filter:blur(10px);
 }
 .modal-close-btn:hover{
-  background:rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.22);
   transform:rotate(90deg);
 }
 
@@ -571,7 +573,7 @@ body{
   font-weight:700;
   line-height:1.15;
   color:#ffffff;
-  margin:0.2rem 0 0.1rem;
+  margin:0.25rem 0 0.35rem;
 }
 .modal-role-pill{
   display:inline-flex;
@@ -590,13 +592,12 @@ body{
 .is-cr .modal-role-pill{color:#e9d5ff;background:rgba(168,85,247,0.15);border-color:rgba(192,132,252,0.35)}
 .is-mgmt .modal-role-pill{color:#7dd3fc;background:rgba(56,189,248,0.15);border-color:rgba(56,189,248,0.35)}
 
-/* Modal Quote Card */
 .modal-quote-card{
   background:rgba(255,255,255,0.03);
   border:1px solid rgba(255,255,255,0.08);
   border-left:3px solid var(--accent);
-  border-radius:0 16px 16px 0;
-  padding:1rem 1.25rem;
+  border-radius:0 14px 14px 0;
+  padding:0.95rem 1.2rem;
 }
 .is-ccr .modal-quote-card{border-left-color:#fbbf24;background:rgba(245,158,11,0.04)}
 .is-cr .modal-quote-card{border-left-color:#c084fc;background:rgba(168,85,247,0.04)}
@@ -604,16 +605,15 @@ body{
 .modal-quote-text{
   font-family:'Fraunces',serif;
   font-style:italic;
-  font-size:1.05rem;
+  font-size:1.02rem;
   color:#f3f2fa;
   line-height:1.6;
 }
 
-/* Modal Info Grid (Roll & Birthday) */
 .modal-stats-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:0.8rem;
+  gap:0.75rem;
 }
 .modal-stat-box{
   background:rgba(255,255,255,0.03);
@@ -647,13 +647,12 @@ body{
   letter-spacing:0.1em;
 }
 .modal-stat-value{
-  font-size:0.88rem;
+  font-size:0.86rem;
   font-weight:600;
   color:#ffffff;
   margin-top:0.15rem;
 }
 
-/* Their Section E Story Section */
 .modal-story-box{
   background:rgba(255,255,255,0.02);
   border:1px solid rgba(255,255,255,0.07);
@@ -681,46 +680,67 @@ body{
 }
 
 /* ════════════════════════════════════════════════
-   MOBILE VIEW (Matches phone mockup in reference)
+   FIXED MOBILE DETAILED VIEW
    ════════════════════════════════════════════════ */
 @media(max-width:768px){
-  .page-hero{padding:2.8rem 1.25rem 2rem}
-  .members-section{padding:1.5rem 1rem 4rem}
+  .page-hero{padding:2.5rem 1.25rem 2rem}
+  .members-section{padding:1.4rem 1rem 4rem}
   .members-grid{
-    grid-template-columns:repeat(auto-fill,minmax(155px,1fr));
-    gap:1rem;
+    grid-template-columns:repeat(2,1fr);
+    gap:0.85rem;
   }
-  .card-photo-box{aspect-ratio:3/3.8}
-  .card-name{font-size:0.95rem;margin-bottom:0.35rem}
-  .card-body{padding:0.85rem 0.75rem 1rem}
-  .pill-roll{font-size:0.62rem;padding:0.18rem 0.65rem}
-  .pill-birthday{font-size:0.58rem}
+  .card-photo-box{aspect-ratio:3/4}
+  .card-name{font-size:0.88rem}
+  .card-body{padding:0.75rem 0.8rem 0.95rem}
 
-  /* Full-bleed bottom sheet modal on mobile */
+  /* Full Screen Bottom-Sheet on Mobile with Safe Scroll */
   .modal-overlay{
     padding:0;
     align-items:flex-end;
   }
   .modal-detailed-card{
     grid-template-columns:1fr;
-    max-height:92vh;
+    max-height:94vh;
     border-radius:28px 28px 0 0;
     transform:translateY(100%);
     border-bottom:none;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    display:flex;
+    flex-direction:column;
   }
   .modal-overlay.open .modal-detailed-card{
     transform:translateY(0);
   }
+
+  /* Photo box on mobile: elegant portrait frame with ambient fill so no face is cut */
   .modal-left-pane{
-    min-height:260px;
-    max-height:280px;
+    min-height:300px;
+    max-height:340px;
+    width:100%;
+    flex-shrink:0;
+    background:#080612;
+  }
+  .modal-left-photo{
+    max-height:340px;
+    object-fit:contain; /* NEVER crops or zooms in on face on mobile */
+    background:transparent;
+  }
+  .modal-signature-wrap{
+    bottom:12px;
+    left:16px;
+    right:16px;
   }
   .modal-signature-text{
-    font-size:2.2rem;
+    font-size:2rem;
+    text-shadow:0 2px 12px rgba(0,0,0,1);
   }
+
+  /* Content pane has plenty of bottom padding so NOTHING gets cropped */
   .modal-right-pane{
-    padding:1.4rem 1.25rem 2rem;
+    padding:1.4rem 1.25rem 4rem; /* 4rem bottom padding prevents cutoff by navigation bars */
     gap:1rem;
+    overflow-y:visible;
   }
   .modal-person-name{
     font-size:1.6rem;
@@ -731,10 +751,10 @@ body{
   }
 }
 
-@media(max-width:380px){
+@media(max-width:360px){
   .members-grid{
-    grid-template-columns:repeat(2,1fr);
-    gap:0.75rem;
+    grid-template-columns:1fr;
+    gap:0.8rem;
   }
 }
   </style>
@@ -767,7 +787,7 @@ body{
     </div>
   </div>
 
-  <!-- Members List Section -->
+  <!-- Members Section -->
   <section class="members-section">
     <div class="members-toolbar">
       <div class="search-wrap">
@@ -782,15 +802,16 @@ body{
   </section>
 </div>
 
-<!-- DETAILED MODAL (Desktop split card & Mobile bottom sheet) -->
+<!-- DETAILED MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-detailed-card" id="modalCard">
     <button class="modal-close-btn" id="modalClose">✕</button>
     <div class="modal-left-pane">
+      <div class="modal-ambient-blur" id="modalAmbientBlur"></div>
       <img src="" alt="" class="modal-left-photo" id="modalPhoto"
         onerror="this.style.display='none';document.getElementById('modalInitialsBox').style.display='flex';"/>
-      <div class="photo-placeholder" id="modalInitialsBox" style="display:none">
-        <div class="photo-initials" id="modalInitials"></div>
+      <div class="card-placeholder" id="modalInitialsBox" style="display:none">
+        <div class="card-placeholder-initials" id="modalInitials"></div>
       </div>
       <div class="modal-signature-wrap">
         <div class="modal-signature-text" id="modalSignature"></div>
@@ -813,7 +834,7 @@ body{
 injectNav();
 
 function toTitle(str){
-  return str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+  return str.toLowerCase().replace(/\\b\\w/g, c => c.toUpperCase());
 }
 
 function getInitials(name){
@@ -838,36 +859,27 @@ function renderGrid(filter=''){
     const initials = getInitials(s.name);
     const title = toTitle(s.name);
     const p = STUDENT_PROFILES[s.roll];
+    const hasProfile = !!p;
     const isCCR = !!s.ccr;
     const isCR = !isCCR && !!s.cr;
     const isMGMT = !isCCR && !isCR && (p && p.wantsManagement);
     
-    // Determine card class
+    // Class names
     let cardClass = '';
     if(isCCR) cardClass = 'is-ccr';
     else if(isCR) cardClass = 'is-cr';
     else if(isMGMT) cardClass = 'is-mgmt';
 
-    // Emblem Watermark Icon
-    let emblemHtml = '';
-    if(isCCR){
-      emblemHtml = `<div class="card-emblem" title="Chief Class Representative"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg></div>`;
-    } else if(isCR){
-      emblemHtml = `<div class="card-emblem" title="Class Representative"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg></div>`;
-    } else if(isMGMT){
-      emblemHtml = `<div class="card-emblem" title="Management Team"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 4.9 5.2.4-3.9 3.5 1.2 5.1-4.1-3.2-4.1 3.2 1.2-5.1-3.9-3.5 5.2-.4z"/></svg></div>`;
-    }
+    // Role Tag top-right
+    let roleTag = '';
+    if(isCCR) roleTag = `<div class="card-role-tag">👑 CCR</div>`;
+    else if(isCR) roleTag = `<div class="card-role-tag">★ CR</div>`;
+    else if(isMGMT) roleTag = `<div class="card-role-tag">⚡ MGMT</div>`;
 
-    // Role subtitle
-    let roleSub = '';
-    if(isCCR) roleSub = `<div class="card-role-sub">👑 Chief CR · Lead with Vision</div>`;
-    else if(isCR) roleSub = `<div class="card-role-sub">★ Class Rep · Represent with Pride</div>`;
-    else if(isMGMT) roleSub = `<div class="card-role-sub">⚡ Management Team</div>`;
+    // Quote for hover preview
+    const quote = (p && p.quote) ? p.quote : (p && p.experience ? p.experience.slice(0, 90) + '…' : '');
 
-    // Quote
-    const quote = (p && p.quote) ? p.quote : (p && p.experience ? p.experience.slice(0, 90) + '…' : 'Learning, leading & making memories in Section E.');
-
-    // Birthday
+    // Birthday formatted
     let bdayText = '';
     if(p && p.dob){
       const d = p.dob;
@@ -880,24 +892,21 @@ function renderGrid(filter=''){
     <div class="member-card ${cardClass}" onclick="openModal(${s.roll})">
       <div class="card-photo-box">
         <img src="${photoSrc}" alt="${title}" loading="lazy"
-          onerror="this.parentElement.innerHTML='<div class=photo-placeholder><div class=photo-initials>${initials}</div></div>'"/>
-        ${emblemHtml}
-        <div class="card-hover-quote-overlay">
-          <div class="card-hover-quote-bubble">
-            <span class="card-hover-quote-mark">❝</span>
-            <div class="card-hover-quote-text">${quote}</div>
+          onerror="this.parentElement.innerHTML='<div class=card-placeholder><div class=card-placeholder-initials>${initials}</div></div>'"/>
+        ${roleTag}
+        <div class="card-status-dot ${hasProfile ? 'has-profile' : 'no-profile'}" title="${hasProfile ? 'Profile active' : 'No profile data'}"></div>
+        ${quote ? `
+        <div class="card-hover-overlay">
+          <div class="card-hover-bubble">
+            <div class="card-hover-quote">“${quote}”</div>
           </div>
-        </div>
+        </div>` : ''}
       </div>
       <div class="card-body">
-        <div class="card-name">${title}</div>
-        ${roleSub}
-        <div class="card-pills-row">
-          <div class="pill-roll">Roll No. ${s.roll}</div>
-          ${bdayText ? `<div class="pill-birthday">🎂 ${bdayText}</div>` : ''}
-        </div>
+        <div class="card-roll">#${s.roll}</div>
+        <div class="card-name" title="${title}">${title}</div>
+        ${bdayText ? `<div class="card-birthday">🎂 ${bdayText}</div>` : ''}
       </div>
-      <div class="card-mountain-deco"></div>
     </div>`;
   }).join('');
 }
@@ -917,16 +926,20 @@ function openModal(roll){
   const cardElem = document.getElementById('modalCard');
   cardElem.className = 'modal-detailed-card' + (isCCR ? ' is-ccr' : isCR ? ' is-cr' : isMGMT ? ' is-mgmt' : '');
 
-  // Photo & Signature
+  // Photo, Ambient Blur & Signature
   const photoEl = document.getElementById('modalPhoto');
   const initBox = document.getElementById('modalInitialsBox');
+  const blurEl = document.getElementById('modalAmbientBlur');
+  
   photoEl.style.display = 'block';
   initBox.style.display = 'none';
   photoEl.src = photoSrc;
+  blurEl.style.backgroundImage = `url("${photoSrc}")`;
+  
   document.getElementById('modalInitials').textContent = initials;
   document.getElementById('modalSignature').textContent = title;
 
-  // Breadcrumb
+  // Breadcrumbs & Roles
   let roleCategory = 'MEMBER';
   let roleTitle = 'Student';
   if(isCCR){ roleCategory = 'CCR'; roleTitle = s.crTitle || 'Chief Class Representative'; }
@@ -943,7 +956,7 @@ function openModal(roll){
   // Quote
   const quote = (p && p.quote) ? p.quote : '“Dream big, work hard, and make every moment count.”';
 
-  // Section E Story (Restored)
+  // Section E Story
   const storyText = (p && p.experience) 
     ? p.experience 
     : "A proud member of St. Xavier's College Section E, sharing in the academic journey, lively discussions, and unforgettable batch memories.";
@@ -982,7 +995,7 @@ function openModal(roll){
     </div>
 
     ${(p && p.email) ? `
-    <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text3);display:flex;align-items:center;gap:0.4rem;padding:0.4rem 0">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text3);display:flex;align-items:center;gap:0.4rem;padding:0.2rem 0">
       ✉️ ${p.email}
     </div>` : ''}
   `;

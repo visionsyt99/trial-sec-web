@@ -2,427 +2,164 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Members — The E Chronicles</title>
   <link rel="stylesheet" href="style.css"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="home-theme.css"/>
   <style>
 *,*::before,*::after{box-sizing:border-box}
 :root{
-  --bg:#07060d;
-  --bg2:#0f0d1a;
-  --surface:#131122;
-  --surface2:#1a172e;
-  --border:rgba(255,255,255,0.08);
-  --border-hover:rgba(168,85,247,0.4);
-  --text:#f8f8fc;
-  --text2:#b4b4c7;
-  --text3:#6d6b82;
-  --accent:#a855f7;
-  --accent-glow:rgba(168,85,247,0.35);
+  --bg:#0a0a0f;
+  --bg2:#111118;
+  --surface:#16161f;
+  --surface2:#1e1e2a;
+  --border:rgba(255,255,255,.07);
+  --border-hover:rgba(255,255,255,.15);
+  --text:#f0f0f5;
+  --text2:#a8a8b8;
+  --text3:#5c5c78;
+  --accent:#8b5cf6;
+  --accent2:#6d28d9;
+  --accent-light:rgba(139,92,246,.12);
   --gold:#f59e0b;
-  --gold-glow:rgba(245,158,11,0.4);
-  --cyan:#38bdf8;
-  --cyan-glow:rgba(56,189,248,0.35);
+  --gold-light:rgba(245,158,11,.12);
+  --gold-glow:rgba(245,158,11,.25);
+  --shadow-lg:0 24px 60px rgba(0,0,0,.6),0 8px 20px rgba(0,0,0,.4);
+  --mesh:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(139,92,246,.15),transparent);
 }
-
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Space Grotesk',sans-serif;
-  margin:0;
-  padding:0;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-}
-
-/* ── HERO BANNER ── */
-.page-hero{
-  background:radial-gradient(ellipse 90% 60% at 50% -20%,rgba(124,58,237,0.22),transparent 75%),var(--bg);
-  border-bottom:1px solid var(--border);
-  padding:3.5rem 2rem 2.8rem;
-  position:relative;
-  overflow:hidden;
-}
-.page-hero-inner{
-  max-width:1240px;
-  margin:0 auto;
-  position:relative;
-  z-index:2;
-}
-.section-label{
-  font-family:'JetBrains Mono',monospace;
-  font-size:0.75rem;
-  letter-spacing:0.18em;
-  color:var(--accent);
-  text-transform:uppercase;
-  margin-bottom:0.4rem;
-}
-.section-title{
-  font-family:'Fraunces',serif;
-  font-size:clamp(2.2rem,4.5vw,3.5rem);
-  font-weight:700;
-  letter-spacing:-0.02em;
-  margin:0;
-  background:linear-gradient(135deg,#ffffff 40%,#d8b4fe 100%);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.section-desc{
-  color:var(--text2);
-  font-size:0.92rem;
-  max-width:620px;
-  margin-top:0.5rem;
-  line-height:1.6;
-}
-
-/* Role Showcase Pills */
-.role-pills-bar{
-  display:flex;
-  align-items:center;
-  gap:0.85rem;
-  margin-top:1.6rem;
-  flex-wrap:wrap;
-}
-.role-pill-item{
-  display:inline-flex;
-  align-items:center;
-  gap:0.6rem;
-  padding:0.4rem 0.9rem;
-  border-radius:100px;
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.08);
-  font-size:0.78rem;
-  backdrop-filter:blur(8px);
-}
-.role-pill-badge{
-  font-family:'JetBrains Mono',monospace;
-  font-size:0.7rem;
-  font-weight:700;
-  letter-spacing:0.06em;
-  padding:0.18rem 0.5rem;
-  border-radius:100px;
-}
-.role-pill-motto{
-  font-family:'Fraunces',serif;
-  font-style:italic;
-  color:var(--text2);
-  font-size:0.8rem;
-}
-
-.pill-ccr .role-pill-badge{background:linear-gradient(135deg,#78350f,#d97706);color:#fef3c7;border:1px solid rgba(251,191,36,0.5);box-shadow:0 0 10px rgba(245,158,11,0.3)}
-.pill-ccr .role-pill-motto{color:#fde68a}
-.pill-cr .role-pill-badge{background:linear-gradient(135deg,#581c87,#9333ea);color:#f3e8ff;border:1px solid rgba(192,132,252,0.4);box-shadow:0 0 10px rgba(168,85,247,0.3)}
-.pill-cr .role-pill-motto{color:#e9d5ff}
-.pill-mgmt .role-pill-badge{background:linear-gradient(135deg,#0c4a6e,#0284c7);color:#e0f2fe;border:1px solid rgba(56,189,248,0.4);box-shadow:0 0 10px rgba(56,189,248,0.3)}
-.pill-mgmt .role-pill-motto{color:#bae6fd}
-
-/* ── TOOLBAR & SEARCH ── */
-.members-section{
-  padding:2.2rem 2rem 6rem;
-  max-width:1280px;
-  margin:0 auto;
-}
-.members-toolbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  margin-bottom:2rem;
-  flex-wrap:wrap;
-}
-.search-wrap{
-  display:flex;
-  align-items:center;
-  gap:0.7rem;
-  background:rgba(22,18,38,0.85);
-  border:1px solid rgba(255,255,255,0.09);
-  border-radius:14px;
-  padding:0.65rem 1.1rem;
-  flex:1;
-  max-width:380px;
-  transition:all 0.25s ease;
-  backdrop-filter:blur(10px);
-}
-.search-wrap:focus-within{
-  border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(168,85,247,0.2),0 0 20px rgba(168,85,247,0.15);
-}
-.search-input{
-  background:none;
-  border:none;
-  outline:none;
-  font-family:'Space Grotesk',sans-serif;
-  font-size:0.85rem;
-  color:#fff;
-  width:100%;
-}
+.page-hero{background:var(--surface);border-bottom:1px solid var(--border);padding:4rem 2.5rem 3.5rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:var(--mesh);pointer-events:none}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.4),rgba(245,158,11,.3),transparent)}
+.page-hero-inner{max-width:1200px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;position:relative;z-index:1}
+.members-section{padding:3rem 2.5rem 6rem}
+.members-inner{max-width:1200px;margin:0 auto}
+.members-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.member-count-badge{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--text3);letter-spacing:.12em;padding:.4rem .85rem;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+.search-wrap{display:flex;align-items:center;gap:.65rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.6rem 1rem;transition:border-color .2s,box-shadow .2s;flex:1;max-width:360px}
+.search-wrap:focus-within{border-color:rgba(139,92,246,.5);box-shadow:0 0 0 3px rgba(139,92,246,.1)}
+.search-wrap svg{flex-shrink:0;color:var(--text3)}
+.search-input{background:none;border:none;outline:none;font-family:'DM Mono',monospace;font-size:.78rem;color:var(--text);width:100%}
 .search-input::placeholder{color:var(--text3)}
-.member-count-badge{
-  font-family:'JetBrains Mono',monospace;
-  font-size:0.72rem;
-  color:var(--text2);
-  letter-spacing:0.12em;
-  padding:0.45rem 0.95rem;
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:100px;
+
+/* ── CARD GRID (Strictly 4 cards per row on laptop) ── */
+.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.25rem}
+@media (min-width: 992px){
+  .members-grid{grid-template-columns:repeat(4,1fr);gap:1.5rem}
 }
 
-/* ── GRID SYSTEM ── */
-.members-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:1.4rem;
-}
+.member-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;cursor:pointer;transition:transform .32s cubic-bezier(.34,1.56,.64,1),box-shadow .32s,border-color .25s;position:relative}
+.member-card::before{content:'';position:absolute;inset:0;border-radius:20px;background:linear-gradient(135deg,rgba(139,92,246,.06) 0%,transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none;z-index:0}
 
-/* ════════════════════════════════════════════════
-   UPGRADED DEFAULT CARDS (Matches Clean Layout)
-   ════════════════════════════════════════════════ */
-.member-card{
-  background:linear-gradient(180deg,rgba(22,18,36,0.92) 0%,rgba(12,10,20,0.98) 100%);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:20px;
-  overflow:hidden;
-  cursor:pointer;
-  position:relative;
-  transition:transform 0.32s cubic-bezier(0.16,1,0.3,1),box-shadow 0.32s ease,border-color 0.32s ease;
-  display:flex;
-  flex-direction:column;
-  box-shadow:0 10px 28px rgba(0,0,0,0.45);
-}
-
+/* ── BORDER GLOW EFFECT ON HOVER ── */
 .member-card:hover{
-  transform:translateY(-7px);
-  border-color:rgba(168,85,247,0.6);
-  box-shadow:0 0 0 2px rgba(168,85,247,0.7),0 16px 45px rgba(168,85,247,0.3);
+  transform:translateY(-8px) scale(1.02);
+  border-color:rgba(139,92,246,.7)!important;
+  box-shadow:0 0 0 2px rgba(139,92,246,.6),0 16px 40px rgba(139,92,246,.35),var(--shadow-lg)!important;
+}
+.member-card:hover::before{opacity:1}
+
+.mc-photo{width:100%;aspect-ratio:3/4;background:var(--bg2);overflow:hidden;position:relative}
+.mc-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease;display:block}
+.member-card:hover .mc-photo img{transform:scale(1.08)}
+.mc-photo-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(135deg,#1a1030 0%,#0d0d1a 100%)}
+.mc-initials{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.mc-photo::before{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,rgba(6,5,15,.8) 0%,transparent 100%);z-index:1;pointer-events:none}
+.mc-quote-overlay{position:absolute;inset:0;z-index:3;background:linear-gradient(160deg,rgba(109,40,217,.92) 0%,rgba(139,92,246,.88) 50%,rgba(245,158,11,.2) 100%);display:flex;align-items:center;justify-content:center;padding:1.25rem;opacity:0;transition:opacity .35s ease}
+.member-card:hover .mc-quote-overlay{opacity:1}
+.mc-quote-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.88rem;color:#fff;text-align:center;line-height:1.6}
+.mc-badge{position:absolute;top:.65rem;right:.65rem;z-index:2;font-size:.6rem;font-weight:600;letter-spacing:.08em;padding:.22rem .55rem;border-radius:7px;font-family:'DM Mono',monospace}
+
+/* ── CR badge & glow ── */
+@keyframes goldShimmer{
+  0%{background-position:200% center}
+  100%{background-position:-200% center}
+}
+.mc-badge-cr{
+  color:#fff;
+  border:1px solid rgba(251,191,36,.45);
+  background:linear-gradient(270deg,#78350f,#d97706,#fbbf24,#d97706,#92400e);
+  background-size:300% 100%;
+  animation:goldShimmer 4s linear infinite;
+  box-shadow:0 2px 16px rgba(217,119,6,.6),0 1px 3px rgba(0,0,0,.5),inset 0 1px 0 rgba(251,191,36,.25);
+}
+.mc-badge-cr::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(110deg,rgba(255,255,255,.18) 0%,transparent 45%);
+  pointer-events:none;border-radius:inherit;
 }
 
-/* CCR Card (Royal Gold) */
-.member-card.is-ccr{
-  border-color:rgba(245,158,11,0.35);
-  background:linear-gradient(180deg,rgba(36,22,10,0.92) 0%,rgba(14,10,6,0.98) 100%);
+/* ── CCR badge & glow ── */
+@keyframes ccrPulse{
+  0%,100%{box-shadow:0 2px 20px rgba(245,158,11,.7),0 0 40px rgba(245,158,11,.3),0 1px 3px rgba(0,0,0,.6)}
+  50%{box-shadow:0 2px 28px rgba(245,158,11,1),0 0 60px rgba(245,158,11,.5),0 1px 3px rgba(0,0,0,.6)}
 }
-.member-card.is-ccr:hover{
-  border-color:#fbbf24;
-  box-shadow:0 0 0 2px #fbbf24,0 18px 50px rgba(245,158,11,0.45);
+@keyframes ccrShimmer{
+  0%{background-position:200% center}
+  100%{background-position:-200% center}
 }
-
-/* CR Card (Neon Violet) */
-.member-card.is-cr{
-  border-color:rgba(192,132,252,0.32);
-}
-.member-card.is-cr:hover{
-  border-color:#c084fc;
-  box-shadow:0 0 0 2px #c084fc,0 18px 48px rgba(192,132,252,0.4);
-}
-
-/* MGMT Card (Cyber Sapphire) */
-.member-card.is-mgmt{
-  border-color:rgba(56,189,248,0.32);
-  background:linear-gradient(180deg,rgba(12,24,42,0.92) 0%,rgba(8,12,22,0.98) 100%);
-}
-.member-card.is-mgmt:hover{
-  border-color:#38bdf8;
-  box-shadow:0 0 0 2px #38bdf8,0 18px 48px rgba(56,189,248,0.4);
-}
-
-/* Card Photo Zone */
-.card-photo-box{
-  width:100%;
-  aspect-ratio:3/4;
-  position:relative;
-  overflow:hidden;
-  background:#090812;
-}
-.card-photo-box img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:top center;
-  transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);
-  display:block;
-}
-.member-card:hover .card-photo-box img{
-  transform:scale(1.06);
-}
-
-/* Photo bottom subtle vignette */
-.card-photo-box::after{
-  content:'';
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  height:40%;
-  background:linear-gradient(to top,rgba(12,10,20,0.85) 0%,transparent 100%);
-  pointer-events:none;
-}
-
-/* Status Indicator Dot (bottom-left of photo) */
-.card-status-dot{
-  position:absolute;
-  bottom:10px;
-  left:12px;
-  z-index:3;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  border:1.5px solid rgba(255,255,255,0.4);
-  box-shadow:0 1px 4px rgba(0,0,0,0.6);
-}
-.card-status-dot.has-profile{
-  background:#10b981;
-  box-shadow:0 0 8px rgba(16,185,129,0.8);
-  border-color:#ffffff;
-}
-.card-status-dot.no-profile{
-  background:#4b5563;
-}
-
-/* Role Badge/Tag (Top right of photo) */
-.card-role-tag{
-  position:absolute;
-  top:10px;
-  right:10px;
-  z-index:3;
-  font-family:'JetBrains Mono',monospace;
-  font-size:0.62rem;
+.mc-badge-ccr{
+  color:#1a0800;
   font-weight:700;
-  letter-spacing:0.06em;
-  padding:0.22rem 0.55rem;
+  font-size:.62rem;
+  letter-spacing:.1em;
+  border:1px solid rgba(253,224,71,.7);
+  background:linear-gradient(270deg,#92400e,#d97706,#fde047,#f59e0b,#fbbf24,#d97706,#92400e);
+  background-size:300% 100%;
+  animation:ccrShimmer 2.5s linear infinite,ccrPulse 2.5s ease-in-out infinite;
+  padding:.28rem .65rem;
   border-radius:8px;
-  display:inline-flex;
-  align-items:center;
-  gap:0.3rem;
-  backdrop-filter:blur(8px);
 }
-.is-ccr .card-role-tag{
-  background:linear-gradient(135deg,rgba(120,53,15,0.9),rgba(217,119,6,0.9));
-  color:#fef3c7;
-  border:1px solid rgba(253,224,71,0.5);
-  box-shadow:0 2px 10px rgba(245,158,11,0.4);
-}
-.is-cr .card-role-tag{
-  background:linear-gradient(135deg,rgba(88,28,135,0.9),rgba(147,51,234,0.9));
-  color:#f3e8ff;
-  border:1px solid rgba(192,132,252,0.4);
-  box-shadow:0 2px 10px rgba(168,85,247,0.35);
-}
-.is-mgmt .card-role-tag{
-  background:linear-gradient(135deg,rgba(12,74,110,0.9),rgba(2,132,199,0.9));
-  color:#e0f2fe;
-  border:1px solid rgba(56,189,248,0.4);
-  box-shadow:0 2px 10px rgba(56,189,248,0.35);
+.mc-badge-ccr::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(110deg,rgba(255,255,255,.35) 0%,transparent 45%);
+  pointer-events:none;border-radius:inherit;
 }
 
-/* Missing Photo Initials Placeholder */
-.card-placeholder{
-  width:100%;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  background:radial-gradient(circle at 50% 35%,#20173a 0%,#0c0a16 100%);
-  gap:0.4rem;
+/* ── MGMT badge ── */
+.mc-badge-mgmt{
+  color:#fff;
+  border:1px solid rgba(167,139,250,.3);
+  background:linear-gradient(135deg,#3730a3 0%,#4f46e5 45%,#7c3aed 80%,#8b5cf6 100%);
+  box-shadow:0 2px 12px rgba(124,58,237,.5),0 1px 3px rgba(0,0,0,.4),inset 0 1px 0 rgba(167,139,250,.2);
 }
-.card-placeholder-initials{
-  font-family:'Fraunces',serif;
-  font-size:2.4rem;
-  font-weight:700;
-  letter-spacing:0.05em;
-  background:linear-gradient(135deg,#c084fc 20%,#fbbf24 100%);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+.mc-badge-mgmt::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(110deg,rgba(255,255,255,.15) 0%,transparent 50%);
+  pointer-events:none;border-radius:inherit;
 }
 
-/* Hover Quote Preview */
-.card-hover-overlay{
-  position:absolute;
-  inset:0;
-  z-index:4;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:1.1rem;
-  opacity:0;
-  visibility:hidden;
-  transition:all 0.32s cubic-bezier(0.16,1,0.3,1);
-  background:radial-gradient(circle at center,rgba(16,12,28,0.85) 0%,rgba(8,6,16,0.94) 100%);
-  backdrop-filter:blur(8px);
-}
-.member-card:hover .card-hover-overlay{
-  opacity:1;
-  visibility:visible;
-}
-.card-hover-bubble{
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.12);
-  border-radius:14px;
-  padding:0.9rem 1rem;
-  text-align:center;
-  box-shadow:0 10px 25px rgba(0,0,0,0.6);
-}
-.card-hover-quote{
-  font-family:'Fraunces',serif;
-  font-style:italic;
-  font-size:0.84rem;
-  line-height:1.5;
-  color:#f1f0f7;
-  display:-webkit-box;
-  -webkit-line-clamp:4;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-}
+.mc-profile-dot{position:absolute;bottom:.65rem;left:.65rem;z-index:2;width:8px;height:8px;border-radius:50%;border:2px solid rgba(255,255,255,.5)}
+.mc-profile-dot.has-profile{background:#10b981;box-shadow:0 0 6px rgba(16,185,129,.6)}
+.mc-profile-dot.no-profile{background:#374151}
 
-/* Card Body (Clean Left-Aligned Layout) */
-.card-body{
-  padding:0.95rem 1.1rem 1.15rem;
-  display:flex;
-  flex-direction:column;
-  gap:0.3rem;
-  position:relative;
-  z-index:2;
+/* CR card gold border & glowing hover */
+.cr-card{border-color:rgba(217,119,6,.3)!important}
+.cr-card:hover{
+  border-color:rgba(245,158,11,.85)!important;
+  box-shadow:0 0 0 2px rgba(245,158,11,.8),0 18px 45px rgba(245,158,11,.45),var(--shadow-lg)!important;
 }
-.card-roll{
-  font-family:'JetBrains Mono',monospace;
-  font-size:0.65rem;
-  font-weight:600;
-  color:var(--accent);
-  letter-spacing:0.06em;
-}
-.is-ccr .card-roll{color:#fde047}
-.is-cr .card-roll{color:#d8b4fe}
-.is-mgmt .card-roll{color:#7dd3fc}
+.cr-card .mc-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(217,119,6,.12) 0%,transparent 55%);pointer-events:none;z-index:0}
 
-.card-name{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:0.96rem;
-  font-weight:700;
-  color:#ffffff;
-  line-height:1.25;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+/* CCR card — stronger gold border & royal glowing hover */
+.ccr-card{border-color:rgba(245,158,11,.55)!important;background:linear-gradient(160deg,rgba(245,158,11,.06) 0%,var(--surface) 40%)!important}
+.ccr-card:hover{
+  border-color:#fbbf24!important;
+  box-shadow:0 0 0 2px #fbbf24,0 20px 55px rgba(245,158,11,.6),0 0 35px rgba(251,191,36,.45),var(--shadow-lg)!important;
 }
+.ccr-card .mc-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(245,158,11,.2) 0%,transparent 55%);pointer-events:none;z-index:0}
 
-.card-birthday{
-  display:flex;
-  align-items:center;
-  gap:0.35rem;
-  font-family:'JetBrains Mono',monospace;
-  font-size:0.62rem;
-  color:var(--text3);
-  margin-top:0.15rem;
-}
+.mc-info{padding:1rem 1rem 1.1rem;position:relative;z-index:1}
+.mc-roll{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.15em;margin-bottom:.28rem;text-transform:uppercase}
+.mc-name{font-size:.83rem;font-weight:600;line-height:1.3;color:var(--text)}
+.mc-meta{display:flex;align-items:center;gap:.35rem;margin-top:.45rem;flex-wrap:wrap}
+.mc-tag{display:inline-flex;align-items:center;gap:.2rem;font-family:'DM Mono',monospace;font-size:.53rem;letter-spacing:.06em;text-transform:uppercase;padding:.12rem .44rem;border-radius:5px;white-space:nowrap}
+.mc-tag-cr{background:var(--gold-light);color:var(--gold);border:1px solid rgba(245,158,11,.2)}
+.mc-tag-ccr{background:linear-gradient(135deg,rgba(245,158,11,.25),rgba(253,224,71,.15));color:#fde047;border:1px solid rgba(253,224,71,.4);font-weight:700}
+.mc-tag-mgmt{background:var(--accent-light);color:var(--accent);border:1px solid rgba(139,92,246,.2)}
+.mc-dob{font-family:'DM Mono',monospace;font-size:.56rem;color:var(--text3);margin-top:.35rem;display:flex;align-items:center;gap:.3rem}
 
-/* ════════════════════════════════════════════════
-   UPGRADED DETAILED MODAL (Desktop & Mobile)
-   ════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════
+   LATEST NEW DETAILED VIEW (Laptop & Mobile - 0 Cropping of Image)
+   ══════════════════════════════════════════════════════════════ */
 .modal-overlay{
   position:fixed;
   inset:0;
@@ -449,9 +186,9 @@ body{
   border:1px solid rgba(255,255,255,0.12);
   border-radius:28px;
   overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,0.85);
+  box-shadow:0 30px 90px rgba(0,0,0,0.85),0 0 50px rgba(139,92,246,0.15);
   display:grid;
-  grid-template-columns:360px 1fr;
+  grid-template-columns:380px 1fr;
   position:relative;
   max-height:88vh;
   transform:scale(0.95) translateY(12px);
@@ -465,7 +202,7 @@ body{
 .modal-detailed-card.is-cr{border-color:rgba(192,132,252,0.45);box-shadow:0 30px 90px rgba(0,0,0,0.85),0 0 60px rgba(168,85,247,0.25)}
 .modal-detailed-card.is-mgmt{border-color:rgba(56,189,248,0.45);box-shadow:0 30px 90px rgba(0,0,0,0.85),0 0 60px rgba(56,189,248,0.25)}
 
-/* Left Photo Pane with Ambient Fill so NO face is ever cut off */
+/* Left Pane: Shows the FULL image with 0 cropping */
 .modal-left-pane{
   position:relative;
   background:#090712;
@@ -489,9 +226,8 @@ body{
   z-index:2;
   width:100%;
   height:100%;
-  max-height:500px;
-  object-fit:cover;
-  object-position:top center;
+  max-height:100%;
+  object-fit:contain; /* ZERO CROPPING - displays full photo */
   display:block;
 }
 .modal-left-pane::after{
@@ -499,31 +235,34 @@ body{
   position:absolute;
   inset:0;
   z-index:3;
-  background:linear-gradient(to top,rgba(11,8,20,0.95) 0%,rgba(11,8,20,0.2) 40%,transparent 80%);
+  background:linear-gradient(to top,rgba(11,8,20,0.85) 0%,transparent 35%);
   pointer-events:none;
 }
 
-/* Signature script - placed cleanly at bottom */
-.modal-signature-wrap{
+/* Close button */
+.modal-close-btn{
   position:absolute;
-  bottom:20px;
-  left:20px;
-  right:20px;
-  z-index:4;
-  pointer-events:none;
+  top:18px;
+  right:18px;
+  z-index:20;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.1rem;
+  cursor:pointer;
+  transition:all 0.2s ease;
+  backdrop-filter:blur(10px);
 }
-.modal-signature-text{
-  font-family:'Caveat',cursive;
-  font-size:2.5rem;
-  font-weight:700;
-  line-height:1;
-  color:#ffffff;
-  text-shadow:0 2px 10px rgba(0,0,0,0.9);
-  transform:rotate(-3deg);
+.modal-close-btn:hover{
+  background:rgba(255,255,255,0.2);
+  transform:rotate(90deg);
 }
-.is-ccr .modal-signature-text{color:#fde047}
-.is-cr .modal-signature-text{color:#e9d5ff}
-.is-mgmt .modal-signature-text{color:#bae6fd}
 
 /* Right Content Pane */
 .modal-right-pane{
@@ -536,43 +275,19 @@ body{
 .modal-right-pane::-webkit-scrollbar{width:5px}
 .modal-right-pane::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:10px}
 
-.modal-close-btn{
-  position:absolute;
-  top:18px;
-  right:18px;
-  z-index:15;
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.1);
-  border:1px solid rgba(255,255,255,0.15);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:1.1rem;
-  cursor:pointer;
-  transition:all 0.2s ease;
-  backdrop-filter:blur(10px);
-}
-.modal-close-btn:hover{
-  background:rgba(255,255,255,0.22);
-  transform:rotate(90deg);
-}
-
 .modal-header-meta{
-  font-family:'JetBrains Mono',monospace;
-  font-size:0.72rem;
+  font-family:'DM Mono',monospace;
+  font-size:0.7rem;
   letter-spacing:0.18em;
   color:var(--text3);
   text-transform:uppercase;
 }
 .modal-person-name{
-  font-family:'Fraunces',serif;
+  font-family:'Cormorant Garamond',serif;
   font-size:2.2rem;
   font-weight:700;
   line-height:1.15;
-  color:#ffffff;
+  color:var(--text);
   margin:0.25rem 0 0.35rem;
 }
 .modal-role-pill{
@@ -580,18 +295,19 @@ body{
   align-items:center;
   gap:0.4rem;
   font-size:0.75rem;
-  font-family:'JetBrains Mono',monospace;
+  font-family:'DM Mono',monospace;
   color:var(--accent);
   padding:0.2rem 0.65rem;
-  background:rgba(168,85,247,0.12);
-  border:1px solid rgba(168,85,247,0.25);
+  background:rgba(139,92,246,0.12);
+  border:1px solid rgba(139,92,246,0.25);
   border-radius:8px;
   width:fit-content;
 }
 .is-ccr .modal-role-pill{color:#fde047;background:rgba(245,158,11,0.15);border-color:rgba(251,191,36,0.35)}
-.is-cr .modal-role-pill{color:#e9d5ff;background:rgba(168,85,247,0.15);border-color:rgba(192,132,252,0.35)}
+.is-cr .modal-role-pill{color:#e9d5ff;background:rgba(139,92,246,0.15);border-color:rgba(192,132,252,0.35)}
 .is-mgmt .modal-role-pill{color:#7dd3fc;background:rgba(56,189,248,0.15);border-color:rgba(56,189,248,0.35)}
 
+/* Quote block */
 .modal-quote-card{
   background:rgba(255,255,255,0.03);
   border:1px solid rgba(255,255,255,0.08);
@@ -600,16 +316,17 @@ body{
   padding:0.95rem 1.2rem;
 }
 .is-ccr .modal-quote-card{border-left-color:#fbbf24;background:rgba(245,158,11,0.04)}
-.is-cr .modal-quote-card{border-left-color:#c084fc;background:rgba(168,85,247,0.04)}
+.is-cr .modal-quote-card{border-left-color:#c084fc;background:rgba(139,92,246,0.04)}
 .is-mgmt .modal-quote-card{border-left-color:#38bdf8;background:rgba(56,189,248,0.04)}
 .modal-quote-text{
-  font-family:'Fraunces',serif;
+  font-family:'Cormorant Garamond',serif;
   font-style:italic;
-  font-size:1.02rem;
-  color:#f3f2fa;
+  font-size:1.05rem;
+  color:var(--text2);
   line-height:1.6;
 }
 
+/* Stats grid */
 .modal-stats-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -628,7 +345,7 @@ body{
   width:34px;
   height:34px;
   border-radius:10px;
-  background:rgba(168,85,247,0.12);
+  background:rgba(139,92,246,0.12);
   color:var(--accent);
   display:flex;
   align-items:center;
@@ -637,10 +354,10 @@ body{
   flex-shrink:0;
 }
 .is-ccr .modal-stat-icon{background:rgba(245,158,11,0.15);color:#fbbf24}
-.is-cr .modal-stat-icon{background:rgba(168,85,247,0.15);color:#c084fc}
+.is-cr .modal-stat-icon{background:rgba(139,92,246,0.15);color:#c084fc}
 .is-mgmt .modal-stat-icon{background:rgba(56,189,248,0.15);color:#38bdf8}
 .modal-stat-label{
-  font-family:'JetBrains Mono',monospace;
+  font-family:'DM Mono',monospace;
   font-size:0.6rem;
   color:var(--text3);
   text-transform:uppercase;
@@ -649,10 +366,11 @@ body{
 .modal-stat-value{
   font-size:0.86rem;
   font-weight:600;
-  color:#ffffff;
+  color:var(--text);
   margin-top:0.15rem;
 }
 
+/* Section E Story */
 .modal-story-box{
   background:rgba(255,255,255,0.02);
   border:1px solid rgba(255,255,255,0.07);
@@ -660,7 +378,7 @@ body{
   padding:1.1rem 1.25rem;
 }
 .modal-story-title{
-  font-family:'JetBrains Mono',monospace;
+  font-family:'DM Mono',monospace;
   font-size:0.65rem;
   letter-spacing:0.14em;
   text-transform:uppercase;
@@ -679,21 +397,12 @@ body{
   line-height:1.7;
 }
 
-/* ════════════════════════════════════════════════
-   FIXED MOBILE DETAILED VIEW
-   ════════════════════════════════════════════════ */
+/* ── MOBILE RESPONSIVENESS (0 Cropping, Full Modal Sheet) ── */
 @media(max-width:768px){
-  .page-hero{padding:2.5rem 1.25rem 2rem}
-  .members-section{padding:1.4rem 1rem 4rem}
-  .members-grid{
-    grid-template-columns:repeat(2,1fr);
-    gap:0.85rem;
-  }
-  .card-photo-box{aspect-ratio:3/4}
-  .card-name{font-size:0.88rem}
-  .card-body{padding:0.75rem 0.8rem 0.95rem}
+  .members-section{padding:2rem 1.25rem 4rem}
+  .page-hero{padding:2.75rem 1.25rem 2.25rem}
+  .members-grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:.9rem}
 
-  /* Full Screen Bottom-Sheet on Mobile with Safe Scroll */
   .modal-overlay{
     padding:0;
     align-items:flex-end;
@@ -713,37 +422,26 @@ body{
     transform:translateY(0);
   }
 
-  /* Photo box on mobile: elegant portrait frame with ambient fill so no face is cut */
+  /* Zero cropping photo box on mobile */
   .modal-left-pane{
-    min-height:300px;
-    max-height:340px;
+    min-height:280px;
+    max-height:320px;
     width:100%;
     flex-shrink:0;
     background:#080612;
   }
   .modal-left-photo{
-    max-height:340px;
-    object-fit:contain; /* NEVER crops or zooms in on face on mobile */
-    background:transparent;
-  }
-  .modal-signature-wrap{
-    bottom:12px;
-    left:16px;
-    right:16px;
-  }
-  .modal-signature-text{
-    font-size:2rem;
-    text-shadow:0 2px 12px rgba(0,0,0,1);
+    max-height:320px;
+    object-fit:contain; /* ZERO CROPPING */
   }
 
-  /* Content pane has plenty of bottom padding so NOTHING gets cropped */
   .modal-right-pane{
-    padding:1.4rem 1.25rem 4rem; /* 4rem bottom padding prevents cutoff by navigation bars */
+    padding:1.4rem 1.25rem 4rem; /* Safe bottom padding */
     gap:1rem;
     overflow-y:visible;
   }
   .modal-person-name{
-    font-size:1.6rem;
+    font-size:1.65rem;
   }
   .modal-stats-grid{
     grid-template-columns:1fr;
@@ -751,58 +449,39 @@ body{
   }
 }
 
-@media(max-width:360px){
-  .members-grid{
-    grid-template-columns:1fr;
-    gap:0.8rem;
-  }
+@media(max-width:400px){
+  .members-grid{grid-template-columns:repeat(2,1fr);gap:.7rem}
 }
-  </style>
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="home-theme.css"/>
 </head>
 <body>
-
 <div class="page">
-  <!-- Top Hero -->
   <div class="page-hero">
-    <div class="page-hero-inner">
-      <div class="section-label">// The People of Section E</div>
-      <h1 class="section-title">Members</h1>
-      <p class="section-desc">All 56 students of Section E — St. Xavier's College, Science Biology, Batch 2025–2027.</p>
-      
-      <!-- Role Bar -->
-      <div class="role-pills-bar">
-        <div class="role-pill-item pill-ccr">
-          <span class="role-pill-badge">👑 CCR</span>
-          <span class="role-pill-motto">Lead with Vision</span>
-        </div>
-        <div class="role-pill-item pill-cr">
-          <span class="role-pill-badge">★ CR</span>
-          <span class="role-pill-motto">Represent with Pride</span>
-        </div>
-        <div class="role-pill-item pill-mgmt">
-          <span class="role-pill-badge">⚡ MGMT</span>
-          <span class="role-pill-motto">Manage with Purpose</span>
-        </div>
+    <div class="page-hero-inner reveal">
+      <div>
+        <div class="section-label">// The people</div>
+        <h1 class="section-title" style="margin-bottom:0">Members</h1>
+        <p class="section-desc" style="margin-top:.5rem">All 56 students of Section E — St. Xavier's College, Science Biology, Batch 2025–2027.</p>
       </div>
     </div>
   </div>
-
-  <!-- Members Section -->
   <section class="members-section">
-    <div class="members-toolbar">
-      <div class="search-wrap">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--text3);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" class="search-input" id="searchInput" placeholder="Search by name or roll number…"/>
+    <div class="members-inner">
+      <div class="members-toolbar reveal">
+        <div class="search-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" class="search-input" id="searchInput" placeholder="Search by name or roll number…"/>
+        </div>
+        <div class="member-count-badge" id="countLabel">56 students</div>
       </div>
-      <div class="member-count-badge" id="countLabel">56 students</div>
+      <div class="members-grid reveal reveal-delay-1" id="membersGrid"></div>
     </div>
-
-    <!-- Cards Grid -->
-    <div class="members-grid" id="membersGrid"></div>
   </section>
 </div>
 
-<!-- DETAILED MODAL -->
+<!-- LATEST DETAILED VIEW MODAL (0 Cropping) -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-detailed-card" id="modalCard">
     <button class="modal-close-btn" id="modalClose">✕</button>
@@ -810,113 +489,89 @@ body{
       <div class="modal-ambient-blur" id="modalAmbientBlur"></div>
       <img src="" alt="" class="modal-left-photo" id="modalPhoto"
         onerror="this.style.display='none';document.getElementById('modalInitialsBox').style.display='flex';"/>
-      <div class="card-placeholder" id="modalInitialsBox" style="display:none">
-        <div class="card-placeholder-initials" id="modalInitials"></div>
-      </div>
-      <div class="modal-signature-wrap">
-        <div class="modal-signature-text" id="modalSignature"></div>
+      <div class="mc-photo-placeholder" id="modalInitialsBox" style="display:none">
+        <div class="mc-initials" id="modalInitials"></div>
       </div>
     </div>
-    <div class="modal-right-pane" id="modalRightContent">
+    <div class="modal-right-pane" id="modalContent">
       <!-- Injected via JS -->
     </div>
   </div>
 </div>
 
-<!-- Firebase & Site Dependencies -->
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="firebase-client.js"></script>
 <script src="shared.js"></script>
-
 <script>
 injectNav();
 
+// Proper Title Casing: Never whole in lowercase
 function toTitle(str){
-  return str.toLowerCase().replace(/\\b\\w/g, c => c.toUpperCase());
+  if(!str) return '';
+  return str.split(' ').map(w => w ? w.charAt(0).toUpperCase() + w.slice(1).toLowerCase() : '').join(' ');
 }
 
 function getInitials(name){
   return name.split(' ').slice(0,2).map(w=>w[0]).join('');
 }
 
-let _memberPhotos = {};
-
 function renderGrid(filter=''){
   const grid = document.getElementById('membersGrid');
   const f = filter.toLowerCase().trim();
   const filtered = STUDENTS.filter(s => !f || s.name.toLowerCase().includes(f) || String(s.roll).includes(f));
-  
   document.getElementById('countLabel').textContent = `${filtered.length} student${filtered.length !== 1 ? 's' : ''}`;
-  
   if(!filtered.length){
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:5rem 2rem;color:var(--text3);font-family:Fraunces,serif;font-style:italic;font-size:1.2rem">No students found matching your search.</div>';
+    grid.innerHTML = '<div class="no-results" style="grid-column:1/-1;text-align:center;padding:5rem 2rem;color:var(--text3);font-family:Cormorant Garamond,serif;font-style:italic;font-size:1.15rem">No students found matching your search.</div>';
     return;
   }
-
   grid.innerHTML = filtered.map(s => {
     const initials = getInitials(s.name);
     const title = toTitle(s.name);
+    const cardClass = s.ccr ? 'cr-card ccr-card' : s.cr ? 'cr-card' : '';
     const p = STUDENT_PROFILES[s.roll];
     const hasProfile = !!p;
-    const isCCR = !!s.ccr;
-    const isCR = !isCCR && !!s.cr;
-    const isMGMT = !isCCR && !isCR && (p && p.wantsManagement);
-    
-    // Class names
-    let cardClass = '';
-    if(isCCR) cardClass = 'is-ccr';
-    else if(isCR) cardClass = 'is-cr';
-    else if(isMGMT) cardClass = 'is-mgmt';
-
-    // Role Tag top-right
-    let roleTag = '';
-    if(isCCR) roleTag = `<div class="card-role-tag">👑 CCR</div>`;
-    else if(isCR) roleTag = `<div class="card-role-tag">★ CR</div>`;
-    else if(isMGMT) roleTag = `<div class="card-role-tag">⚡ MGMT</div>`;
-
-    // Quote for hover preview
-    const quote = (p && p.quote) ? p.quote : (p && p.experience ? p.experience.slice(0, 90) + '…' : '');
-
-    // Birthday formatted
-    let bdayText = '';
-    if(p && p.dob){
-      const d = p.dob;
-      bdayText = d.bsDay ? `${d.monthName} ${d.bsDay}` : `${d.monthName}`;
-    }
-
+    const wantsMgmt = p && p.wantsManagement;
+    const quote = p && p.quote ? p.quote : '';
     const photoSrc = getDriveFolderPhotoUrl(s.roll, _memberPhotos);
+
+    let badge = '';
+    if(s.ccr) badge = `<div class="mc-badge mc-badge-ccr">👑 CCR</div>`;
+    else if(s.cr) badge = `<div class="mc-badge mc-badge-cr">★ CR</div>`;
+    else if(wantsMgmt) badge = `<div class="mc-badge mc-badge-mgmt">⚡ MGMT</div>`;
+
+    let tag = '';
+    if(s.ccr) tag = `<span class="mc-tag mc-tag-ccr">👑 ${s.crTitle||'Chief CR'}</span>`;
+    else if(s.cr) tag = `<span class="mc-tag mc-tag-cr">★ ${s.crTitle||'Class Rep'}</span>`;
+    else if(wantsMgmt) tag = '<span class="mc-tag mc-tag-mgmt">⚡ Mgmt</span>';
 
     return `
     <div class="member-card ${cardClass}" onclick="openModal(${s.roll})">
-      <div class="card-photo-box">
-        <img src="${photoSrc}" alt="${title}" loading="lazy"
-          onerror="this.parentElement.innerHTML='<div class=card-placeholder><div class=card-placeholder-initials>${initials}</div></div>'"/>
-        ${roleTag}
-        <div class="card-status-dot ${hasProfile ? 'has-profile' : 'no-profile'}" title="${hasProfile ? 'Profile active' : 'No profile data'}"></div>
-        ${quote ? `
-        <div class="card-hover-overlay">
-          <div class="card-hover-bubble">
-            <div class="card-hover-quote">“${quote}”</div>
-          </div>
-        </div>` : ''}
+      <div class="mc-photo">
+        <img src="${photoSrc}" alt="${title}"
+          onerror="this.parentElement.innerHTML='<div class=mc-photo-placeholder><div class=mc-initials>${initials}</div></div>'"
+          loading="lazy"/>
+        ${badge}
+        <div class="mc-profile-dot ${hasProfile?'has-profile':'no-profile'}"></div>
+        ${quote?`<div class="mc-quote-overlay"><div class="mc-quote-text">${quote.length>80?quote.substring(0,80)+'…':quote}</div></div>`:''}
       </div>
-      <div class="card-body">
-        <div class="card-roll">#${s.roll}</div>
-        <div class="card-name" title="${title}">${title}</div>
-        ${bdayText ? `<div class="card-birthday">🎂 ${bdayText}</div>` : ''}
+      <div class="mc-info">
+        <div class="mc-roll">#${s.roll}</div>
+        <div class="mc-name">${title}</div>
+        <div class="mc-meta">${tag}</div>
+        ${(p&&p.dob&&p.dob.bsDay)?`<div class="mc-dob">🎂 ${p.dob.monthName} ${p.dob.bsDay}</div>`:''}
       </div>
     </div>`;
   }).join('');
 }
 
 function openModal(roll){
-  const s = STUDENTS.find(x => x.roll === roll);
+  const s = STUDENTS.find(s => s.roll === roll);
   if(!s) return;
-  const p = STUDENT_PROFILES[s.roll];
   const title = toTitle(s.name);
   const initials = getInitials(s.name);
+  const p = STUDENT_PROFILES[s.roll];
   const photoSrc = getDriveFolderPhotoUrl(roll, _memberPhotos);
 
   const isCCR = !!s.ccr;
@@ -926,20 +581,18 @@ function openModal(roll){
   const cardElem = document.getElementById('modalCard');
   cardElem.className = 'modal-detailed-card' + (isCCR ? ' is-ccr' : isCR ? ' is-cr' : isMGMT ? ' is-mgmt' : '');
 
-  // Photo, Ambient Blur & Signature
+  // Photo & Ambient Blur (0 Cropping!)
   const photoEl = document.getElementById('modalPhoto');
   const initBox = document.getElementById('modalInitialsBox');
   const blurEl = document.getElementById('modalAmbientBlur');
-  
+
   photoEl.style.display = 'block';
   initBox.style.display = 'none';
   photoEl.src = photoSrc;
   blurEl.style.backgroundImage = `url("${photoSrc}")`;
-  
   document.getElementById('modalInitials').textContent = initials;
-  document.getElementById('modalSignature').textContent = title;
 
-  // Breadcrumbs & Roles
+  // Breadcrumb & Role tag
   let roleCategory = 'MEMBER';
   let roleTitle = 'Student';
   if(isCCR){ roleCategory = 'CCR'; roleTitle = s.crTitle || 'Chief Class Representative'; }
@@ -961,7 +614,7 @@ function openModal(roll){
     ? p.experience 
     : "A proud member of St. Xavier's College Section E, sharing in the academic journey, lively discussions, and unforgettable batch memories.";
 
-  document.getElementById('modalRightContent').innerHTML = `
+  document.getElementById('modalContent').innerHTML = `
     <div>
       <div class="modal-header-meta">SECTION E • ${roleCategory}</div>
       <div class="modal-person-name">${title}</div>
@@ -995,7 +648,7 @@ function openModal(roll){
     </div>
 
     ${(p && p.email) ? `
-    <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text3);display:flex;align-items:center;gap:0.4rem;padding:0.2rem 0">
+    <div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text3);display:flex;align-items:center;gap:0.4rem;padding:0.2rem 0">
       ✉️ ${p.email}
     </div>` : ''}
   `;
@@ -1019,6 +672,7 @@ document.addEventListener('keydown', e => {
 
 document.getElementById('searchInput').addEventListener('input', e => renderGrid(e.target.value));
 
+let _memberPhotos = {};
 (async function init(){
   try {
     const siteData = await loadSiteData();

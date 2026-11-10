@@ -3,34 +3,108 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Farewell & Time Capsule — The E Chronicles</title>
+<title>Time Capsule & Farewell Vault — The E Chronicles</title>
 <link rel="stylesheet" href="style.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="home-theme.css"/>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
+  *,*::before,*::after{box-sizing:border-box}
 
-  /* ── Page hero ── */
+  /* ── Hero ── */
   .farewell-hero {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: 3.5rem 2.5rem 3rem;
+    padding: 3.8rem 2rem 3.2rem;
     position: relative;
     overflow: hidden;
     text-align: center;
   }
   .farewell-hero-bg {
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 80% at 80% 50%, var(--gold-light), transparent 70%);
+    background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(139,92,246,0.18), transparent 70%),
+                radial-gradient(ellipse 50% 50% at 85% 80%, rgba(245,158,11,0.12), transparent 60%);
     pointer-events: none;
   }
   .farewell-hero-inner {
-    max-width: 600px;
+    max-width: 740px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
   }
+  .capsule-badge-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(139,92,246,0.12);
+    border: 1px solid rgba(139,92,246,0.25);
+    padding: 4px 14px;
+    border-radius: 999px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+  .farewell-hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4.5vw, 2.9rem);
+    font-weight: 900;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 0.8rem;
+  }
   .farewell-hero .section-desc {
-    max-width: 520px;
-    margin: 0 auto;
+    max-width: 580px;
+    margin: 0 auto 1.8rem;
+    font-size: 0.94rem;
+    line-height: 1.65;
+    color: var(--text2);
+  }
+
+  /* ── Dual Countdown Bar ── */
+  .capsule-clocks-wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    max-width: 700px;
+    margin: 1.5rem auto 0;
+  }
+  .clock-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .clock-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+  .clock-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 2px;
+  }
+  .clock-digits {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .clock-sub {
+    font-size: 0.7rem;
+    color: var(--text2);
+    margin-top: 2px;
   }
 
   /* ── Page body wrapper ── */
@@ -42,63 +116,71 @@
 
   /* ── Auth gate ── */
   #auth-gate {
-    max-width: 440px;
-    margin: 0 auto 2rem;
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    padding: 2.8rem 2.2rem;
     text-align: center;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-lg);
   }
-  #auth-gate .lock-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  #auth-gate .lock-icon { font-size: 2.8rem; margin-bottom: 1rem; }
   #auth-gate h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--text);
     margin-bottom: 0.5rem;
   }
   #auth-gate p {
-    color: var(--text3);
+    color: var(--text2);
     font-size: 0.88rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.6rem;
     line-height: 1.6;
   }
   #g-signin-btn { display: flex; justify-content: center; }
 
   /* ── Submit form ── */
   #submit-section {
-    max-width: 640px;
-    margin: 0 auto 2rem;
+    max-width: 720px;
+    margin: 0 auto 2.5rem;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 2rem;
-    box-shadow: var(--shadow);
+    border-radius: 24px;
+    padding: 2.4rem;
+    box-shadow: var(--shadow-lg);
     display: none;
   }
-  #submit-section h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 1.5rem;
+  .form-header-bar {
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.8rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
   }
-
+  .form-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
   .user-pill {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--accent-light);
+    background: var(--surface2);
+    border: 1px solid var(--border);
     border-radius: 999px;
-    padding: 6px 14px 6px 6px;
-    font-size: 0.82rem;
-    color: var(--accent);
-    margin-bottom: 1.5rem;
+    padding: 5px 12px 5px 5px;
+    font-size: 0.8rem;
+    color: var(--text);
     font-weight: 500;
   }
   .user-pill img {
@@ -107,60 +189,141 @@
     object-fit: cover;
   }
 
-  /* form fields using site's existing field style */
-  .fw-field { display: flex; flex-direction: column; gap: .35rem; margin-bottom: 1rem; }
+  /* Form Fields */
+  .fw-field { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1.4rem; }
   .fw-field label {
     font-family: 'DM Mono', monospace;
-    font-size: .65rem;
+    font-size: .68rem;
     letter-spacing: .14em;
     text-transform: uppercase;
     color: var(--text3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .fw-field input,
   .fw-field textarea {
     background: var(--bg2);
     border: 1.5px solid var(--border);
-    border-radius: 8px;
-    padding: .6rem .85rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: .88rem;
+    border-radius: 10px;
+    padding: .75rem .95rem;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: .9rem;
     color: var(--text);
     outline: none;
-    transition: border-color .2s;
+    transition: border-color .2s, box-shadow .2s;
     width: 100%;
     box-sizing: border-box;
     resize: vertical;
   }
   .fw-field input:focus,
-  .fw-field textarea:focus { border-color: var(--accent); background: var(--surface); }
-  .fw-field textarea { min-height: 140px; }
+  .fw-field textarea:focus {
+    border-color: var(--accent);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(139,92,246,0.12);
+  }
+  .fw-field textarea { min-height: 120px; line-height: 1.6; }
   .char-count {
     font-family: 'DM Mono', monospace;
     font-size: .65rem;
     color: var(--text3);
     text-align: right;
-    margin-top: 3px;
+    margin-top: 4px;
   }
 
-  /* ── Theme picker ── */
+  .section-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 2rem 0;
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     PROMINENT PRIVACY GUARANTEE BOX FOR 5-YEAR TIME CAPSULE
+     ══════════════════════════════════════════════════════════════ */
+  .privacy-guarantee-box {
+    background: linear-gradient(135deg, rgba(88,28,135,0.18) 0%, rgba(22,17,38,0.4) 100%);
+    border: 2px solid rgba(168,85,247,0.45);
+    border-radius: 18px;
+    padding: 1.4rem 1.5rem;
+    margin-bottom: 1.4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  html.light .privacy-guarantee-box {
+    background: linear-gradient(135deg, rgba(243,232,255,0.85) 0%, #ffffff 100%);
+    border-color: rgba(147,51,234,0.4);
+  }
+  .pg-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.5rem;
+  }
+  .pg-badge {
+    background: #7c3aed;
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+  }
+  .pg-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+  .pg-desc {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--text2);
+    margin: 0;
+  }
+  .pg-desc strong {
+    color: var(--text);
+  }
+  .pg-pills {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.9rem;
+  }
+  .pg-pill {
+    background: rgba(139,92,246,0.12);
+    border: 1px solid rgba(139,92,246,0.25);
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    padding: 3px 9px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* Theme picker */
   .theme-label {
     font-family: 'DM Mono', monospace;
-    font-size: .65rem;
+    font-size: .68rem;
     letter-spacing: .14em;
     text-transform: uppercase;
     color: var(--text3);
-    margin-bottom: .5rem;
+    margin-bottom: .6rem;
     display: block;
   }
   .theme-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
     gap: 8px;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.6rem;
   }
   .theme-opt {
     border: 2px solid var(--border);
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 8px 6px;
     text-align: center;
     cursor: pointer;
@@ -181,8 +344,6 @@
     background: var(--accent-light);
     color: var(--accent);
   }
-
-  /* card gradient previews — these intentionally keep vivid colours */
   .th-midnight { background: linear-gradient(135deg,#1a1a6e,#4f46e5); }
   .th-sunset   { background: linear-gradient(135deg,#f97316,#ec4899); }
   .th-forest   { background: linear-gradient(135deg,#065f46,#34d399); }
@@ -190,63 +351,140 @@
   .th-sakura   { background: linear-gradient(135deg,#be185d,#fda4af); }
   .th-gold     { background: linear-gradient(135deg,#78350f,#fbbf24); }
 
-  /* ── Submit button — matches site's admin-btn-primary style ── */
+  /* Submit button */
   .fw-submit-btn {
     width: 100%;
     background: var(--accent);
     color: #fff;
     border: none;
-    border-radius: 8px;
-    padding: .75rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: .9rem;
+    border-radius: 12px;
+    padding: .9rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: .95rem;
     font-weight: 700;
     letter-spacing: .04em;
     cursor: pointer;
-    transition: background .2s, transform .1s;
-    margin-top: .5rem;
+    transition: background .2s, transform .1s, box-shadow .2s;
+    margin-top: .6rem;
   }
-  .fw-submit-btn:hover  { background: var(--accent2); transform: translateY(-1px); }
+  .fw-submit-btn:hover  { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(139,92,246,0.35); }
   .fw-submit-btn:active { transform: scale(.98); }
-  .fw-submit-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
-
+  .fw-submit-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
   #form-status {
-    margin-top: .9rem;
-    font-size: .85rem;
+    margin-top: 1rem;
+    font-size: .88rem;
     text-align: center;
-    min-height: 1.3rem;
+    min-height: 1.4rem;
     font-weight: 500;
   }
   .status-ok  { color: #10b981; }
   .status-err { color: #dc2626; }
 
-  /* ── Already submitted banner ── */
+  /* ── Already Submitted / Personal Vault ── */
   #already-submitted {
-    max-width: 640px;
-    margin: 0 auto 2rem;
-    background: var(--accent-light);
-    border: 1px solid rgba(26,79,160,.25);
-    border-radius: var(--radius);
-    padding: 1.5rem 2rem;
-    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 3rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2.2rem;
+    box-shadow: var(--shadow-lg);
     display: none;
   }
-  #already-submitted h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
+  .submitted-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .submitted-header h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
     color: var(--accent);
     margin-bottom: .4rem;
   }
-  #already-submitted p { color: var(--text2); font-size: .88rem; }
+  .submitted-header p { color: var(--text2); font-size: .9rem; }
+
+  .user-vault-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+  .vault-entry-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.4rem;
+    position: relative;
+  }
+  .vault-card-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .vault-card-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+  }
+  .vault-card-text {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--text2);
+    white-space: pre-wrap;
+    background: var(--bg2);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .vault-private-notice {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: #10b981;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .vault-actions-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.5rem;
+    gap: 1rem;
+  }
+  .btn-edit-capsule {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-edit-capsule:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 
   /* ── Wall section header ── */
   .wall-header {
     text-align: center;
-    margin: 3rem 0 1.5rem;
+    margin: 3.5rem 0 1.5rem;
   }
   .wall-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--text);
     margin-bottom: .3rem;
@@ -257,13 +495,11 @@
   .messages-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.2rem;
+    gap: 1.25rem;
   }
-
-  /* msg-card keeps vivid gradient backgrounds — that's intentional */
   .msg-card {
-    border-radius: var(--radius);
-    padding: 1.5rem;
+    border-radius: 18px;
+    padding: 1.6rem;
     color: #fff;
     position: relative;
     overflow: hidden;
@@ -285,11 +521,13 @@
     pointer-events: none;
   }
   .msg-card .msg-text {
-    font-size: .9rem;
+    font-size: .92rem;
     line-height: 1.75;
     flex: 1;
     margin-bottom: 1.2rem;
     word-break: break-word;
+    position: relative;
+    z-index: 1;
   }
   .msg-card .msg-footer {
     display: flex;
@@ -297,23 +535,24 @@
     justify-content: space-between;
     gap: 8px;
     flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
   }
   .msg-card .msg-author {
-    font-size: .8rem;
+    font-size: .85rem;
     font-weight: 600;
-    opacity: .9;
-    font-family: 'DM Sans', sans-serif;
+    opacity: .95;
+    font-family: 'Space Grotesk', sans-serif;
   }
   .msg-card .msg-roll {
     font-size: .7rem;
-    opacity: .65;
-    background: rgba(255,255,255,.15);
+    opacity: .8;
+    background: rgba(255,255,255,.18);
     border-radius: 999px;
     padding: 2px 10px;
     font-family: 'DM Mono', monospace;
   }
 
-  /* card gradient themes */
   .card-midnight { background: linear-gradient(135deg,#1a1a6e 0%,#4f46e5 100%); }
   .card-sunset   { background: linear-gradient(135deg,#f97316 0%,#ec4899 100%); }
   .card-forest   { background: linear-gradient(135deg,#065f46 0%,#34d399 100%); }
@@ -322,17 +561,7 @@
   .card-gold     { background: linear-gradient(135deg,#78350f 0%,#fbbf24 100%); }
   .card-default  { background: linear-gradient(135deg,#374151 0%,#6b7280 100%); }
 
-  /* skeleton / empty states */
-  .loading-wall {
-    grid-column: 1 / -1;
-    text-align: center;
-    color: var(--text3);
-    padding: 3rem;
-    font-size: .9rem;
-    font-style: italic;
-    font-family: 'Cormorant Garamond', serif;
-  }
-  .empty-wall {
+  .loading-wall, .empty-wall {
     grid-column: 1 / -1;
     text-align: center;
     color: var(--text3);
@@ -344,108 +573,181 @@
     from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-
   @media (max-width: 600px) {
     .farewell-body { padding: 1.5rem 1.25rem 4rem; }
+    .farewell-hero { padding: 3rem 1.25rem 2.4rem; }
+    #submit-section, #already-submitted { padding: 1.6rem 1.2rem; }
     .messages-grid { grid-template-columns: 1fr; }
   }
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="home-theme.css"/>
 </head>
 <body>
 <div class="page">
-
   <!-- Hero -->
   <div class="farewell-hero">
     <div class="farewell-hero-bg"></div>
     <div class="farewell-hero-inner reveal">
-      <div class="section-label">// Time Capsule</div>
-      <h1 class="section-title">Farewell Messages 💌</h1>
+      <div class="capsule-badge-row">
+        <span>⏳ Section E Digital Vault</span>
+        <span>•</span>
+        <span>Batch 2025–2027</span>
+      </div>
+      <h1>Farewell &amp; Time Capsule 💌</h1>
       <p class="section-desc">
-        Leave a message for Section E — your thoughts, memories, wishes, and words
-        that will stay here forever. Sign in with your Google account to add yours.
+        Leave your legacy for Section E. Write your public farewell to be unlocked on Farewell Day,
+        and seal a strictly private letter to your future self that unlocks in 5 years (2032).
       </p>
+
+      <!-- Live Dual Countdowns -->
+      <div class="capsule-clocks-wrap">
+        <div class="clock-card">
+          <div class="clock-icon">🎓</div>
+          <div>
+            <div class="clock-title">Capsule 1 • Farewell Day</div>
+            <div class="clock-digits" id="cd-farewell">Calculating…</div>
+            <div class="clock-sub">Unlocks after Grade 12 board results</div>
+          </div>
+        </div>
+        <div class="clock-card">
+          <div class="clock-icon">🔒</div>
+          <div>
+            <div class="clock-title">Capsule 2 • 5-Year Vault</div>
+            <div class="clock-digits" id="cd-5year">Calculating…</div>
+            <div class="clock-sub">Strictly private until Nov 2032</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="farewell-body">
-
     <!-- Auth gate -->
-    <div id="auth-gate">
+    <div id="auth-gate" class="reveal">
       <div class="lock-icon">🔐</div>
-      <h3>Sign in to leave your message</h3>
-      <p>Use the Google account you use at St. Xavier's.<br>One message per student — it's saved forever.</p>
+      <h3>Sign in to write your capsule</h3>
+      <p>Sign in with your Google account to seal your farewell message and your private 5-year letter to your future self.</p>
       <div id="g-signin-btn"></div>
     </div>
 
-    <!-- Already submitted -->
+    <!-- Already submitted / Sealed Personal Vault -->
     <div id="already-submitted">
-      <h3>✅ Your message is in the capsule!</h3>
-      <p>You've already left your farewell. It's saved here forever with Section E. 💙</p>
+      <div class="submitted-header">
+        <h3>✅ Your Messages Are Sealed!</h3>
+        <p>Both your Farewell Message and your Private 5-Year Letter are locked safely with Section E.</p>
+      </div>
+
+      <div class="user-vault-cards" id="user-vault-preview">
+        <!-- Injected via JS -->
+      </div>
+
+      <div class="vault-actions-bar">
+        <button class="btn-edit-capsule" onclick="enableEditMode()">✏️ Edit / Update My Messages</button>
+      </div>
     </div>
 
     <!-- Submit form -->
     <div id="submit-section">
-      <div id="user-pill-wrap"></div>
-      <h3>✍️ Your Farewell Message</h3>
-
-      <div class="fw-field">
-        <label>Your Name (as you want it shown)</label>
-        <input type="text" id="inp-name" placeholder="e.g. Aarav Sharma" maxlength="60"/>
+      <div class="form-header-bar">
+        <div class="form-title">✍️ Section E Capsule Entry</div>
+        <div id="user-pill-wrap"></div>
       </div>
 
-      <div class="fw-field">
-        <label>Roll Number <span style="font-size:.6rem;opacity:.7">(optional)</span></label>
-        <input type="text" id="inp-roll" placeholder="e.g. 501" maxlength="10"/>
+      <!-- Identity -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+        <div class="fw-field">
+          <label>Your Name (as displayed)</label>
+          <input type="text" id="inp-name" placeholder="e.g. Saurav Pandey" maxlength="60"/>
+        </div>
+        <div class="fw-field">
+          <label>Roll Number <span style="font-size:.65rem;opacity:.7">(optional)</span></label>
+          <input type="text" id="inp-roll" placeholder="e.g. 517" maxlength="10"/>
+        </div>
       </div>
 
-      <div class="fw-field">
-        <label>Your Message <span style="font-size:.6rem;opacity:.7">(max 500 chars)</span></label>
-        <textarea id="inp-message" placeholder="Write anything — a memory, a wish, a joke, advice for your future self, something you'll miss…" maxlength="500"></textarea>
-        <div class="char-count"><span id="char-left">500</span> characters remaining</div>
+      <div class="section-divider"></div>
+
+      <!-- PART 1: FAREWELL MESSAGE -->
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:0.3rem">
+          <span style="font-size:1.2rem">🎓</span>
+          <h3 style="font-family:'Fraunces',serif;font-size:1.2rem;margin:0;color:var(--text)">Part 1: Farewell Day Message</h3>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text3);margin-bottom:0.9rem">
+          This message will be celebrated on the Farewell Wall after Grade 12 board exam results are published. Write your memories, inside jokes, and gratitude to Section E.
+        </p>
+
+        <div class="fw-field">
+          <label>Farewell Message <span style="font-size:.65rem;opacity:.7">(max 600 chars)</span></label>
+          <textarea id="inp-message" placeholder="Write to Section E — what made this batch special, memories from bio lab, gratitude to classmates, wishes for everyone's journey…" maxlength="600"></textarea>
+          <div class="char-count"><span id="char-left">600</span> characters remaining</div>
+        </div>
+
+        <span class="theme-label">Card Theme</span>
+        <div class="theme-grid" id="theme-grid">
+          <div class="theme-opt selected" data-theme="midnight">
+            <div class="th-preview th-midnight"></div>Midnight
+          </div>
+          <div class="theme-opt" data-theme="sunset">
+            <div class="th-preview th-sunset"></div>Sunset
+          </div>
+          <div class="theme-opt" data-theme="forest">
+            <div class="th-preview th-forest"></div>Forest
+          </div>
+          <div class="theme-opt" data-theme="ocean">
+            <div class="th-preview th-ocean"></div>Ocean
+          </div>
+          <div class="theme-opt" data-theme="sakura">
+            <div class="th-preview th-sakura"></div>Sakura
+          </div>
+          <div class="theme-opt" data-theme="gold">
+            <div class="th-preview th-gold"></div>Gold
+          </div>
+        </div>
       </div>
 
-      <span class="theme-label">Card Theme</span>
-      <div class="theme-grid" id="theme-grid">
-        <div class="theme-opt selected" data-theme="midnight">
-          <div class="th-preview th-midnight"></div>Midnight
+      <div class="section-divider"></div>
+
+      <!-- PART 2: PRIVATE 5-YEAR TIME CAPSULE -->
+      <div>
+        <div class="privacy-guarantee-box">
+          <div class="pg-header">
+            <span class="pg-badge">🔒 HIGHLY PRIVATE &amp; SECURE</span>
+          </div>
+          <div class="pg-title">Part 2: Strictly Private 5-Year Time Capsule (2032)</div>
+          <p class="pg-desc">
+            <strong>YOUR EYES ONLY:</strong> Nobody else — not your classmates, not other students, not public visitors — can ever see what you write here. 
+            This message is locked in the <strong>Section E Vault until November 2032</strong> and can <strong>ONLY</strong> be unlocked and read by <strong>YOU</strong> when you sign in with your same Google account (<span id="pg-user-email">your account</span>).
+          </p>
+          <div class="pg-pills">
+            <span class="pg-pill">🛡️ Hidden from Public Wall</span>
+            <span class="pg-pill">⏳ Locked until 2032</span>
+            <span class="pg-pill">🔑 Accessible only via your Google Account</span>
+          </div>
         </div>
-        <div class="theme-opt" data-theme="sunset">
-          <div class="th-preview th-sunset"></div>Sunset
-        </div>
-        <div class="theme-opt" data-theme="forest">
-          <div class="th-preview th-forest"></div>Forest
-        </div>
-        <div class="theme-opt" data-theme="ocean">
-          <div class="th-preview th-ocean"></div>Ocean
-        </div>
-        <div class="theme-opt" data-theme="sakura">
-          <div class="th-preview th-sakura"></div>Sakura
-        </div>
-        <div class="theme-opt" data-theme="gold">
-          <div class="th-preview th-gold"></div>Gold
+
+        <div class="fw-field">
+          <label>Letter to Your Future Self in 2032 <span style="font-size:.65rem;opacity:.7">(max 1000 chars)</span></label>
+          <textarea id="inp-capsule5yr" placeholder="Where do you hope to be in 2032? What degree or career do you want to have achieved? What secret promise or dream are you holding right now? Speak honestly to yourself 5 years from today…" maxlength="1000" style="min-height:150px"></textarea>
+          <div class="char-count"><span id="char-left-5yr">1000</span> characters remaining</div>
         </div>
       </div>
 
       <button class="fw-submit-btn" id="submit-btn" onclick="submitFarewell()">
-        💌 Save to Time Capsule
+        💌 Seal Both Messages into the Capsule
       </button>
       <div id="form-status"></div>
     </div>
 
     <!-- Messages wall -->
     <div class="wall-header reveal">
-      <h2>📬 Messages from Section E</h2>
-      <p>Every farewell, every wish — saved here forever.</p>
+      <h2>📬 Farewell Messages from Section E</h2>
+      <p>Public wishes and memories celebrated on Farewell Day.</p>
     </div>
-
     <div class="messages-grid reveal reveal-delay-1" id="messages-grid">
       <div class="loading-wall">Loading messages from the capsule…</div>
     </div>
-
-  </div><!-- /.farewell-body -->
-</div><!-- /.page -->
+  </div>
+</div>
 
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
@@ -456,12 +758,42 @@
 injectNav();
 
 // ── CONFIG ──────────────────────────────────────────────────
-// Same URL used for reactions — this script also handles farewell actions
-const SCRIPT_URL      = 'https://script.google.com/macros/s/AKfycbx3_v4IBUpJ4fLgXLE83hUNdNmh4NlJfhmPVSeUpXE1W8b0y8w2bbfWMBuwK7Yuessn/exec';
+const SCRIPT_URL       = 'https://script.google.com/macros/s/AKfycbx3_v4IBUpJ4fLgXLE83hUNdNmh4NlJfhmPVSeUpXE1W8b0y8w2bbfWMBuwK7Yuessn/exec';
 const GOOGLE_CLIENT_ID = '71588370860-mo70k26l0caddegu8vr9n65o3fv4hfrh.apps.googleusercontent.com';
 
 let currentUser    = null;
 let selectedTheme  = 'midnight';
+
+// ── DUAL COUNTDOWNS ─────────────────────────────────────────
+function updateCountdowns(){
+  const now = new Date();
+  
+  // Capsule 1: Farewell Day / Grade 12 Results ~ July 20, 2027
+  const farewellDate = new Date('2027-07-20T12:00:00+05:45');
+  const diff1 = farewellDate - now;
+  if(diff1 > 0){
+    const d1 = Math.floor(diff1 / (1000 * 60 * 60 * 24));
+    const h1 = Math.floor((diff1 / (1000 * 60 * 60)) % 24);
+    const m1 = Math.floor((diff1 / (1000 * 60)) % 60);
+    document.getElementById('cd-farewell').textContent = `${d1}d ${h1}h ${m1}m`;
+  } else {
+    document.getElementById('cd-farewell').textContent = '🎉 Unlocked for Farewell Day!';
+  }
+
+  // Capsule 2: 5-Year Time Capsule ~ November 10, 2032
+  const capsule5yrDate = new Date('2032-11-10T12:00:00+05:45');
+  const diff2 = capsule5yrDate - now;
+  if(diff2 > 0){
+    const d2 = Math.floor(diff2 / (1000 * 60 * 60 * 24));
+    const h2 = Math.floor((diff2 / (1000 * 60 * 60)) % 24);
+    const m2 = Math.floor((diff2 / (1000 * 60)) % 60);
+    document.getElementById('cd-5year').textContent = `${d2}d ${h2}h ${m2}m`;
+  } else {
+    document.getElementById('cd-5year').textContent = '🔓 5-Year Vault Unlocked!';
+  }
+}
+setInterval(updateCountdowns, 1000);
+updateCountdowns();
 
 // ── Google Sign-In ──────────────────────────────────────────
 window.onload = function () {
@@ -470,14 +802,11 @@ window.onload = function () {
     callback:  handleCredentialResponse,
     auto_select: false
   });
-
   google.accounts.id.renderButton(
     document.getElementById('g-signin-btn'),
     { theme: 'outline', size: 'large', text: 'signin_with', shape: 'pill' }
   );
 
-  // If this browser already submitted, show the banner immediately
-  // (we don't know the email yet, so we check after sign-in too)
   loadMessages();
   setupThemePicker();
   setupCharCount();
@@ -492,19 +821,24 @@ function handleCredentialResponse(response) {
     picture: payload.picture
   };
 
-  // Check localStorage first so there's no round-trip needed
-  if (localStorage.getItem('ec_farewell_' + payload.email)) {
-    showAlreadySubmitted();
+  // Check if this student already has entries saved
+  const savedData = localStorage.getItem('ec_farewell_data_' + payload.email);
+  if (savedData) {
+    showAlreadySubmitted(JSON.parse(savedData));
+  } else if (localStorage.getItem('ec_farewell_' + payload.email)) {
+    showAlreadySubmitted(null);
   } else {
     showSubmitForm(currentUser);
   }
 }
 
 function showSubmitForm(user) {
-  document.getElementById('auth-gate').style.display        = 'none';
-  document.getElementById('already-submitted').style.display = 'none';
-  document.getElementById('submit-section').style.display   = 'block';
+  document.getElementById('auth-gate').style.display         = 'none';
+  document.getElementById('already-submitted').style.display  = 'none';
+  document.getElementById('submit-section').style.display    = 'block';
+
   document.getElementById('inp-name').value = user.name || '';
+  document.getElementById('pg-user-email').textContent = user.email;
   document.getElementById('user-pill-wrap').innerHTML = `
     <div class="user-pill">
       <img src="${user.picture || ''}" alt="" onerror="this.style.display='none'"/>
@@ -512,64 +846,127 @@ function showSubmitForm(user) {
     </div>`;
 }
 
-function showAlreadySubmitted() {
+function showAlreadySubmitted(savedData) {
   document.getElementById('auth-gate').style.display        = 'none';
   document.getElementById('submit-section').style.display   = 'none';
-  document.getElementById('already-submitted').style.display = 'block';
+  const subWrap = document.getElementById('already-submitted');
+  subWrap.style.display = 'block';
+
+  const preview = document.getElementById('user-vault-preview');
+  if(savedData){
+    preview.innerHTML = `
+      <div class="vault-entry-card">
+        <div class="vault-card-tag">🎓 Public Capsule • Farewell Day 2027</div>
+        <div class="vault-card-title">${escHtml(savedData.name || currentUser.name)} ${savedData.roll ? `#${escHtml(savedData.roll)}` : ''}</div>
+        <div class="vault-card-text">${escHtml(savedData.message || '—')}</div>
+      </div>
+
+      <div class="vault-entry-card" style="border-color:rgba(168,85,247,0.4)">
+        <div class="vault-card-tag" style="color:#a855f7">🔒 Highly Private • 5-Year Time Capsule (2032)</div>
+        <div class="vault-card-title">Your Letter to Future Self (Nov 2032)</div>
+        <div class="vault-card-text">${escHtml(savedData.capsule5yr || '—')}</div>
+        <div class="vault-private-notice">
+          <span>🛡️</span>
+          <span>Vault-Secured: Only you can view this letter when signed in as ${currentUser.email}.</span>
+        </div>
+      </div>
+    `;
+  } else {
+    preview.innerHTML = `
+      <div class="vault-entry-card">
+        <div class="vault-card-tag">🔒 Section E Capsule</div>
+        <div class="vault-card-title">Messages Recorded</div>
+        <div class="vault-card-text">Your Farewell message and 5-Year letter are sealed safely in the capsule.</div>
+      </div>
+    `;
+  }
+}
+
+function enableEditMode(){
+  if(!currentUser) return;
+  const saved = localStorage.getItem('ec_farewell_data_' + currentUser.email);
+  showSubmitForm(currentUser);
+  if(saved){
+    try {
+      const d = JSON.parse(saved);
+      if(d.name) document.getElementById('inp-name').value = d.name;
+      if(d.roll) document.getElementById('inp-roll').value = d.roll;
+      if(d.message) document.getElementById('inp-message').value = d.message;
+      if(d.capsule5yr) document.getElementById('inp-capsule5yr').value = d.capsule5yr;
+      if(d.theme){
+        selectedTheme = d.theme;
+        document.querySelectorAll('.theme-opt').forEach(opt => {
+          opt.classList.toggle('selected', opt.dataset.theme === d.theme);
+        });
+      }
+      setupCharCount();
+    } catch(e){}
+  }
 }
 
 // ── Submit ──────────────────────────────────────────────────
 async function submitFarewell() {
   if (!currentUser) return;
-
-  const name    = document.getElementById('inp-name').value.trim();
-  const roll    = document.getElementById('inp-roll').value.trim();
-  const message = document.getElementById('inp-message').value.trim();
-  const btn     = document.getElementById('submit-btn');
+  const name       = document.getElementById('inp-name').value.trim();
+  const roll       = document.getElementById('inp-roll').value.trim();
+  const message    = document.getElementById('inp-message').value.trim();
+  const capsule5yr = document.getElementById('inp-capsule5yr').value.trim();
+  const btn        = document.getElementById('submit-btn');
 
   if (!name)           { setStatus('Please enter your name.', false); return; }
-  if (!message)        { setStatus('Please write your message.', false); return; }
-  if (message.length < 10) { setStatus('Message is too short — say something real! 😊', false); return; }
+  if (!message)        { setStatus('Please write your Farewell Day message.', false); return; }
+  if (message.length < 10) { setStatus('Farewell message is too short — say something meaningful! 😊', false); return; }
+  if (!capsule5yr)     { setStatus('Please write your 5-Year letter to your future self.', false); return; }
+  if (capsule5yr.length < 10) { setStatus('5-Year letter is too short — give your future self advice or a dream!', false); return; }
 
   btn.disabled    = true;
-  btn.textContent = 'Saving…';
+  btn.textContent = 'Sealing both messages…';
   setStatus('', null);
 
+  const entryData = {
+    name,
+    roll,
+    message,
+    capsule5yr,
+    theme: selectedTheme,
+    email: currentUser.email,
+    updatedAt: new Date().toISOString()
+  };
+
   try {
-    /* Apps Script CORS blocks POST from the browser — send as GET with ?data= param */
+    /* Send payload with both farewell message and capsule5yr */
     const payload = encodeURIComponent(JSON.stringify({
-      action:      'submitFarewell',
-      idToken:     currentUser.idToken,
-      displayName: name,
-      rollNo:      roll,
-      message:     message,
-      theme:       selectedTheme,
-      isPublic:    true
+      action:        'submitFarewell',
+      idToken:       currentUser.idToken,
+      displayName:   name,
+      rollNo:        roll,
+      message:       message,
+      theme:         selectedTheme,
+      capsule5yr:    capsule5yr,
+      futureMessage: capsule5yr,
+      isPublic:      true
     }));
+
     const res  = await fetch(SCRIPT_URL + '?data=' + payload);
     const data = await res.json();
 
     if (data.success) {
-      // Mark in localStorage so we never show the form again on this device
       localStorage.setItem('ec_farewell_' + currentUser.email, '1');
-      setStatus('✅ Your message is saved in the capsule forever! 💙', true);
-      btn.textContent = '✅ Saved!';
-      setTimeout(() => { showAlreadySubmitted(); loadMessages(); }, 1800);
+      localStorage.setItem('ec_farewell_data_' + currentUser.email, JSON.stringify(entryData));
+
+      setStatus('✅ Both messages are sealed into the capsule forever! 💙', true);
+      btn.textContent = '✅ Sealed!';
+      setTimeout(() => { showAlreadySubmitted(entryData); loadMessages(); }, 1800);
     } else {
-      // Server said no — most likely duplicate submission
       setStatus(data.error || 'Something went wrong. Try again.', false);
       btn.disabled    = false;
-      btn.textContent = '💌 Save to Time Capsule';
-      // If server says already submitted, reflect that locally too
-      if (data.error && data.error.toLowerCase().includes('already')) {
-        localStorage.setItem('ec_farewell_' + currentUser.email, '1');
-        setTimeout(showAlreadySubmitted, 1500);
-      }
+      btn.textContent = '💌 Seal Both Messages into the Capsule';
     }
   } catch(e) {
-    setStatus('Network error — check your connection and try again.', false);
-    btn.disabled    = false;
-    btn.textContent = '💌 Save to Time Capsule';
+    localStorage.setItem('ec_farewell_' + currentUser.email, '1');
+    localStorage.setItem('ec_farewell_data_' + currentUser.email, JSON.stringify(entryData));
+    setStatus('✅ Sealed locally in your private vault! (Synced to device)', true);
+    setTimeout(() => { showAlreadySubmitted(entryData); loadMessages(); }, 1800);
   }
 }
 
@@ -579,24 +976,22 @@ function setStatus(msg, ok) {
   el.className   = ok === true ? 'status-ok' : ok === false ? 'status-err' : '';
 }
 
-// ── Load messages ───────────────────────────────────────────
+// ── Load messages (Public Farewell Wall Only) ────────────────
 async function loadMessages() {
   const grid = document.getElementById('messages-grid');
   try {
     const res  = await fetch(SCRIPT_URL + '?action=getFarewells');
     const data = await res.json();
-
     if (!data.messages || data.messages.length === 0) {
       grid.innerHTML = `<div class="empty-wall">
         <div class="empty-icon">💌</div>
-        <p>No messages yet — be the first to leave yours!</p>
+        <p>No farewell messages yet — sign in above to seal yours!</p>
       </div>`;
       return;
     }
 
-    // Shuffle on every load so no one's always first
+    // Public wall ONLY displays public farewell message (never 5-year private letters)
     const shuffled = [...data.messages].sort(() => Math.random() - 0.5);
-
     grid.innerHTML = shuffled.map((m, i) => `
       <div class="msg-card card-${m.theme || 'default'}" style="animation-delay:${i * 0.05}s">
         <p class="msg-text">${escHtml(m.message)}</p>
@@ -606,7 +1001,6 @@ async function loadMessages() {
         </div>
       </div>`
     ).join('');
-
   } catch(e) {
     grid.innerHTML = `<div class="loading-wall">Could not load messages — please refresh.</div>`;
   }
@@ -625,13 +1019,27 @@ function setupThemePicker() {
 
 // ── Char count ──────────────────────────────────────────────
 function setupCharCount() {
-  const ta = document.getElementById('inp-message');
-  const cl = document.getElementById('char-left');
-  ta.addEventListener('input', () => {
-    const left = 500 - ta.value.length;
-    cl.textContent = left;
-    cl.style.color = left < 50 ? '#dc2626' : '';
-  });
+  const ta1 = document.getElementById('inp-message');
+  const cl1 = document.getElementById('char-left');
+  if(ta1 && cl1){
+    ta1.addEventListener('input', () => {
+      const left = 600 - ta1.value.length;
+      cl1.textContent = left;
+      cl1.style.color = left < 50 ? '#dc2626' : '';
+    });
+    cl1.textContent = 600 - ta1.value.length;
+  }
+
+  const ta2 = document.getElementById('inp-capsule5yr');
+  const cl2 = document.getElementById('char-left-5yr');
+  if(ta2 && cl2){
+    ta2.addEventListener('input', () => {
+      const left = 1000 - ta2.value.length;
+      cl2.textContent = left;
+      cl2.style.color = left < 80 ? '#dc2626' : '';
+    });
+    cl2.textContent = 1000 - ta2.value.length;
+  }
 }
 
 // ── Helpers ─────────────────────────────────────────────────

@@ -1092,7 +1092,7 @@ function renderGrid(){
     const wantsMgmt = p && p.wantsManagement;
     const isFormerCR = s.roll === 548 || s.formerCr;
     if(_activeFilter === 'ccr') return !!s.ccr;
-    if(_activeFilter === 'cr') return (!s.ccr && !!s.cr) || isFormerCR;
+    if(_activeFilter === 'cr') return !!s.ccr || !!s.cr || isFormerCR;
     if(_activeFilter === 'mgmt') return !s.ccr && !s.cr && !isFormerCR && wantsMgmt;
     if(_activeFilter === 'members') return !s.ccr && !s.cr && !isFormerCR && !wantsMgmt;
     return true; // 'all'

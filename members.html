@@ -34,6 +34,9 @@
   --cyan:#38bdf8;
   --cyan-light:rgba(56,189,248,.12);
   --cyan-glow:rgba(56,189,248,.25);
+  --emerald:#10b981;
+  --emerald-light:rgba(16,185,129,.12);
+  --emerald-glow:rgba(16,185,129,.25);
   --shadow-lg:0 24px 60px rgba(0,0,0,.6),0 8px 20px rgba(0,0,0,.4);
   --mesh:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(139,92,246,.15),transparent);
   --card-bg:var(--surface);
@@ -48,7 +51,6 @@
   --pill-active-color:#f0f0f5;
   color-scheme:dark;
 }
-
 html.light{
   --bg:#faf7ff;
   --bg2:#f1eaff;
@@ -68,6 +70,9 @@ html.light{
   --cyan:#0284c7;
   --cyan-light:rgba(2,132,199,0.10);
   --cyan-glow:rgba(2,132,199,0.25);
+  --emerald:#059669;
+  --emerald-light:rgba(5,150,105,0.10);
+  --emerald-glow:rgba(5,150,105,0.25);
   --shadow-lg:0 20px 50px rgba(109,40,217,0.12),0 4px 14px rgba(42,20,83,0.06);
   --mesh:radial-gradient(ellipse 80% 60% at 70% 10%,rgba(196,167,255,.35),transparent 60%),
          radial-gradient(ellipse 70% 50% at 10% 80%,rgba(255,215,107,.25),transparent 60%);
@@ -83,12 +88,10 @@ html.light{
   --pill-active-color:#4c1d95;
   color-scheme:light;
 }
-
 .page-hero{background:var(--surface);border-bottom:1px solid var(--border);padding:4rem 2.5rem 3.5rem;position:relative;overflow:hidden;transition:background .3s,border-color .3s}
 .page-hero::before{content:'';position:absolute;inset:0;background:var(--mesh);pointer-events:none}
 .page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.4),rgba(245,158,11,.3),transparent)}
 .page-hero-inner{max-width:1200px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;position:relative;z-index:1}
-
 .members-section{padding:3rem 2.5rem 6rem}
 .members-inner{max-width:1240px;margin:0 auto}
 
@@ -100,7 +103,6 @@ html.light{
 .search-wrap svg{flex-shrink:0;color:var(--text3)}
 .search-input{background:none;border:none;outline:none;font-family:'DM Mono',monospace;font-size:.78rem;color:var(--text);width:100%}
 .search-input::placeholder{color:var(--text3)}
-
 .sort-select-wrap{position:relative}
 .sort-select{
   appearance:none;
@@ -118,7 +120,6 @@ html.light{
 .sort-select:hover{border-color:var(--border-hover);color:var(--text)}
 .sort-select:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(139,92,246,.15)}
 .sort-select-arrow{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);pointer-events:none;font-size:.65rem;color:var(--text3)}
-
 .toolbar-right{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
 .member-count-badge{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--text3);letter-spacing:.12em;padding:.4rem .85rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;white-space:nowrap}
 
@@ -181,7 +182,6 @@ html.light{
   pointer-events:none;
   z-index:0;
 }
-
 /* Regular Card Hover - Dark */
 .member-card:hover{
   transform:translateY(-8px) scale(1.02);
@@ -189,7 +189,6 @@ html.light{
   box-shadow:0 0 0 2px rgba(139,92,246,.6),0 16px 40px rgba(139,92,246,.35),var(--shadow-lg)!important;
 }
 .member-card:hover::before{opacity:1}
-
 /* Regular Card Hover - Light */
 html.light .member-card{
   box-shadow:0 4px 18px rgba(109,40,217,0.06),0 1px 3px rgba(0,0,0,0.04);
@@ -198,11 +197,9 @@ html.light .member-card:hover{
   border-color:rgba(124,58,237,.65)!important;
   box-shadow:0 0 0 2px rgba(139,92,246,.35),0 16px 36px rgba(109,40,217,.18),0 4px 12px rgba(0,0,0,.06)!important;
 }
-
 .mc-photo{width:100%;aspect-ratio:3/4;background:var(--bg2);overflow:hidden;position:relative}
 .mc-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease;display:block}
 .member-card:hover .mc-photo img{transform:scale(1.08)}
-
 .mc-photo-placeholder{
   width:100%;
   height:100%;
@@ -216,7 +213,6 @@ html.light .member-card:hover{
 html.light .mc-photo-placeholder{
   background:linear-gradient(135deg,#f3e8ff 0%,#ede9fe 100%);
 }
-
 .mc-initials{
   font-family:'Cormorant Garamond',serif;
   font-size:2.8rem;
@@ -233,7 +229,6 @@ html.light .mc-initials{
   -webkit-text-fill-color:transparent;
   background-clip:text;
 }
-
 .mc-photo::before{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,rgba(6,5,15,.8) 0%,transparent 100%);z-index:1;pointer-events:none}
 html.light .mc-photo::before{background:linear-gradient(to top,rgba(20,10,35,.5) 0%,transparent 100%)}
 
@@ -251,7 +246,6 @@ html.light .mc-photo::before{background:linear-gradient(to top,rgba(20,10,35,.5)
   background:linear-gradient(145deg,rgba(22,17,38,0.95) 0%,rgba(46,26,71,0.92) 55%,rgba(88,28,135,0.9) 100%);
 }
 .member-card:hover .mc-quote-overlay{opacity:1}
-
 html.light .mc-quote-overlay{
   background:linear-gradient(145deg,rgba(245,240,255,0.97) 0%,rgba(237,233,254,0.95) 50%,rgba(221,214,254,0.92) 100%)!important;
 }
@@ -263,7 +257,6 @@ html.light .mc-quote-text{color:#2e1065!important}
   background:linear-gradient(145deg,rgba(120,53,15,0.96) 0%,rgba(180,83,9,0.94) 50%,rgba(217,119,6,0.9) 100%)!important;
 }
 .ccr-card .mc-quote-text{color:#fef3c7!important}
-
 html.light .ccr-card .mc-quote-overlay{
   background:linear-gradient(145deg,rgba(254,243,199,0.98) 0%,rgba(253,230,138,0.96) 50%,rgba(245,158,11,0.92) 100%)!important;
 }
@@ -274,7 +267,6 @@ html.light .ccr-card .mc-quote-text{color:#78350f!important}
   background:linear-gradient(145deg,rgba(76,29,149,0.96) 0%,rgba(109,40,217,0.94) 50%,rgba(147,51,234,0.9) 100%)!important;
 }
 .cr-card .mc-quote-text{color:#f3e8ff!important}
-
 html.light .cr-card .mc-quote-overlay{
   background:linear-gradient(145deg,rgba(243,232,255,0.98) 0%,rgba(233,213,255,0.96) 50%,rgba(192,132,252,0.92) 100%)!important;
 }
@@ -285,11 +277,20 @@ html.light .cr-card .mc-quote-text{color:#4c1d95!important}
   background:linear-gradient(145deg,rgba(12,74,110,0.96) 0%,rgba(2,132,199,0.94) 50%,rgba(14,165,233,0.9) 100%)!important;
 }
 .mgmt-card .mc-quote-text{color:#e0f2fe!important}
-
 html.light .mgmt-card .mc-quote-overlay{
   background:linear-gradient(145deg,rgba(224,242,254,0.98) 0%,rgba(186,230,253,0.96) 50%,rgba(56,189,248,0.92) 100%)!important;
 }
 html.light .mgmt-card .mc-quote-text{color:#0c4a6e!important}
+
+/* FORMER CR Hover Quote: Imperial Jade / Emerald Neon Gradient */
+.former-cr-card .mc-quote-overlay{
+  background:linear-gradient(145deg,rgba(6,78,59,0.96) 0%,rgba(5,150,105,0.94) 50%,rgba(16,185,129,0.9) 100%)!important;
+}
+.former-cr-card .mc-quote-text{color:#ecfdf5!important}
+html.light .former-cr-card .mc-quote-overlay{
+  background:linear-gradient(145deg,rgba(236,253,245,0.98) 0%,rgba(209,250,229,0.96) 50%,rgba(167,243,208,0.92) 100%)!important;
+}
+html.light .former-cr-card .mc-quote-text{color:#064e3b!important}
 
 .mc-badge{position:absolute;top:.65rem;right:.65rem;z-index:2;font-size:.6rem;font-weight:600;letter-spacing:.08em;padding:.22rem .55rem;border-radius:7px;font-family:'DM Mono',monospace}
 
@@ -308,7 +309,6 @@ html.light .mgmt-card .mc-quote-text{color:#0c4a6e!important}
   background:linear-gradient(135deg,#581c87 0%,#7c3aed 50%,#9333ea 100%);
   box-shadow:0 2px 14px rgba(168,85,247,.6),0 1px 3px rgba(0,0,0,.5);
 }
-
 /* Light Theme CR Card & Badge */
 html.light .cr-card{
   border-color:rgba(147,51,234,.35)!important;
@@ -323,6 +323,48 @@ html.light .mc-badge-cr{
   border:1px solid rgba(147,51,234,.4);
   background:linear-gradient(135deg,#6b21a8 0%,#7c3aed 50%,#9333ea 100%);
   box-shadow:0 2px 12px rgba(147,51,234,.35),0 1px 3px rgba(0,0,0,.1);
+}
+
+/* ── FORMER CR CARD & BADGE (Imperial Emerald / Jade Green) ── */
+.former-cr-card{
+  border-color:rgba(16,185,129,.45)!important;
+  background:linear-gradient(160deg,rgba(16,185,129,.09) 0%,var(--surface) 40%)!important;
+}
+.former-cr-card:hover{
+  border-color:#34d399!important;
+  box-shadow:0 0 0 2px #10b981,0 20px 50px rgba(5,150,105,.5),0 0 30px rgba(52,211,153,.35),var(--shadow-lg)!important;
+}
+.mc-badge-former-cr{
+  color:#fff;
+  border:1px solid rgba(110,231,183,.6);
+  background:linear-gradient(135deg,#064e3b 0%,#059669 50%,#10b981 100%);
+  box-shadow:0 2px 14px rgba(16,185,129,.6),0 1px 3px rgba(0,0,0,.5);
+}
+/* Light Theme FORMER CR Card & Badge */
+html.light .former-cr-card{
+  border-color:rgba(5,150,105,.35)!important;
+  background:linear-gradient(160deg,rgba(236,253,245,.65) 0%,#ffffff 40%)!important;
+}
+html.light .former-cr-card:hover{
+  border-color:#059669!important;
+  box-shadow:0 0 0 2px #10b981,0 18px 45px rgba(5,150,105,.22),0 0 25px rgba(16,185,129,.2),0 4px 14px rgba(0,0,0,.06)!important;
+}
+html.light .mc-badge-former-cr{
+  color:#fff;
+  border:1px solid rgba(5,150,105,.4);
+  background:linear-gradient(135deg,#047857 0%,#059669 50%,#10b981 100%);
+  box-shadow:0 2px 12px rgba(5,150,105,.32),0 1px 3px rgba(0,0,0,.1);
+}
+.mc-tag-former-cr{
+  background:rgba(16,185,129,.15);
+  color:#34d399;
+  border:1px solid rgba(52,211,153,.35);
+  font-weight:600;
+}
+html.light .mc-tag-former-cr{
+  background:rgba(5,150,105,.1);
+  color:#047857;
+  border:1px solid rgba(5,150,105,.28);
 }
 
 /* ── CCR CARD & BADGE (Royal Gold Shimmer & Pulsing Glow) ── */
@@ -354,7 +396,6 @@ html.light .mc-badge-cr{
   padding:.28rem .65rem;
   border-radius:8px;
 }
-
 /* Light Theme CCR Card & Badge */
 html.light .ccr-card{
   border-color:rgba(217,119,6,.45)!important;
@@ -387,7 +428,6 @@ html.light .mc-badge-ccr{
   background:linear-gradient(135deg,#0c4a6e 0%,#0284c7 50%,#38bdf8 100%);
   box-shadow:0 2px 14px rgba(56,189,248,.5),0 1px 3px rgba(0,0,0,.4);
 }
-
 /* Light Theme MGMT Card & Badge */
 html.light .mgmt-card{
   border-color:rgba(2,132,199,.35)!important;
@@ -407,7 +447,6 @@ html.light .mc-badge-mgmt{
 .mc-profile-dot{position:absolute;bottom:.65rem;left:.65rem;z-index:2;width:8px;height:8px;border-radius:50%;border:2px solid rgba(255,255,255,.5)}
 .mc-profile-dot.has-profile{background:#10b981;box-shadow:0 0 6px rgba(16,185,129,.6)}
 .mc-profile-dot.no-profile{background:#374151}
-
 .mc-info{padding:1rem 1rem 1.1rem;position:relative;z-index:1}
 .mc-roll{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--text3);letter-spacing:.15em;margin-bottom:.28rem;text-transform:uppercase}
 .mc-name{font-size:.83rem;font-weight:600;line-height:1.3;color:var(--text)}
@@ -417,7 +456,6 @@ html.light .mc-badge-mgmt{
 .mc-tag-ccr{background:linear-gradient(135deg,rgba(245,158,11,.25),rgba(253,224,71,.15));color:#fde047;border:1px solid rgba(253,224,71,.4);font-weight:700}
 .mc-tag-mgmt{background:var(--cyan-light);color:var(--cyan);border:1px solid rgba(56,189,248,.3)}
 .mc-dob{font-family:'DM Mono',monospace;font-size:.56rem;color:var(--text3);margin-top:.35rem;display:flex;align-items:center;gap:.3rem}
-
 /* Light Theme Tag Tweaks */
 html.light .mc-tag-ccr{background:rgba(245,158,11,.12);color:#b45309;border:1px solid rgba(217,119,6,.3)}
 html.light .mc-tag-cr{background:rgba(124,58,237,.1);color:#6d28d9;border:1px solid rgba(124,58,237,.25)}
@@ -444,12 +482,10 @@ html.light .mc-tag-mgmt{background:rgba(2,132,199,.1);color:#0369a1;border:1px s
   opacity:1;
   visibility:visible;
 }
-
 html.light .modal-overlay{
   background:rgba(30,15,60,0.48);
   backdrop-filter:blur(16px);
 }
-
 .modal-detailed-card{
   width:100%;
   max-width:880px;
@@ -468,20 +504,20 @@ html.light .modal-overlay{
 .modal-overlay.open .modal-detailed-card{
   transform:scale(1) translateY(0);
 }
-
 html.light .modal-detailed-card{
   box-shadow:0 30px 80px rgba(42,20,83,0.2),0 8px 24px rgba(42,20,83,0.08);
 }
-
 /* Modal theme borders - Dark */
 .modal-detailed-card.is-ccr{border-color:rgba(251,191,36,0.5);box-shadow:0 30px 90px rgba(0,0,0,0.85),0 0 60px rgba(245,158,11,0.25)}
 .modal-detailed-card.is-cr{border-color:rgba(192,132,252,0.5);box-shadow:0 30px 90px rgba(0,0,0,0.85),0 0 60px rgba(168,85,247,0.25)}
 .modal-detailed-card.is-mgmt{border-color:rgba(56,189,248,0.5);box-shadow:0 30px 90px rgba(0,0,0,0.85),0 0 60px rgba(56,189,248,0.25)}
+.modal-detailed-card.is-former-cr{border-color:rgba(52,211,153,0.5);box-shadow:0 30px 90px rgba(0,0,0,0.85),0 0 60px rgba(16,185,129,0.25)}
 
 /* Modal theme borders - Light */
 html.light .modal-detailed-card.is-ccr{border-color:rgba(217,119,6,0.45);box-shadow:0 30px 80px rgba(42,20,83,0.2),0 0 50px rgba(245,158,11,0.2)}
 html.light .modal-detailed-card.is-cr{border-color:rgba(147,51,234,0.45);box-shadow:0 30px 80px rgba(42,20,83,0.2),0 0 50px rgba(147,51,234,0.2)}
 html.light .modal-detailed-card.is-mgmt{border-color:rgba(2,132,199,0.45);box-shadow:0 30px 80px rgba(42,20,83,0.2),0 0 50px rgba(2,132,199,0.2)}
+html.light .modal-detailed-card.is-former-cr{border-color:rgba(5,150,105,0.45);box-shadow:0 30px 80px rgba(42,20,83,0.2),0 0 50px rgba(16,185,129,0.2)}
 
 /* Left Pane: Desktop full edge-to-edge */
 .modal-left-pane{
@@ -502,7 +538,6 @@ html.light .modal-detailed-card.is-mgmt{border-color:rgba(2,132,199,0.45);box-sh
   object-position:center top;
   display:block;
 }
-
 /* Gradient vignette over lower section of photo */
 .modal-left-pane::after{
   content:'';
@@ -518,7 +553,6 @@ html.light .modal-detailed-card.is-mgmt{border-color:rgba(2,132,199,0.45);box-sh
 html.light .modal-left-pane::after{
   background:linear-gradient(to top,rgba(20,10,35,0.85) 0%,rgba(20,10,35,0.38) 40%,transparent 100%);
 }
-
 /* Color-coded handwritten signature over bottom of image */
 .modal-signature-wrap{
   position:absolute;
@@ -549,6 +583,14 @@ html.light .modal-left-pane::after{
 .is-mgmt .modal-signature-text{
   color:#7dd3fc;
   text-shadow:0 2px 14px rgba(56,189,248,0.6),0 2px 4px #000;
+}
+.is-former-cr .modal-signature-text{
+  color:#6ee7b7;
+  text-shadow:0 2px 14px rgba(16,185,129,0.7),0 2px 4px #000;
+}
+html.light .is-former-cr .modal-signature-text{
+  color:#047857;
+  text-shadow:0 2px 10px rgba(5,150,105,0.22);
 }
 
 /* Modal Nav Arrows (Previous / Next Member) */
@@ -630,7 +672,6 @@ html.light .modal-close-btn:hover{
 .modal-right-pane::-webkit-scrollbar{width:5px}
 .modal-right-pane::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:10px}
 html.light .modal-right-pane::-webkit-scrollbar-thumb{background:rgba(109,40,217,0.2)}
-
 .modal-header-meta{
   font-family:'DM Mono',monospace;
   font-size:0.7rem;
@@ -641,10 +682,11 @@ html.light .modal-right-pane::-webkit-scrollbar-thumb{background:rgba(109,40,217
 .is-ccr .modal-header-meta{color:rgba(251,191,36,0.85)}
 .is-cr .modal-header-meta{color:rgba(192,132,252,0.85)}
 .is-mgmt .modal-header-meta{color:rgba(56,189,248,0.85)}
-
+.is-former-cr .modal-header-meta{color:rgba(52,211,153,0.9)}
 html.light .is-ccr .modal-header-meta{color:#b45309}
 html.light .is-cr .modal-header-meta{color:#6d28d9}
 html.light .is-mgmt .modal-header-meta{color:#0369a1}
+html.light .is-former-cr .modal-header-meta{color:#047857}
 
 .modal-person-name{
   font-family:'Cormorant Garamond',serif;
@@ -654,7 +696,6 @@ html.light .is-mgmt .modal-header-meta{color:#0369a1}
   color:var(--text);
   margin:0.25rem 0 0.35rem;
 }
-
 .modal-role-pill{
   display:inline-flex;
   align-items:center;
@@ -671,11 +712,12 @@ html.light .is-mgmt .modal-header-meta{color:#0369a1}
 .is-ccr .modal-role-pill{color:#fde047;background:rgba(245,158,11,0.15);border-color:rgba(251,191,36,0.4)}
 .is-cr .modal-role-pill{color:#e9d5ff;background:rgba(139,92,246,0.15);border-color:rgba(192,132,252,0.4)}
 .is-mgmt .modal-role-pill{color:#7dd3fc;background:rgba(56,189,248,0.15);border-color:rgba(56,189,248,0.4)}
-
+.is-former-cr .modal-role-pill{color:#a7f3d0;background:rgba(16,185,129,0.15);border-color:rgba(52,211,153,0.45)}
 html.light .modal-role-pill{color:#6d28d9;background:rgba(124,58,237,0.08);border-color:rgba(124,58,237,0.22)}
 html.light .is-ccr .modal-role-pill{color:#b45309;background:rgba(245,158,11,0.12);border-color:rgba(217,119,6,0.3)}
 html.light .is-cr .modal-role-pill{color:#6d28d9;background:rgba(124,58,237,0.12);border-color:rgba(124,58,237,0.25)}
 html.light .is-mgmt .modal-role-pill{color:#0369a1;background:rgba(2,132,199,0.12);border-color:rgba(2,132,199,0.25)}
+html.light .is-former-cr .modal-role-pill{color:#047857;background:rgba(5,150,105,0.12);border-color:rgba(5,150,105,0.3)}
 
 /* Quote card */
 .modal-quote-card{
@@ -688,6 +730,7 @@ html.light .is-mgmt .modal-role-pill{color:#0369a1;background:rgba(2,132,199,0.1
 .is-ccr .modal-quote-card{border-left-color:#fbbf24;background:rgba(245,158,11,0.04)}
 .is-cr .modal-quote-card{border-left-color:#c084fc;background:rgba(139,92,246,0.04)}
 .is-mgmt .modal-quote-card{border-left-color:#38bdf8;background:rgba(56,189,248,0.04)}
+.is-former-cr .modal-quote-card{border-left-color:#10b981;background:rgba(16,185,129,0.04)}
 .modal-quote-text{
   font-family:'Cormorant Garamond',serif;
   font-style:italic;
@@ -695,7 +738,6 @@ html.light .is-mgmt .modal-role-pill{color:#0369a1;background:rgba(2,132,199,0.1
   color:var(--text2);
   line-height:1.6;
 }
-
 html.light .modal-quote-card{
   background:#faf7ff;
   border:1px solid rgba(109,40,217,0.12);
@@ -704,6 +746,7 @@ html.light .modal-quote-card{
 html.light .is-ccr .modal-quote-card{border-left-color:#d97706;background:rgba(245,158,11,0.05)}
 html.light .is-cr .modal-quote-card{border-left-color:#9333ea;background:rgba(124,58,237,0.05)}
 html.light .is-mgmt .modal-quote-card{border-left-color:#0284c7;background:rgba(2,132,199,0.05)}
+html.light .is-former-cr .modal-quote-card{border-left-color:#059669;background:rgba(5,150,105,0.06)}
 html.light .modal-quote-text{color:#4c3870}
 
 /* Stats grid */
@@ -725,7 +768,6 @@ html.light .modal-stat-box{
   background:#fbf9ff;
   border:1px solid rgba(109,40,217,0.1);
 }
-
 .modal-stat-icon{
   width:34px;
   height:34px;
@@ -741,10 +783,11 @@ html.light .modal-stat-box{
 .is-ccr .modal-stat-icon{background:rgba(245,158,11,0.15);color:#fbbf24}
 .is-cr .modal-stat-icon{background:rgba(139,92,246,0.15);color:#c084fc}
 .is-mgmt .modal-stat-icon{background:rgba(56,189,248,0.15);color:#38bdf8}
-
+.is-former-cr .modal-stat-icon{background:rgba(16,185,129,0.15);color:#34d399}
 html.light .is-ccr .modal-stat-icon{background:rgba(245,158,11,0.12);color:#b45309}
 html.light .is-cr .modal-stat-icon{background:rgba(124,58,237,0.1);color:#6d28d9}
 html.light .is-mgmt .modal-stat-icon{background:rgba(2,132,199,0.1);color:#0284c7}
+html.light .is-former-cr .modal-stat-icon{background:rgba(5,150,105,0.12);color:#047857}
 
 .modal-stat-label{
   font-family:'DM Mono',monospace;
@@ -771,7 +814,6 @@ html.light .modal-story-box{
   background:#fbf9ff;
   border:1px solid rgba(109,40,217,0.12);
 }
-
 .modal-story-title{
   font-family:'DM Mono',monospace;
   font-size:0.65rem;
@@ -786,11 +828,11 @@ html.light .modal-story-box{
 .is-ccr .modal-story-title{color:#fbbf24}
 .is-cr .modal-story-title{color:#c084fc}
 .is-mgmt .modal-story-title{color:#38bdf8}
-
+.is-former-cr .modal-story-title{color:#34d399}
 html.light .is-ccr .modal-story-title{color:#b45309}
 html.light .is-cr .modal-story-title{color:#6d28d9}
 html.light .is-mgmt .modal-story-title{color:#0284c7}
-
+html.light .is-former-cr .modal-story-title{color:#047857}
 .modal-story-text{
   font-size:0.88rem;
   color:var(--text2);
@@ -868,7 +910,6 @@ html.light .toast-notice{
   .members-section{padding:2rem 1.25rem 4rem}
   .page-hero{padding:2.75rem 1.25rem 2.25rem}
   .members-grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:.9rem}
-
   .modal-overlay{
     padding:0;
     align-items:flex-end;
@@ -887,9 +928,7 @@ html.light .toast-notice{
   .modal-overlay.open .modal-detailed-card{
     transform:translateY(0);
   }
-
   .modal-nav-btn{display:none} /* Hidden on mobile to avoid touching edge swipe */
-
   /* Mobile Left Pane: Centers photo with 0 cropping */
   .modal-left-pane{
     min-height:240px;
@@ -904,7 +943,6 @@ html.light .toast-notice{
     background:#080612;
   }
   html.light .modal-left-pane{background:#ece4fa}
-
   .modal-left-backdrop{
     display:block;
     position:absolute;
@@ -919,7 +957,6 @@ html.light .toast-notice{
   html.light .modal-left-backdrop{
     filter:blur(24px) brightness(0.7) opacity(0.6);
   }
-
   .modal-left-photo{
     width:100%;
     height:auto;
@@ -929,7 +966,6 @@ html.light .toast-notice{
     position:relative;
     z-index:2;
   }
-
   .modal-signature-wrap{
     bottom:12px;
     left:16px;
@@ -939,7 +975,6 @@ html.light .toast-notice{
   .modal-signature-text{
     font-size:2.2rem;
   }
-
   .modal-right-pane{
     padding:1.4rem 1.25rem 4.5rem;
     gap:1rem;
@@ -953,7 +988,6 @@ html.light .toast-notice{
     gap:0.6rem;
   }
 }
-
 @media(max-width:400px){
   .members-grid{grid-template-columns:repeat(2,1fr);gap:.7rem}
 }
@@ -991,7 +1025,6 @@ html.light .toast-notice{
           <div class="member-count-badge" id="countLabel">56 students</div>
         </div>
       </div>
-
       <!-- Role Filter Pills -->
       <div class="filter-pills-bar reveal" id="filterPills">
         <button class="filter-pill active" data-filter="all">✦ All (56)</button>
@@ -1000,18 +1033,15 @@ html.light .toast-notice{
         <button class="filter-pill" data-filter="mgmt">⚡ Management</button>
         <button class="filter-pill" data-filter="members">✦ Members</button>
       </div>
-
       <div class="members-grid reveal reveal-delay-1" id="membersGrid"></div>
     </div>
   </section>
 </div>
-
 <!-- LATEST DETAILED VIEW MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <!-- Desktop Nav Arrows: Previous & Next -->
   <button class="modal-nav-btn modal-nav-prev" id="modalPrev" title="Previous member (Left Arrow)">❮</button>
   <button class="modal-nav-btn modal-nav-next" id="modalNext" title="Next member (Right Arrow)">❯</button>
-
   <div class="modal-detailed-card" id="modalCard">
     <button class="modal-close-btn" id="modalClose" title="Close (Esc)">✕</button>
     <div class="modal-left-pane">
@@ -1030,12 +1060,10 @@ html.light .toast-notice{
     </div>
   </div>
 </div>
-
 <!-- Toast notification -->
 <div class="toast-notice" id="toastNotice">
   <span>✓</span> <span id="toastMsg">Profile link copied to clipboard!</span>
 </div>
-
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
@@ -1043,58 +1071,48 @@ html.light .toast-notice{
 <script src="shared.js"></script>
 <script>
 injectNav();
-
 // Proper Title Casing: Never whole in lowercase
 function toTitle(str){
   if(!str) return '';
   return str.split(' ').map(w => w ? w.charAt(0).toUpperCase() + w.slice(1).toLowerCase() : '').join(' ');
 }
-
 function getInitials(name){
   return name.split(' ').slice(0,2).map(w=>w[0]).join('');
 }
-
 let _activeFilter = 'all';
 let _activeSort = 'roll-asc';
 let _lastFilteredList = [];
 let _currentModalRoll = null;
-
 function renderGrid(){
   const searchVal = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
   const grid = document.getElementById('membersGrid');
-
   // 1. Role Filter
   let list = STUDENTS.filter(s => {
     const p = STUDENT_PROFILES[s.roll];
     const wantsMgmt = p && p.wantsManagement;
+    const isFormerCR = s.roll === 548 || s.formerCr;
     if(_activeFilter === 'ccr') return !!s.ccr;
-    if(_activeFilter === 'cr') return !s.ccr && !!s.cr;
-    if(_activeFilter === 'mgmt') return !s.ccr && !s.cr && wantsMgmt;
-    if(_activeFilter === 'members') return !s.ccr && !s.cr && !wantsMgmt;
+    if(_activeFilter === 'cr') return (!s.ccr && !!s.cr) || isFormerCR;
+    if(_activeFilter === 'mgmt') return !s.ccr && !s.cr && !isFormerCR && wantsMgmt;
+    if(_activeFilter === 'members') return !s.ccr && !s.cr && !isFormerCR && !wantsMgmt;
     return true; // 'all'
   });
-
   // 2. Search Filter
   if(searchVal){
     list = list.filter(s => s.name.toLowerCase().includes(searchVal) || String(s.roll).includes(searchVal));
   }
-
   // 3. Sort
   list = list.slice().sort((a, b) => {
     if(_activeSort === 'roll-desc') return b.roll - a.roll;
     if(_activeSort === 'name-asc') return a.name.localeCompare(b.name);
     return a.roll - b.roll; // default 'roll-asc'
   });
-
   _lastFilteredList = list;
-
   document.getElementById('countLabel').textContent = `${list.length} student${list.length !== 1 ? 's' : ''}`;
-
   if(!list.length){
     grid.innerHTML = '<div class="no-results" style="grid-column:1/-1;text-align:center;padding:5rem 2rem;color:var(--text3);font-family:Cormorant Garamond,serif;font-style:italic;font-size:1.15rem">No students found matching your criteria.</div>';
     return;
   }
-
   grid.innerHTML = list.map(s => {
     const initials = getInitials(s.name);
     const title = toTitle(s.name);
@@ -1103,24 +1121,33 @@ function renderGrid(){
     const wantsMgmt = p && p.wantsManagement;
     const quote = p && p.quote ? p.quote : '';
     const photoSrc = getDriveFolderPhotoUrl(s.roll, _memberPhotos);
+    
+    // Check role types including FORMER CR for Shreeji (548)
+    const isFormerCR = s.roll === 548 || s.formerCr;
+    const isCCR = !!s.ccr;
+    const isCR = !isCCR && !isFormerCR && !!s.cr;
+    const isMGMT = !isCCR && !isCR && !isFormerCR && wantsMgmt;
 
     // Color code card classes
     let cardClass = '';
-    if(s.ccr) cardClass = 'ccr-card';
-    else if(s.cr) cardClass = 'cr-card';
-    else if(wantsMgmt) cardClass = 'mgmt-card';
+    if(isCCR) cardClass = 'ccr-card';
+    else if(isCR) cardClass = 'cr-card';
+    else if(isFormerCR) cardClass = 'former-cr-card';
+    else if(isMGMT) cardClass = 'mgmt-card';
 
-    // Badge: CCR > CR > MGMT
+    // Badge: CCR > CR > FORMER CR > MGMT
     let badge = '';
-    if(s.ccr) badge = `<div class="mc-badge mc-badge-ccr">👑 CCR</div>`;
-    else if(s.cr) badge = `<div class="mc-badge mc-badge-cr">★ CR</div>`;
-    else if(wantsMgmt) badge = `<div class="mc-badge mc-badge-mgmt">⚡ MGMT</div>`;
+    if(isCCR) badge = `<div class="mc-badge mc-badge-ccr">👑 CCR</div>`;
+    else if(isCR) badge = `<div class="mc-badge mc-badge-cr">★ CR</div>`;
+    else if(isFormerCR) badge = `<div class="mc-badge mc-badge-former-cr">✦ FORMER CR</div>`;
+    else if(isMGMT) badge = `<div class="mc-badge mc-badge-mgmt">⚡ MGMT</div>`;
 
     // Tag below name
     let tag = '';
-    if(s.ccr) tag = `<span class="mc-tag mc-tag-ccr">👑 ${s.crTitle||'Chief CR'}</span>`;
-    else if(s.cr) tag = `<span class="mc-tag mc-tag-cr">★ ${s.crTitle||'Class Rep'}</span>`;
-    else if(wantsMgmt) tag = '<span class="mc-tag mc-tag-mgmt">⚡ Mgmt</span>';
+    if(isCCR) tag = `<span class="mc-tag mc-tag-ccr">👑 ${s.crTitle||'Chief CR'}</span>`;
+    else if(isCR) tag = `<span class="mc-tag mc-tag-cr">★ ${s.crTitle||'Class Rep'}</span>`;
+    else if(isFormerCR) tag = `<span class="mc-tag mc-tag-former-cr">✦ Former CR</span>`;
+    else if(isMGMT) tag = '<span class="mc-tag mc-tag-mgmt">⚡ Mgmt</span>';
 
     return `
     <div class="member-card ${cardClass}" onclick="openModal(${s.roll})">
@@ -1146,24 +1173,23 @@ function openModal(roll){
   const s = STUDENTS.find(s => s.roll === roll);
   if(!s) return;
   _currentModalRoll = roll;
-
   const title = toTitle(s.name);
   const initials = getInitials(s.name);
   const p = STUDENT_PROFILES[s.roll];
   const photoSrc = getDriveFolderPhotoUrl(roll, _memberPhotos);
-
+  
+  const isFormerCR = s.roll === 548 || s.formerCr;
   const isCCR = !!s.ccr;
-  const isCR = !isCCR && !!s.cr;
-  const isMGMT = !isCCR && !isCR && (p && p.wantsManagement);
+  const isCR = !isCCR && !isFormerCR && !!s.cr;
+  const isMGMT = !isCCR && !isCR && !isFormerCR && (p && p.wantsManagement);
 
   const cardElem = document.getElementById('modalCard');
-  cardElem.className = 'modal-detailed-card' + (isCCR ? ' is-ccr' : isCR ? ' is-cr' : isMGMT ? ' is-mgmt' : '');
+  cardElem.className = 'modal-detailed-card' + (isCCR ? ' is-ccr' : isCR ? ' is-cr' : isFormerCR ? ' is-former-cr' : isMGMT ? ' is-mgmt' : '');
 
   // Photo, Backdrop & Signature setup
   const photoEl = document.getElementById('modalPhoto');
   const backdropEl = document.getElementById('modalBackdrop');
   const initBox = document.getElementById('modalInitialsBox');
-
   photoEl.style.display = 'block';
   initBox.style.display = 'none';
   photoEl.src = photoSrc;
@@ -1178,6 +1204,7 @@ function openModal(roll){
   let roleTitle = 'Student';
   if(isCCR){ roleCategory = 'CCR'; roleTitle = s.crTitle || 'Chief Class Representative'; }
   else if(isCR){ roleCategory = 'CR'; roleTitle = s.crTitle || 'Class Representative'; }
+  else if(isFormerCR){ roleCategory = 'FORMER CR'; roleTitle = 'Former Class Representative'; }
   else if(isMGMT){ roleCategory = 'MGMT'; roleTitle = 'Management Team'; }
 
   // Birthday formatted
@@ -1186,10 +1213,8 @@ function openModal(roll){
     const d = p.dob;
     dobStr = d.bsDay ? `${d.monthName} ${d.bsDay}, ${d.bsYear} BS` : `${d.monthName} ${d.bsYear} BS`;
   }
-
   // Quote
   const quote = (p && p.quote) ? p.quote : '“Dream big, work hard, and make every moment count.”';
-
   // Section E Story
   const storyText = (p && p.experience) 
     ? p.experience 
@@ -1199,13 +1224,11 @@ function openModal(roll){
     <div>
       <div class="modal-header-meta">SECTION E • ${roleCategory}</div>
       <div class="modal-person-name">${title}</div>
-      <div class="modal-role-pill">${isCCR ? '👑' : isCR ? '★' : isMGMT ? '⚡' : '✦'} ${roleTitle}</div>
+      <div class="modal-role-pill">${isCCR ? '👑' : isCR ? '★' : isFormerCR ? '✦' : isMGMT ? '⚡' : '✦'} ${roleTitle}</div>
     </div>
-
     <div class="modal-quote-card">
       <div class="modal-quote-text">“ ${quote.replace(/^[“"']+|[”"']+$/g, '')} ”</div>
     </div>
-
     <div class="modal-stats-grid">
       <div class="modal-stat-box">
         <div class="modal-stat-icon">#</div>
@@ -1222,17 +1245,14 @@ function openModal(roll){
         </div>
       </div>
     </div>
-
     <div class="modal-story-box">
       <div class="modal-story-title">✦ Their Section E Story</div>
       <div class="modal-story-text">${storyText}</div>
     </div>
-
     ${(p && p.email) ? `
     <div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text3);display:flex;align-items:center;gap:0.4rem;padding:0.2rem 0">
       ✉️ ${p.email}
     </div>` : ''}
-
     <div class="modal-footer-actions">
       <button class="modal-share-btn" onclick="copyMemberLink(${s.roll})">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
@@ -1243,10 +1263,8 @@ function openModal(roll){
       </div>
     </div>
   `;
-
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-
   // Update URL hash cleanly
   try {
     history.replaceState(null, '', `#${roll}`);
@@ -1318,11 +1336,9 @@ function checkUrlForMember(){
 document.getElementById('modalClose').addEventListener('click', closeModal);
 document.getElementById('modalPrev').addEventListener('click', e => { e.stopPropagation(); navigateModal(-1); });
 document.getElementById('modalNext').addEventListener('click', e => { e.stopPropagation(); navigateModal(1); });
-
 document.getElementById('modalOverlay').addEventListener('click', e => {
   if(e.target === e.currentTarget) closeModal();
 });
-
 document.addEventListener('keydown', e => {
   if(!document.getElementById('modalOverlay').classList.contains('open')) return;
   if(e.key === 'Escape') closeModal();
